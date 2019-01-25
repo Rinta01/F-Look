@@ -13,7 +13,7 @@ $font: 'Work Sans', sans-serif;
 }
 
 @mixin borders {
-    border: 8.5px solid color(purple);
+	border: 8.5px solid color(purple);
 	position: relative;
 
 	&::before,
@@ -28,7 +28,7 @@ $font: 'Work Sans', sans-serif;
 		top: -0.3em; // let it overlap a bit to prevent thin line which could appear during scaling in some browsers etc.
 		bottom: -0.3em;
 		left: 1em;
-        right: 1em;
+		right: 1em;
 	}
 
 	&::after {
@@ -39,7 +39,7 @@ $font: 'Work Sans', sans-serif;
 	}
 }
 
-@mixin title{
+@mixin title {
 	font: bold 25px $font;
 	text-transform: uppercase;
 	letter-spacing: 1px;
