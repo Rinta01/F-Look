@@ -1,0 +1,92 @@
+@import '../css/variables.scss';
+
+.login-page {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+
+	* {
+		font-family: $font;
+	}
+
+	header {
+		@include title;
+		margin-bottom: 15px;
+
+		span#singup {
+			color: color(font-color);
+		}
+		span#login {
+			color: color(grey);
+		}
+	}
+
+	.form-container {
+		padding: 10px 25px;
+		width: 90%;
+
+		@include borders;
+		&::after,
+		&::before {
+			background-color: #fff;
+		}
+
+		&::after {
+			top: 1.2em;
+			bottom: 1.2em;
+			left: -0.6em;
+			right: -0.6em;
+		}
+
+		&::before {
+			top: -0.6em;
+			bottom: -0.6em;
+			left: 1em;
+			right: 1em;
+		}
+
+		form {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			flex: 1;
+			position: relative;
+			z-index: 1;
+
+			input {
+				margin: 8px 0;
+				padding: 2px 5px;
+				line-height: 18px;
+				border: 0.5px solid color(input-border);
+				width: 100%;
+			}
+			button {
+				margin-top: 25px;
+				padding: 4px 0;
+				background-color: color(grey);
+				width: 100%;
+				letter-spacing: 1px;
+				color: #fff;
+				border: none;
+				font-size: 16px;
+				text-transform: uppercase;
+			}
+		}
+	}
+	footer {
+
+		margin-top: 10px;
+
+		span {
+			@include title;
+		}
+
+		.social-icon {
+			color: color(grey);
+			margin: 5px 10px;
+			font-size: 35px;
+		}
+	}
+}
