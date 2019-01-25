@@ -2,7 +2,7 @@
   "name": "f-back",
   "version": "1.0.0",
   "description": "back-end for f-look",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -20,6 +20,7 @@
     "express": "^4.16.4",
     "express-graphql": "^0.7.1",
     "graphql": "^14.1.1",
+    "mongoose": "^5.4.6",
     "nodemon": "^1.18.9"
   }
 }
