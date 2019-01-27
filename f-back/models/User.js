@@ -18,6 +18,7 @@ const UserSchema = new Schema({
 	tel: {
 		type: String,
 		required: 'User must have a phone number.',
+		unique: true,
 	},
 	password: {
 		type: String,

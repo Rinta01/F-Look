@@ -20,7 +20,7 @@ const Users = () => (
 									<li key={randomiser(i)}>{u.first_name}</li>
 								);
 						  })
-						: null}
+						: <p>No users registered yet.</p>}
 				</ul>
 			);
 		}}

@@ -1,50 +1,32 @@
 import React, { Component } from 'react';
 import '../css/Login.scss';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import Users from '../graphql/Users';
-
+// import UsersQuery from '../graphql/Users';
+import LoginForm from '../components/LoginForm';
+import LoginFooter from '../components/LoginFooter';
 class Login extends Component {
+	constructor(props) {
+		super(props);
+		this.handleKeyDown = this.handleKeyDown.bind(this);
+	}
+
 	render() {
 		return (
-			<div className='login-page' onKeyDown={(e)=>{
-				if(e.which===27){
-					e.target.blur();
-				}
-			}}>
+			<div className='login-page' onKeyDown={this.handleKeyDown}>
 				<header>
 					<span id='signup'>Sign Up</span>
 					{' / '}
 					<span id='login'>Log in</span>
 				</header>
-				<section className='form-container'>
-					<form>
-						<input name='country' type='text' placeholder="Country"/>
-						<input name='tel' type='tel' placeholder="Phone number"/>
-						<input name='password' type='password' placeholder="Password"/>
-						<input name='confirmPassword' type='password' placeholder="Confirm Password"/>
-						<button type='submit'>Submit</button>
-					</form>
-				</section>
-				<footer>
-					<span>Sign In Via:</span>
-					<div>
-						<FontAwesomeIcon
-							className='social-icon'
-							icon={['fab', 'facebook-square']}
-						/>
-						<FontAwesomeIcon
-							className='social-icon'
-							icon={['fab', 'google-plus-square']}
-						/>
-						<FontAwesomeIcon
-							className='social-icon'
-							icon={['fab', 'vk']}
-						/>
-					</div>
-				</footer>
-				{/* <Users /> */}
+				<LoginForm />
+				<LoginFooter />
+				{/* <UsersQuery /> */}
 			</div>
 		);
+	}
+	handleKeyDown(e) {
+		if (e.which === 27) {
+			e.target.blur();
+		}
 	}
 }
 
