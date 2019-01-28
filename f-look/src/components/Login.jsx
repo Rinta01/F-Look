@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import '../css/Login.scss';
 // import UsersQuery from '../graphql/Users';
-import LoginForm from '../components/LoginForm';
-import LoginFooter from '../components/LoginFooter';
+import LoginForm from '../containers/LoginForm';
+import LoginFooter from './LoginFooter';
 class Login extends Component {
 	constructor(props) {
 		super(props);

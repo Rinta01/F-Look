@@ -3,7 +3,7 @@ import { faFacebookSquare, faGoogle, faVk, faGooglePlusSquare } from '@fortaweso
 import { default as ApolloClient } from 'apollo-boost';
 import React, { Component } from 'react';
 import Start from '../components/Start';
-import Login from '../containers/Login';
+import Login from '../components/Login';
 import '../css/App.scss';
 import { ApolloProvider } from 'react-apollo';
 

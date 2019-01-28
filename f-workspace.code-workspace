@@ -4,5 +4,8 @@
 			"path": "."
 		}
 	],
-	"settings": {}
+	"settings": {
+		"prettier.jsxBracketSameLine": true,
+		"prettier.jsxSingleQuote": true
+	}
 }

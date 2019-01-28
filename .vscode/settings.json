@@ -1,0 +1,4 @@
+{
+    "javascript.format.insertSpaceAfterOpeningAndBeforeClosingJsxExpressionBraces": true,
+    "prettier.jsxBracketSameLine": true
+}
