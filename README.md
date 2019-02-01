@@ -6,7 +6,6 @@ Stay tuned for more info.
 
 Todos:
 
-Todos:
 0. Backend +- (добавляем таблицы по мере разработки)
 1. Start Page +
 2. Reg Page +
