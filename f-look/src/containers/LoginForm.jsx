@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import '../css/Login.scss';
@@ -110,34 +110,47 @@ class LoginForm extends Component {
 									<form
 										onSubmit={handleSubmit}
 										onBlur={handleBlur}>
-										<Input
-											name='first_name'
-											onChange={handleChange}
-											errors={errors}
-											touched={touched}
-										/>
-										<Input
-											name='last_name'
-											onChange={handleChange}
-											errors={errors}
-											touched={touched}
-										/>
-										<Input
-											name='tel'
-											onChange={handleChange}
-											errors={errors}
-											touched={touched}
-										/>
-										<RadioInput
-											name='sex'
-											onChange={handleChange}
-											values={values}
-										/>
-										<button
+										{this.state.page === 1 ? (
+											<Fragment>
+												<Input
+													name='first_name'
+													onChange={handleChange}
+													errors={errors}
+													touched={touched}
+												/>
+												<Input
+													name='last_name'
+													onChange={handleChange}
+													errors={errors}
+													touched={touched}
+												/>
+												<Input
+													name='tel'
+													onChange={handleChange}
+													errors={errors}
+													touched={touched}
+												/>
+												<Input
+													name='email'
+													onChange={handleChange}
+													errors={errors}
+													touched={touched}
+												/>
+												<RadioInput
+													name='sex'
+													onChange={handleChange}
+													values={values}
+												/>
+												<button
+												onClick={()=>{this.setState({page:2})}}
+												>Next</button>
+											</Fragment>
+										) : null}
+										{/* <button
 											type='submit'
 											disabled={isSubmitting}>
 											Submit
-										</button>
+										</button> */}
 									</form>
 								</section>
 							);
