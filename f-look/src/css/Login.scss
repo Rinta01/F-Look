@@ -53,15 +53,15 @@
 			right: 1em;
 		}
 
-		&:focus-within {
-			box-shadow: 0px 0.2em 1.5em #dddddd;
-			transform: scale(1.025);
-			// Remove the scaling for those who don't want animation.
-			@media screen and (prefers-reduced-motion: reduce) {
-				box-shadow: none;
-				transform: none;
-			}
-		}
+		// &:focus-within {
+		// 	box-shadow: 0px 0.2em 1.5em #dddddd;
+		// 	transform: scale(1.025);
+		// 	// Remove the scaling for those who don't want animation.
+		// 	@media screen and (prefers-reduced-motion: reduce) {
+		// 		box-shadow: none;
+		// 		transform: none;
+		// 	}
+		// }
 
 		form {
 			display: flex;
@@ -172,7 +172,7 @@
 			}
 			.input-feedback {
 				color: red;
-				margin-top: 0.1rem;
+				margin-top: .5px;
 				font-size: 11px;
 				text-align: left;
 				width: 100%;
