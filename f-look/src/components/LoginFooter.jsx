@@ -2,10 +2,10 @@ import React from 'react';
 import '../css/Login.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-const LoginFooter = () => {
+const LoginFooter = ({ signup }) => {
 	return (
 		<footer>
-			<span>Sign In Via:</span>
+			<span>Sign {signup ? 'Up' : 'In'} Via:</span>
 			<div>
 				<FontAwesomeIcon
 					className='social-icon'

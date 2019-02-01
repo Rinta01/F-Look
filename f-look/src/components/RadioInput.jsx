@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 export default class RadioInput extends Component {
 	static propTypes = {
-        name: PropTypes.string,
+		name: PropTypes.string,
 		onChange: PropTypes.func,
 		values: PropTypes.object,
 	};
@@ -17,8 +17,6 @@ export default class RadioInput extends Component {
 					id1: 'sex-male',
 					value2: 'Female',
 					id2: 'sex-female',
-					value3: 'Other',
-					id3: 'sex-other',
 				};
 			case 'wealth':
 				return {
@@ -36,8 +34,8 @@ export default class RadioInput extends Component {
 	}
 
 	render() {
-		const { name, value1, id1, value2, id2, value3, id3 } = this.getRadio();
-        const { onChange, values } = this.props;
+		const { name, value1, id1, value2, id2} = this.getRadio();
+		const { onChange, values } = this.props;
 		return (
 			<div className='radio-group'>
 				<input
@@ -58,15 +56,6 @@ export default class RadioInput extends Component {
 					onChange={onChange}
 				/>
 				<label htmlFor={id2}>{value2}</label>
-				<input
-					type='radio'
-					name={name}
-					value={value3}
-					id={id3}
-					checked={values[name] === value3}
-					onChange={onChange}
-				/>
-				<label htmlFor={id3}>{value3}</label>
 			</div>
 		);
 	}

@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
-import '../css/Login.scss';
-// import UsersQuery from '../graphql/Users';
 import LoginForm from '../containers/LoginForm';
+// import UsersQuery from '../graphql/Users';
+import RegForm from '../containers/RegForm';
+import '../css/Login.scss';
 import LoginFooter from './LoginFooter';
 class Login extends Component {
 	constructor(props) {
 		super(props);
+		this.state = {
+			signup: false,
+		};
 		this.handleKeyDown = this.handleKeyDown.bind(this);
 	}
 
@@ -13,12 +17,26 @@ class Login extends Component {
 		return (
 			<div className='login-page' onKeyDown={this.handleKeyDown}>
 				<header>
-					<span id='signup'>Sign Up</span>
+					<span
+						id='signup'
+						className={this.state.signup ? 'active' : ''}
+						onClick={() => {
+							this.setState({ signup: true });
+						}}>
+						Sign Up
+					</span>
 					{' / '}
-					<span id='login'>Log in</span>
+					<span
+						id='login'
+						className={!this.state.signup ? 'active' : ''}
+						onClick={() => {
+							this.setState({ signup: false });
+						}}>
+						Log in
+					</span>
 				</header>
-				<LoginForm />
-				<LoginFooter />
+				{this.state.signup ? <RegForm /> : <LoginForm />}
+				<LoginFooter signup={this.state.signup}/>
 				{/* <UsersQuery /> */}
 			</div>
 		);

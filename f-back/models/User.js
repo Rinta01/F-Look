@@ -8,17 +8,20 @@ const UserSchema = new Schema({
 	},
 	last_name: {
 		type: String,
-		required: 'User must have a last name.',
 	},
 	country: {
 		type: String,
-		required: 'User must be from a country.',
 		default: 'Russia',
 	},
 	tel: {
 		type: String,
 		required: 'User must have a phone number.',
 		unique: true,
+	},
+	email: {
+		type: String,
+		unique: true,
+		default: ''
 	},
 	password: {
 		type: String,
@@ -27,6 +30,18 @@ const UserSchema = new Schema({
 	created_date: {
 		type: Date,
 		default: Date.now,
+	},
+	sex: {
+		type: String,
+		default: 'Other',
+	},
+	wealth: {
+		type: String,
+		default: 'Average',
+	},
+	age: {
+		type: Number,
+		default: 25,
 	},
 });
 

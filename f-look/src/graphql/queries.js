@@ -19,3 +19,14 @@ export const ADD_USER = gql`
             }
         }
 `
+
+export const NEW_USER = gql`
+        mutation ($first_name: String!, $tel: String!, $password: String!, $sex: String!){
+            newUser(first_name: $first_name, tel: $tel, password: $password, sex: $sex){
+                first_name
+                tel
+                sex
+            }
+        }
+`
+

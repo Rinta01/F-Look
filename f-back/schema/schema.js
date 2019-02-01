@@ -8,6 +8,7 @@ const {
 	GraphQLID,
 	GraphQLList,
 	GraphQLNonNull,
+	GraphQLInt,
 } = graphql;
 
 const UserType = new GraphQLObjectType({
@@ -19,6 +20,9 @@ const UserType = new GraphQLObjectType({
 		password: { type: GraphQLString },
 		country: { type: GraphQLString },
 		tel: { type: GraphQLString },
+		sex: { type: GraphQLString },
+		age: { type: GraphQLInt },
+		wealth: { type: GraphQLString },
 	}),
 });
 
@@ -47,14 +51,15 @@ const RootQuery = new GraphQLObjectType({
 const Mutation = new GraphQLObjectType({
 	name: 'Mutation',
 	fields: {
-		addUser: {
+		editUser: {
 			type: UserType,
 			args: {
-				first_name: { type: new GraphQLNonNull(GraphQLString) },
-				last_name: { type: new GraphQLNonNull(GraphQLString) },
+				first_name: { type: GraphQLString },
+				last_name: { type: GraphQLString },
 				country: { type: GraphQLString },
-				tel: { type: new GraphQLNonNull(GraphQLString) },
-				password: { type: new GraphQLNonNull(GraphQLString) },
+				tel: { type: GraphQLString },
+				age: { type: GraphQLInt },
+				wealth: { type: GraphQLString },
 			},
 			resolve(parent, args) {
 				let user = new User({
@@ -63,6 +68,24 @@ const Mutation = new GraphQLObjectType({
 					country: args.country,
 					tel: args.tel,
 					password: args.password,
+				});
+				return user.save();
+			},
+		},
+		newUser: {
+			type: UserType,
+			args: {
+				first_name: { type: new GraphQLNonNull(GraphQLString) },
+				tel: { type: new GraphQLNonNull(GraphQLString) },
+				password: { type: new GraphQLNonNull(GraphQLString) },
+				sex: { type: new GraphQLNonNull(GraphQLString) },
+			},
+			resolve(parent, args) {
+				let user = new User({
+					first_name: args.first_name,
+					tel: args.tel,
+					password: args.password,
+					sex: args.sex,
 				});
 				return user.save();
 			},

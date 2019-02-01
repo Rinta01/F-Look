@@ -76,8 +76,9 @@ export default class Input extends Component {
 					name={name}
 					placeholder={placeholder}
 					onChange={onChange}
+					className={errors[name]==='required'? 'input-error': ''}
 				/>
-				{errors[name] && touched[name] && (
+				{(errors[name]!=='required') && touched[name] && (
 					<div className='input-feedback'>{errors[name]}</div>
 				)}
 			</Fragment>
