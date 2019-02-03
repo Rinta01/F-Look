@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import LoginForm from '../containers/LoginForm';
-// import UsersQuery from '../graphql/Users';
 import RegForm from '../containers/RegForm';
 import '../css/Login.scss';
 import LoginFooter from './LoginFooter';
@@ -10,7 +9,6 @@ class Login extends Component {
 		this.state = {
 			signup: false,
 		};
-		this.handleKeyDown = this.handleKeyDown.bind(this);
 	}
 
 	render() {
@@ -36,8 +34,7 @@ class Login extends Component {
 					</span>
 				</header>
 				{this.state.signup ? <RegForm /> : <LoginForm />}
-				<LoginFooter signup={this.state.signup}/>
-				{/* <UsersQuery /> */}
+				<LoginFooter signup={this.state.signup} />
 			</div>
 		);
 	}

@@ -1,5 +1,7 @@
 const graphql = require('graphql');
 const User = require('../models/User');
+const Apparel = require('../models/Apparel');
+const bcrypt = require('bcryptjs');
 
 const {
 	GraphQLSchema,
@@ -26,6 +28,18 @@ const UserType = new GraphQLObjectType({
 	}),
 });
 
+const ApparelType = new GraphQLObjectType({
+	name: 'Apparel',
+	fields: () => ({
+		id: { type: GraphQLID },
+		article: { type: GraphQLString },
+		brand: { type: GraphQLString },
+		sex: { type: GraphQLString },
+		category: { type: GraphQLString },
+		material: { type: GraphQLString },
+	}),
+});
+
 const RootQuery = new GraphQLObjectType({
 	name: 'RootQueryType',
 	fields: () => ({
@@ -43,6 +57,21 @@ const RootQuery = new GraphQLObjectType({
 			type: new GraphQLList(UserType),
 			resolve(parent, args) {
 				return User.find({});
+			},
+		},
+		apparel: {
+			type: ApparelType,
+			id: { type: GraphQLID },
+			args: { article: { type: GraphQLString } },
+			resolve(parent, args) {
+				return Apparel.findOne(
+					{ article: args.article },
+					(err, res) => {
+						if (err) {
+							return console.log(err);
+						}
+					}
+				);
 			},
 		},
 	}),
@@ -80,14 +109,19 @@ const Mutation = new GraphQLObjectType({
 				password: { type: new GraphQLNonNull(GraphQLString) },
 				sex: { type: new GraphQLNonNull(GraphQLString) },
 			},
-			resolve(parent, args) {
-				let user = new User({
-					first_name: args.first_name,
-					tel: args.tel,
-					password: args.password,
-					sex: args.sex,
-				});
-				return user.save();
+			async resolve(parent, args) {
+				try {
+					const hashedPassword = await bcrypt.hash(args.password, 12);
+					const user = new User({
+						first_name: args.first_name,
+						tel: args.tel,
+						password: hashedPassword,
+						sex: args.sex,
+					});
+					return user.save();
+				} catch (err) {
+					throw err;
+				}
 			},
 		},
 	},
