@@ -6,8 +6,13 @@ import {
 	faGooglePlusSquare,
 } from '@fortawesome/free-brands-svg-icons';
 import { ApolloClient, InMemoryCache, HttpLink } from 'apollo-boost';
-import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import React from 'react';
+import {
+	BrowserRouter as Router,
+	Route,
+	Switch,
+	Redirect,
+} from 'react-router-dom';
 import Start from '../components/Start';
 import Login from '../components/Login';
 import { ApolloProvider } from 'react-apollo';
@@ -31,32 +36,29 @@ const client = new ApolloClient({
 	},
 });
 
-class App extends Component {
-	startApp = () => {
-		this.setState({
-			start: false,
-		});
-	};
-
-	constructor(props) {
-		super(props);
-		this.state = {
-			start: true,
-		};
-		this.startApp = this.startApp.bind(this);
-	}
-	render() {
-		return (
-			<ApolloProvider client={client}>
-				<Router>
-					<Switch>
-						<Route exact path='/login' component={Login} />
-						<Route exact path='/' component={Start} />
-					</Switch>
-				</Router>
-			</ApolloProvider>
-		);
-	}
-}
+const App = () => {
+	return (
+		<ApolloProvider client={client}>
+			<Router>
+				<Switch>
+					<Route exact path='/login' component={Login} />
+					{/* should depend on authorisation?? */}
+					<Route
+						exact
+						path='/signup'
+						render={() => <Redirect to='/login' />}
+					/>
+					<Route exact path='/' component={Start} />
+					{/* should depend on authorisation?? */}
+					<Route
+						exact
+						path='/confirm'
+						render={() => <div>NOT THERE YET</div>}
+					/>
+				</Switch>
+			</Router>
+		</ApolloProvider>
+	);
+};
 
 export default App;

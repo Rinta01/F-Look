@@ -1,26 +1,26 @@
-import React, { Component } from 'react';
 import { Formik } from 'formik';
-import * as Yup from 'yup';
-import '../css/Login.scss';
+import React, { Component } from 'react';
 import { Mutation } from 'react-apollo';
-import { NEW_USER } from '../graphql/queries';
+import * as Yup from 'yup';
 import Input from '../components/Input';
 import RadioInput from '../components/RadioInput';
+import '../css/Login.scss';
 import { TEL } from '../utils/validators';
+import { NEW_USER, GET_USERS } from '../graphql/queries';
 
 class RegForm extends Component {
 	render() {
+		const { getNumber, history } = this.props;
 		return (
 			<Mutation
 				mutation={NEW_USER}
-				// update={(cache, { data: { newUser } }) => {
-				// 	const { users } = cache.readQuery({ query: GET_USERS });
-				// 	cache.writeQuery({
-				// 		query: GET_USERS,
-				// 		data: { users: users.concat([getUsers]) },
-				// 	});
-				// }}
-			>
+				update={(cache, { data: { newUser } }) => {
+					const { users } = cache.readQuery({ query: GET_USERS });
+					cache.writeQuery({
+						query: GET_USERS,
+						data: { users: users.concat([newUser]) },
+					});
+				}}>
 				{newUser => (
 					<Formik
 						initialValues={{
@@ -41,6 +41,7 @@ class RegForm extends Component {
 								setSubmitting(false);
 								// console.log(values);
 								newUser({ variables: values });
+								getNumber(history, values.tel);
 							}, 500);
 						}}
 						validationSchema={Yup.object().shape({

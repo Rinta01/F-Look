@@ -6,6 +6,7 @@ import Input from '../components/Input';
 import { TEL } from '../utils/validators';
 export default class LoginForm extends Component {
 	render() {
+		const { getNumber, history } = this.props;
 		return (
 			<Formik
 				initialValues={{
@@ -14,10 +15,11 @@ export default class LoginForm extends Component {
 				}}
 				onSubmit={(values, { setSubmitting }) => {
 					setTimeout(() => {
-						alert(JSON.stringify(values, null, 2));
+						// alert(JSON.stringify(values, null, 2));
 						setSubmitting(false);
 						// console.log(values);
-					}, 500);
+					    getNumber(history, values.tel);
+					}, 250);
 				}}
 				validationSchema={Yup.object().shape({
 					tel: Yup.string()

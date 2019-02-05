@@ -4,11 +4,11 @@ import * as Yup from 'yup';
 import '../css/Login.scss';
 import NumberInput from './NumberInput';
 
-const CodeConfirm = () => {
+const CodeConfirm = ({phone}) => {
 	return (
 		<div className='code-confirm'>
 			<h5>Enter the confirmation code sent to your phone</h5>
-			<span id='tel-num'>89164809519</span>
+			<span id='tel-num'>{phone}</span>
 			<Formik
 				initialValues={{
 					1: '',

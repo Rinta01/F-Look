@@ -30,8 +30,9 @@
 		* {
 			cursor: pointer;
 			color: color(grey);
+			text-decoration: none;
 		}
-		span.active {
+		a.active {
 			color: color(font-color);
 		}
 	}
