@@ -16,15 +16,17 @@
 		padding: 15px 20px;
 		text-transform: uppercase;
 		color: color(purple);
-		border: 8.5px solid color(purple);
 		font: bold 35px $font;
-		position: relative;
 		@include borders;
+		&::before,
+		&::after {
+			background: color(black);
+		}
 		transition: 0.25s all linear;
 
 		.logo {
-			z-index: 1;
-			position: relative;
+			// z-index: 1;
+			// position: relative;
 		}
 		&:hover {
 			transform: scale(1.2);

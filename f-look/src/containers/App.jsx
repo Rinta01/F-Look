@@ -5,7 +5,7 @@ import {
 	faVk,
 	faGooglePlusSquare,
 } from '@fortawesome/free-brands-svg-icons';
-import { default as ApolloClient } from 'apollo-boost';
+import { ApolloClient, InMemoryCache, HttpLink } from 'apollo-boost';
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Start from '../components/Start';
@@ -16,7 +16,19 @@ library.add(faFacebookSquare, faGoogle, faVk, faGooglePlusSquare);
 
 const graphqlUri = 'http://localhost:4000/graphql';
 const client = new ApolloClient({
-	uri: graphqlUri,
+	link: new HttpLink({ uri: graphqlUri }),
+	cache: new InMemoryCache(),
+	watchQuery: {
+		fetchPolicy: 'cache-and-network',
+		errorPolicy: 'ignore',
+	},
+	query: {
+		fetchPolicy: 'network-only',
+		errorPolicy: 'all',
+	},
+	mutate: {
+		errorPolicy: 'all',
+	},
 });
 
 class App extends Component {
