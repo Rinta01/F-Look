@@ -20,3 +20,4 @@ Todos:
 11. Clothes selection page (algorithm??)
 12. Filter component
 13. Wishlist
+14. CSS Transitions
