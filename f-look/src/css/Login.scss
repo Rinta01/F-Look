@@ -165,16 +165,20 @@
 			input.input-error {
 				border-color: color(red);
 			}
-
-			.input-feedback {
-				color: red;
-				margin-top: 0.5px;
-				font-size: 11px;
-				text-align: left;
-				width: 100%;
-				transition: 0.2s all linear;
-			}
 		}
+	}
+	.input-feedback {
+		color: red;
+		margin-top: 0.5px;
+		font-size: 10px;
+		text-align: left;
+		width: 100%;
+		transition: 0.2s all linear;
+	}
+
+	p.input-feedback{
+		font-size: 12px;
+		text-align: center;
 	}
 
 	footer {
@@ -254,5 +258,8 @@
 				display: none;
 			}
 		}
+	}
+	.loader {
+		margin: 0 auto;
 	}
 }

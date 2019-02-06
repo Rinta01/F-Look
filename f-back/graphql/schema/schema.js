@@ -1,6 +1,6 @@
 const graphql = require('graphql');
-const User = require('../models/User');
-const Apparel = require('../models/Apparel');
+const User = require('../../models/User');
+const Apparel = require('../../models/Apparel');
 const bcrypt = require('bcryptjs');
 
 const {
@@ -48,30 +48,29 @@ const RootQuery = new GraphQLObjectType({
 			type: UserType,
 			id: { type: GraphQLID },
 			args: { id: { type: GraphQLString } },
-			resolve(parent, args) {
-				return User.findById(args.id);
+			async resolve(parent, args) {
+				await User.findById(args.id);
 			},
 		},
 		//get all users
 		users: {
 			type: new GraphQLList(UserType),
-			resolve(parent, args) {
-				return User.find({});
+			async resolve(parent, args) {
+				await User.find({});
 			},
 		},
 		apparel: {
 			type: ApparelType,
 			id: { type: GraphQLID },
 			args: { article: { type: GraphQLString } },
-			resolve(parent, args) {
-				return Apparel.findOne(
-					{ article: args.article },
-					(err, res) => {
-						if (err) {
-							return console.log(err);
-						}
+			async resolve(parent, args) {
+				await Apparel.findOne({ article: args.article }, (err, res) => {
+					if (err) {
+						console.log(err);
+					} else if (!res) {
+						throw new Error('Not found!');
 					}
-				);
+				});
 			},
 		},
 	}),
