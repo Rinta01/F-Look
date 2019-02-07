@@ -11,7 +11,7 @@ Todos:
 2. Reg Page +
 3. Login Page +-	
 4. Authentication mechanism (?)
-5. Phone verification (google it)	-+ (page without logic)
+5. Phone verification (google it) +- :(page without logic)
 6. Profile Page with editing	
 7. Main Page	
 8. Barcode Scan (google it)	

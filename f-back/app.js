@@ -1,15 +1,24 @@
 const express = require('express');
 const graphqlHTTP = require('express-graphql');
-const schema = require('./graphql/schema/schema');
+const schema = require('./graphql/schema');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const path = require('path');
+const bodyParser = require('body-parser');
+const isAuth = require('./middleware/is-auth');
 
 const PORT = process.env.PORT || 4000;
 const app = express();
 
-app.use(cors());
-// { credentials: true 
+app.use(bodyParser.json());
+app.use(
+	cors({
+		origin: true,
+		allowedHeaders: 'Content-Type, Authorization',
+		methods: 'POST,GET,OPTIONS',
+	})
+);
+app.use(isAuth);
 app.use('/graphql', graphqlHTTP({ schema, graphiql: true }));
 app.use(express.static('public'));
 

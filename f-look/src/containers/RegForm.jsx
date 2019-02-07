@@ -130,7 +130,7 @@ class RegForm extends Component {
 									{error ? (
 										error.message.includes('duplicate') ? (
 											<p className='input-feedback'>
-												This tel is already registered!
+												This phone number is already registered!
 											</p>
 										) : (
 											<p>{error.message}</p>

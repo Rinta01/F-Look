@@ -1,6 +1,6 @@
 const graphql = require('graphql');
-const User = require('../../models/User');
-const Apparel = require('../../models/Apparel');
+const User = require('../models/User');
+const Apparel = require('../models/Apparel');
 const bcrypt = require('bcryptjs');
 
 const {
@@ -37,6 +37,7 @@ const ApparelType = new GraphQLObjectType({
 		sex: { type: GraphQLString },
 		category: { type: GraphQLString },
 		material: { type: GraphQLString },
+		image: { type: GraphQLString },
 	}),
 });
 
@@ -49,14 +50,22 @@ const RootQuery = new GraphQLObjectType({
 			id: { type: GraphQLID },
 			args: { id: { type: GraphQLString } },
 			async resolve(parent, args) {
-				await User.findById(args.id);
+				const user = await User.findById(args.id, (err, res) => {
+					if (err) {
+						console.log(err);
+					} else if (!res) {
+						throw new Error('User not found!');
+					}
+				});
+				return user;
 			},
 		},
 		//get all users
 		users: {
 			type: new GraphQLList(UserType),
 			async resolve(parent, args) {
-				await User.find({});
+				const users = await User.find({});
+				return users;
 			},
 		},
 		apparel: {
@@ -64,13 +73,24 @@ const RootQuery = new GraphQLObjectType({
 			id: { type: GraphQLID },
 			args: { article: { type: GraphQLString } },
 			async resolve(parent, args) {
-				await Apparel.findOne({ article: args.article }, (err, res) => {
-					if (err) {
-						console.log(err);
-					} else if (!res) {
-						throw new Error('Not found!');
+				const item = await Apparel.findOne(
+					{ article: args.article },
+					(err, res) => {
+						if (err) {
+							console.log(err);
+						} else if (!res) {
+							throw new Error('Not found!');
+						}
 					}
-				});
+				);
+				return item;
+			},
+		},
+		allApparel: {
+			type: new GraphQLList(ApparelType),
+			async resolve(parent, args) {
+				const apparel = await Apparel.find({});
+				return apparel;
 			},
 		},
 	}),
@@ -89,7 +109,7 @@ const Mutation = new GraphQLObjectType({
 				age: { type: GraphQLInt },
 				wealth: { type: GraphQLString },
 			},
-			resolve(parent, args) {
+			async resolve(parent, args) {
 				let user = new User({
 					first_name: args.first_name,
 					last_name: args.last_name,
@@ -97,7 +117,8 @@ const Mutation = new GraphQLObjectType({
 					tel: args.tel,
 					password: args.password,
 				});
-				return user.save();
+				const savedUser = await user.save();
+				return savedUser;
 			},
 		},
 		newUser: {
@@ -117,7 +138,35 @@ const Mutation = new GraphQLObjectType({
 						password: hashedPassword,
 						sex: args.sex,
 					});
-					return user.save();
+					const savedUser = await user.save();
+					return savedUser;
+				} catch (err) {
+					throw err;
+				}
+			},
+		},
+		newApparel: {
+			type: ApparelType,
+			args: {
+				article: { type: new GraphQLNonNull(GraphQLString) },
+				brand: { type: new GraphQLNonNull(GraphQLString) },
+				sex: { type: new GraphQLNonNull(GraphQLString) },
+				category: { type: new GraphQLNonNull(GraphQLString) },
+				material: { type: GraphQLString },
+				image: { type: GraphQLString },
+			},
+			async resolve(parent, args) {
+				try {
+					const item = new Apparel({
+						article: args.article,
+						brand: args.brand,
+						sex: args.sex,
+						category: args.category,
+						material: args.material,
+						image: args.image,
+					});
+					const savedItem = await item.save();
+					return savedItem;
 				} catch (err) {
 					throw err;
 				}

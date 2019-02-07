@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const ApparelSchema = new Schema({
 	article: {
-		type: Number,
+		type: String,
 		required: [true, 'An item must have an article'],
 		unique: true,
 	},
@@ -31,6 +31,10 @@ const ApparelSchema = new Schema({
 	material: {
 		type: String,
 	},
+	image: {
+		type: String,
+		default: 'https://via.placeholder.com/150?text=Missing+item',
+	}
 });
 
 const Apparel = mongoose.model('Apparel', ApparelSchema);
