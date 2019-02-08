@@ -1,11 +1,12 @@
 const express = require('express');
 const graphqlHTTP = require('express-graphql');
-const schema = require('./graphql/schema');
+const schema = require('./schema');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const path = require('path');
 const bodyParser = require('body-parser');
 const isAuth = require('./middleware/is-auth');
+const rootValue = require('./graphql/resolvers/index');
 
 const PORT = process.env.PORT || 4000;
 const app = express();
@@ -13,18 +14,19 @@ const app = express();
 app.use(bodyParser.json());
 app.use(
 	cors({
-		origin: true,
+		origin: '*',
 		allowedHeaders: 'Content-Type, Authorization',
 		methods: 'POST,GET,OPTIONS',
+		preflightContinue: true,
 	})
 );
 app.use(isAuth);
-app.use('/graphql', graphqlHTTP({ schema, graphiql: true }));
+app.use('/graphql', graphqlHTTP({ schema, rootValue, graphiql: true }));
 app.use(express.static('public'));
 
-app.get('*', (req, res) => {
-	res.sendFile(path.resolve(__dirname, 'public', 'index.html'));
-});
+// app.get('*', (req, res) => {
+// 	res.sendFile(path.resolve(__dirname, 'public', 'index.html'));
+// });
 
 mongoose.set('debug', true);
 mongoose.Promise = Promise;
