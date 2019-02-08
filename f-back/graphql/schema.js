@@ -34,7 +34,7 @@ input ApparelInput {
     material: String
     image: String
 }
-input NewUserInput {
+input CreateUserInput {
   first_name: String!  
   tel: String!
   password: String!
@@ -49,13 +49,14 @@ input EditUserInput {
     wealth: String
 }
 type RootQuery {
-    findUser(userId: ID!): User
+    findUser(userId: String!): User
     allUsers: [User!]!
-    findApparel:(itemArticle: String!): Apparel
+    findApparel(itemArticle: String!): Apparel
     allApparel: [Apparel!]!
+    login(tel: String!, password: String!): AuthData!
 }
 type RootMutation {
-    createUser(userInput: NewUserInput): User
+    createUser(userInput: CreateUserInput): User
     editUser(editUserInput: EditUserInput): User!
     createApparel(apparelInput: ApparelInput): Apparel
 }

@@ -3,8 +3,8 @@ const bcrypt = require('bcryptjs');
 const User = require('../../models/User');
 
 module.exports = {
-	findUser: async ({ id }) => {
-		const user = await User.findById(id, (err, res) => {
+	findUser: async ({ userId }) => {
+		const user = await User.findById(userId, (err, res) => {
 			if (err) {
 				console.log(err);
 			} else if (!res) {
@@ -19,7 +19,6 @@ module.exports = {
 	},
 	createUser: async ({ userInput }) => {
 		try {
-			console.log(...userInput);
 			const existingUser = await User.findOne({ tel: userInput.tel });
 			if (existingUser) {
 				throw new Error('User exists already.');
