@@ -13,7 +13,10 @@ module.exports = {
 		});
 		return user;
 	},
-	allUsers: async () => {
+	allUsers: async (args, req) => {
+		if (!req.isAuth) {
+			throw new Error('Unauthenticated!');
+		}
 		const users = await User.find({});
 		return users;
 	},
