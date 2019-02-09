@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../css/Start.scss';
 import { BrowserRouter as Router, Redirect } from 'react-router-dom';
+import AuthContext from '../containers/AuthContext';
 
 class Start extends Component {
 	constructor(props) {
@@ -8,11 +9,23 @@ class Start extends Component {
 		this.state = {
 			redirect: false,
 		};
+		this.handleClick = this.handleClick.bind(this);
 	}
 
+	static contextType = AuthContext;
+
+	handleClick = () => {
+		this.setState({
+			redirect: true,
+		});
+	};
+
 	render() {
+		if (this.context.token && this.state.redirect) {
+			return <Redirect push from='/' to='/main' />;
+		}
 		if (this.state.redirect) {
-			return <Redirect push to='/login' />;
+			return <Redirect push from='/' to='/login' />;
 		}
 		return (
 			<Router>
@@ -24,11 +37,6 @@ class Start extends Component {
 			</Router>
 		);
 	}
-	handleClick = () => {
-		this.setState({
-			redirect: true,
-		});
-	};
 }
 
 export default Start;

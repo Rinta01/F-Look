@@ -4,6 +4,7 @@ const User = require('../../models/User');
 
 module.exports = {
 	login: async ({ tel, password }) => {
+		console.log('LOGGING IN');
 		const user = await User.findOne({ tel });
 		if (!user) {
 			throw new Error('User does not exist!');

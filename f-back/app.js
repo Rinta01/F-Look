@@ -12,14 +12,19 @@ const PORT = process.env.PORT || 4000;
 const app = express();
 
 app.use(bodyParser.json());
-app.use(
-	cors({
-		origin: '*',
-		allowedHeaders: 'Content-Type, Authorization',
-		methods: 'POST,GET,OPTIONS',
-		preflightContinue: true,
-	})
-);
+const corsOptions = {
+	origin: true,
+	allowedHeaders: 'Content-Type, Authorization',
+	methods: 'GET,POST,OPTIONS',
+	preflightContinue: true,
+};
+app.use(cors(corsOptions), (req, res, next) => {
+	if (req.method === 'OPTIONS') {
+		return res.sendStatus(200);
+	}
+	next();
+});
+
 app.use(isAuth);
 app.use('/graphql', graphqlHTTP({ schema, rootValue, graphiql: true }));
 app.use(express.static('public'));

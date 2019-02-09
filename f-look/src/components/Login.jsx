@@ -9,9 +9,8 @@ class Login extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			signup: false,
-			codeSent: false,
-			phone: 'no phone :(',
+			signup: this.props.signup,
+			phone: null,
 		};
 		this.getNumber = this.getNumber.bind(this);
 	}
@@ -45,34 +44,28 @@ class Login extends Component {
 						<Route
 							exact
 							path='/login'
-							render={({ history }) => (
-								<LoginForm
-									getNumber={this.getNumber}
-									history={history}
-								/>
+							render={() => (
+								<LoginForm getNumber={this.getNumber} />
 							)}
 						/>
 						<Route
 							exact
 							path='/signup'
-							render={({ history }) => (
-								<RegForm
-									getNumber={this.getNumber}
-									history={history}
-								/>
-							)}
-						/>
-						<Route
-							exact
-							path='/confirm'
 							render={() => (
-								<CodeConfirm phone={this.state.phone} />
+								<RegForm getNumber={this.getNumber} />
 							)}
 						/>
+						{this.state.phone && (
+							<Route
+								exact
+								path='/confirm'
+								render={() => (
+									<CodeConfirm phone={this.state.phone} />
+								)}
+							/>
+						)}
 					</Switch>
-					{!this.state.codeSent ? (
-						<LoginFooter signup={this.state.signup} />
-					) : null}
+					<LoginFooter signup={this.state.signup} />
 				</div>
 			</Router>
 		);
@@ -82,15 +75,10 @@ class Login extends Component {
 			e.target.blur();
 		}
 	}
-	async getNumber(history, num) {
-		await this.setState({
+	getNumber(num) {
+		this.setState({
 			phone: num,
 		});
-		if (history) {
-			history.push('/confirm');
-		} else {
-			console.log('No history object was provided');
-		}
 	}
 }
 

@@ -11,7 +11,6 @@ import Loader from 'react-loader-spinner';
 
 class RegForm extends Component {
 	render() {
-		const { getNumber, history } = this.props;
 		return (
 			<Mutation
 				mutation={NEW_USER}
@@ -22,15 +21,10 @@ class RegForm extends Component {
 					<Formik
 						initialValues={{
 							first_name: '',
-							// last_name: '',
-							// age: '',
-							// email: '',
-							// country: '',
 							password: '',
 							tel: '',
 							confirm_password: '',
 							sex: 'Male',
-							// wealth: 'Average',
 						}}
 						onSubmit={async (values, { setSubmitting }) => {
 							setTimeout(async () => {
@@ -41,24 +35,14 @@ class RegForm extends Component {
 									variables: values,
 								});
 								console.log(res);
-								getNumber(history, values.tel);
+								this.props.getNumber(values.tel);
 							}, 500);
 						}}
 						validationSchema={Yup.object().shape({
 							first_name: Yup.string().required('required'),
-							// last_name: Yup.string().required('required'),
-							// email: Yup.string()
-							// 	.email()
-							// 	.required('required'),
 							tel: Yup.string()
 								.matches(TEL, 'Phone number is not valid')
 								.required('required'),
-							// age: Yup.number()
-							// 	.min(1, 'You are too young')
-							// 	.max(100, 'You are too old')
-							// 	.required('required'),
-							//Match with existing countries!!!!!!!
-							// country: Yup.string().required('required'),
 							password: Yup.string()
 								.min(6, 'Password is too short')
 								.required('required'),
@@ -118,7 +102,7 @@ class RegForm extends Component {
 											</button>
 										</form>
 									</section>
-									{loading ? (
+									{loading && (
 										<Loader
 											className='loader'
 											type='Bars'
@@ -126,16 +110,17 @@ class RegForm extends Component {
 											height='50px'
 											width='50px'
 										/>
-									) : null}
-									{error ? (
-										error.message.includes('duplicate') ? (
+									)}
+
+									{error &&
+										(error.message.includes('duplicate') ? (
 											<p className='input-feedback'>
-												This phone number is already registered!
+												This phone number is already
+												registered!
 											</p>
 										) : (
 											<p>{error.message}</p>
-										)
-									) : null}
+										))}
 								</Fragment>
 							);
 						}}
