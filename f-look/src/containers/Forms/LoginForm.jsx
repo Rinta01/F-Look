@@ -1,18 +1,29 @@
 import { Formik } from 'formik';
 import React, { Component } from 'react';
-import { ApolloConsumer } from 'react-apollo';
+import { Mutation } from 'react-apollo';
 import * as Yup from 'yup';
 import AuthContext from '../../context/AuthContext';
 import { LOGIN } from '../../graphql/queries';
 import { TEL } from '../../utils/validators';
-import TextInput from '../../components/InputTypes/TextInput/TextInput';
+import { TextInput } from '../../components/InputTypes/Inputs';
+import CustomLoader from '../../components/CustomLoader/CustomLoader';
+import ErrorContainer from '../../components/ErrorContainer/ErrorContainer';
+import './Form.scss';
 
 export default class LoginForm extends Component {
 	static contextType = AuthContext;
 	render() {
 		return (
-			<ApolloConsumer>
-				{client => (
+			<Mutation
+				mutation={LOGIN}
+				onCompleted={({ login }) => {
+					console.log('YAY');
+					this.context.login(login.userId, login.token);
+				}}
+				onError={err => {
+					console.log(err.graphQLErrors, err.networkError);
+				}}>
+				{(login, { loading, error }) => (
 					<Formik
 						initialValues={{
 							tel: '',
@@ -20,20 +31,11 @@ export default class LoginForm extends Component {
 						}}
 						onSubmit={async (values, { setSubmitting }) => {
 							setSubmitting(false);
-							const res = await client.query({
-								query: LOGIN,
+							await login({
 								variables: values,
 							});
 							//This is a redirect to phone number confirmation
 							// this.props.getNumber(values.tel);
-							console.log(res);
-							if (res.data.login) {
-								console.log(this.context);
-								this.context.login(
-									res.data.login.userId,
-									res.data.login.token
-								);
-							}
 						}}
 						validationSchema={Yup.object().shape({
 							tel: Yup.string()
@@ -52,30 +54,37 @@ export default class LoginForm extends Component {
 								handleSubmit,
 							} = props;
 							return (
-								<form onSubmit={handleSubmit}>
-									<TextInput
-										name='tel'
-										onChange={handleChange}
-										errors={errors}
-										touched={touched}
-									/>
-									<TextInput
-										name='password'
-										onChange={handleChange}
-										errors={errors}
-										touched={touched}
-									/>
-									<button
-										type='submit'
-										disabled={isSubmitting}>
-										Submit
-									</button>
-								</form>
+								<section className='form-container'>
+									<form onSubmit={handleSubmit}>
+										<TextInput
+											name='tel'
+											onChange={handleChange}
+											errors={errors}
+											touched={touched}
+										/>
+										<TextInput
+											name='password'
+											onChange={handleChange}
+											errors={errors}
+											touched={touched}
+										/>
+										{loading ? (
+											<CustomLoader loading={loading} />
+										) : (
+											<button
+												type='submit'
+												disabled={isSubmitting}>
+												Submit
+											</button>
+										)}
+										<ErrorContainer error={error} />
+									</form>
+								</section>
 							);
 						}}
 					</Formik>
 				)}
-			</ApolloConsumer>
+			</Mutation>
 		);
 	}
 }

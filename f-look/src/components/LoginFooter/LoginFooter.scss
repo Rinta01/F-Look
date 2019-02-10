@@ -6,16 +6,4 @@ footer {
 	span {
 		@include title;
 	}
-
-	.social-icon {
-		cursor: pointer;
-		color: color(grey);
-		margin: 10px;
-		font-size: 33px;
-		transition: all 0.2s linear;
-
-		&:hover {
-			color: darken(color(grey), 20%);
-		}
-	}
 }

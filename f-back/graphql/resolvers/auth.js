@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const User = require('../../models/User');
 
 module.exports = {
-	login: async ({ tel, password }) => {
+	login: async ({ tel, password }, req, res) => {
 		console.log('LOGGING IN');
 		const user = await User.findOne({ tel });
 		if (!user) {

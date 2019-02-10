@@ -41,24 +41,22 @@ class Login extends Component {
 							Log in
 						</Link>
 					</header>
-					<section className='form-container'>
-						<Switch>
-							<Route
-								exact
-								path='/login'
-								render={() => (
-									<LoginForm getNumber={this.getNumber} />
-								)}
-							/>
-							<Route
-								exact
-								path='/signup'
-								render={() => (
-									<RegForm getNumber={this.getNumber} />
-								)}
-							/>
-						</Switch>
-					</section>
+					<Switch>
+						<Route
+							exact
+							path='/login'
+							render={() => (
+								<LoginForm getNumber={this.getNumber} />
+							)}
+						/>
+						<Route
+							exact
+							path='/signup'
+							render={() => (
+								<RegForm getNumber={this.getNumber} />
+							)}
+						/>
+					</Switch>
 					{/* Path to phone number confirmation */}
 					{this.state.phone && (
 						<Route

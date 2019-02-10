@@ -53,9 +53,9 @@ type RootQuery {
     allUsers: [User!]!
     findApparel(itemArticle: String!): Apparel
     allApparel: [Apparel!]!
-    login(tel: String!, password: String!): AuthData!
 }
 type RootMutation {
+    login(tel: String!, password: String!): AuthData!
     createUser(userInput: CreateUserInput): User
     editUser(editUserInput: EditUserInput): User!
     createApparel(apparelInput: ApparelInput): Apparel

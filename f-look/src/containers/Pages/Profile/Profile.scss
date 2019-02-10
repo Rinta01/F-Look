@@ -1,0 +1,43 @@
+@import '../../../css/variables.scss';
+
+.container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+
+	* {
+		font-family: $font;
+	}
+
+	header {
+		@include title;
+		margin-bottom: 20px;
+
+		* {
+			cursor: pointer;
+			color: color(grey);
+			text-decoration: none;
+		}
+	}
+	.form-container {
+		&.profile-page {
+			&::before {
+				top: -0.6rem; // let it overlap a bit to prevent thin line which could appear during scaling in some browsers etc.
+				bottom: 1.1rem;
+				left: 1.1rem;
+				right: -0.6rem;
+			}
+
+			&::after {
+				left: -0.6rem;
+				right: 1.1rem;
+				top: 1.1rem;
+				bottom: -0.6rem;
+			}
+		}
+    }
+    .social-icon{
+        align-self: flex-end;
+    }
+}

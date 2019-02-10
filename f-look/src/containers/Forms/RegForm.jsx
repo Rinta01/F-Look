@@ -1,12 +1,13 @@
 import { Formik } from 'formik';
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { Mutation } from 'react-apollo';
-import Loader from 'react-loader-spinner';
 import * as Yup from 'yup';
 import { NEW_USER } from '../../graphql/queries';
 import { TEL } from '../../utils/validators';
-import TextInput from '../../components/InputTypes/TextInput/TextInput';
-import RadioInput from '../../components/InputTypes/RadioInput/RadioInput';
+import { TextInput, RadioInput } from '../../components/InputTypes/Inputs';
+import CustomLoader from '../../components/CustomLoader/CustomLoader';
+import ErrorContainer from '../../components/ErrorContainer/ErrorContainer';
+import './Form.scss';
 
 class RegForm extends Component {
 	render() {
@@ -26,14 +27,11 @@ class RegForm extends Component {
 							sex: 'Male',
 						}}
 						onSubmit={async (values, { setSubmitting }) => {
-							setTimeout(async () => {
-								setSubmitting(false);
-								const res = await newUser({
-									variables: values,
-								});
-								console.log(res);
-								// this.props.getNumber(values.tel);
-							}, 500);
+							setSubmitting(false);
+							await newUser({
+								variables: values,
+							});
+							// this.props.getNumber(values.tel);
 						}}
 						validationSchema={Yup.object().shape({
 							first_name: Yup.string().required('required'),
@@ -60,7 +58,7 @@ class RegForm extends Component {
 								handleSubmit,
 							} = props;
 							return (
-								<Fragment>
+								<section className='form-container'>
 									<form onSubmit={handleSubmit}>
 										<TextInput
 											name='first_name'
@@ -91,31 +89,18 @@ class RegForm extends Component {
 											onChange={handleChange}
 											values={values}
 										/>
-										<button
-											type='submit'
-											disabled={isSubmitting}>
-											Submit
-										</button>
-									</form>
-									{loading && (
-										<Loader
-											className='loader'
-											type='Bars'
-											color='#b97fff'
-											height='50px'
-											width='50px'
-										/>
-									)}
-									{error &&
-										(error.message.includes('duplicate') ? (
-											<p className='input-feedback'>
-												This phone number is already
-												registered!
-											</p>
+										{loading ? (
+											<CustomLoader loading={loading} />
 										) : (
-											<p>{error.message}</p>
-										))}
-								</Fragment>
+											<button
+												type='submit'
+												disabled={isSubmitting}>
+												Submit
+											</button>
+										)}
+										<ErrorContainer error={error} />
+									</form>
+								</section>
 							);
 						}}
 					</Formik>

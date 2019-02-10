@@ -9,15 +9,14 @@ const graphqlUri = 'http://localhost:4000/graphql';
 const httpLink = new HttpLink({
 	uri: graphqlUri,
 });
-const errorLink = onError(({ graphQLErrors, networkError }) => {
+const errorLink = onError(({ response, graphQLErrors, networkError }) => {
 	if (graphQLErrors)
 		graphQLErrors.map(({ message, path }) =>
-			console.log(
-				`[GraphQL error]: Message: ${message}, Path: ${path}`
-			)
+			console.log(`[GraphQL error]: Message: ${message}, Path: ${path}`)
 		);
-
-	if (networkError) console.log(`[Network error]: ${networkError}`);
+	if (networkError) {
+		console.log(`[Network error]: ${networkError}`);
+	}
 });
 const authLink = setContext((_, { headers }) => {
 	// get the authentication token from local storage if it exists

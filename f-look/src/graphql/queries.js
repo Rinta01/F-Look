@@ -1,7 +1,7 @@
 import gql from 'graphql-tag';
 
 export const LOGIN = gql`
-	query($tel: String!, $password: String!) {
+	mutation($tel: String!, $password: String!) {
 		login(tel: $tel, password: $password) {
 			userId
 			token

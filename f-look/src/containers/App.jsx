@@ -1,15 +1,16 @@
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faFacebookSquare, faGoogle, faGooglePlusSquare, faVk } from '@fortawesome/free-brands-svg-icons';
+import { faFacebookSquare, faGooglePlusSquare, faVk } from '@fortawesome/free-brands-svg-icons';
+import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import React, { Component } from 'react';
 import { ApolloProvider } from 'react-apollo';
 import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
 import Login from '../components/Login/Login';
 import Start from '../components/Start/Start';
-import Profile from '../containers/Pages/Profile';
+import Profile from '../containers/Pages/Profile/Profile';
 import AuthContext from '../context/AuthContext';
 import { client } from '../utils/apolloConfig';
 
-library.add(faFacebookSquare, faGoogle, faVk, faGooglePlusSquare);
+library.add(faFacebookSquare, faVk, faGooglePlusSquare, faSignOutAlt);
 
 export default class App extends Component {
 	constructor(props) {
