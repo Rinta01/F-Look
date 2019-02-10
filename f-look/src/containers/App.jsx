@@ -1,9 +1,18 @@
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faFacebookSquare, faGooglePlusSquare, faVk } from '@fortawesome/free-brands-svg-icons';
+import {
+	faFacebookSquare,
+	faGooglePlusSquare,
+	faVk,
+} from '@fortawesome/free-brands-svg-icons';
 import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import React, { Component } from 'react';
 import { ApolloProvider } from 'react-apollo';
-import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
+import {
+	BrowserRouter as Router,
+	Redirect,
+	Route,
+	Switch,
+} from 'react-router-dom';
 import Login from '../components/Login/Login';
 import Start from '../components/Start/Start';
 import Profile from '../containers/Pages/Profile/Profile';
@@ -67,11 +76,6 @@ export default class App extends Component {
 								render={() => <Login signup={true} />}
 							/>
 							<Route exact path='/profile' component={Profile} />
-							<Route
-								exact
-								path='/confirm'
-								render={() => <div>NOT THERE YET</div>}
-							/>
 						</Switch>
 					</AuthContext.Provider>
 				</Router>

@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 export default class RadioInput extends Component {
 	static propTypes = {
 		name: PropTypes.string,
-		onChange: PropTypes.func,
+		handleChange: PropTypes.func,
 		values: PropTypes.object,
 	};
 
@@ -36,7 +36,7 @@ export default class RadioInput extends Component {
 
 	render() {
 		const { name, value1, id1, value2, id2 } = this.getRadio();
-		const { onChange, values } = this.props;
+		const { handleChange, values } = this.props;
 		return (
 			<div className='radio-group'>
 				<input
@@ -45,7 +45,7 @@ export default class RadioInput extends Component {
 					value={value1}
 					id={id1}
 					checked={values[name] === value1}
-					onChange={onChange}
+					onChange={handleChange}
 				/>
 				<label htmlFor={id1}>{value1}</label>
 				<input
@@ -54,7 +54,7 @@ export default class RadioInput extends Component {
 					value={value2}
 					id={id2}
 					checked={values[name] === value2}
-					onChange={onChange}
+					onChange={handleChange}
 				/>
 				<label htmlFor={id2}>{value2}</label>
 			</div>

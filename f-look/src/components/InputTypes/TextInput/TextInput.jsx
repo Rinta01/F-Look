@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 export default class TextInput extends Component {
 	static propTypes = {
 		name: PropTypes.string,
-		onChange: PropTypes.func,
+		handleChange: PropTypes.func,
 		errors: PropTypes.object,
 		touched: PropTypes.object,
 	};
@@ -67,7 +67,7 @@ export default class TextInput extends Component {
 
 	render() {
 		const { type, name, placeholder } = this.getInput();
-		const { onChange, errors, touched } = this.props;
+		const { values, handleChange, errors, touched } = this.props;
 
 		return (
 			<Fragment>
@@ -75,7 +75,8 @@ export default class TextInput extends Component {
 					type={type}
 					name={name}
 					placeholder={placeholder}
-					onChange={onChange}
+					onChange={handleChange}
+					value={values[name] ? values[name] : ''}
 					className={`input-field	${errors[name] === 'required' &&
 						touched[name] &&
 						'input-error'}`}

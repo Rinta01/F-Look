@@ -6,7 +6,7 @@ import { NEW_USER } from '../../graphql/queries';
 import { TEL } from '../../utils/validators';
 import { TextInput, RadioInput } from '../../components/InputTypes/Inputs';
 import CustomLoader from '../../components/CustomLoader/CustomLoader';
-import ErrorContainer from '../../components/ErrorContainer/ErrorContainer';
+import StatusContainer from '../../components/StatusContainer/StatusContainer';
 import './Form.scss';
 
 class RegForm extends Component {
@@ -50,11 +50,11 @@ class RegForm extends Component {
 						})}>
 						{props => {
 							const {
-								values,
-								touched,
-								errors,
+								// values,
+								// touched,
+								// errors,
+								// handleChange,
 								isSubmitting,
-								handleChange,
 								handleSubmit,
 							} = props;
 							return (
@@ -62,33 +62,15 @@ class RegForm extends Component {
 									<form onSubmit={handleSubmit}>
 										<TextInput
 											name='first_name'
-											onChange={handleChange}
-											errors={errors}
-											touched={touched}
+											{...props}
 										/>
-										<TextInput
-											name='tel'
-											onChange={handleChange}
-											errors={errors}
-											touched={touched}
-										/>
-										<TextInput
-											name='password'
-											onChange={handleChange}
-											errors={errors}
-											touched={touched}
-										/>
+										<TextInput name='tel' {...props} />
+										<TextInput name='password' {...props} />
 										<TextInput
 											name='confirm_password'
-											onChange={handleChange}
-											errors={errors}
-											touched={touched}
+											{...props}
 										/>
-										<RadioInput
-											name='sex'
-											onChange={handleChange}
-											values={values}
-										/>
+										<RadioInput name='sex' {...props} />
 										{loading ? (
 											<CustomLoader loading={loading} />
 										) : (
@@ -98,7 +80,7 @@ class RegForm extends Component {
 												Submit
 											</button>
 										)}
-										<ErrorContainer error={error} />
+										<StatusContainer error={error} />
 									</form>
 								</section>
 							);

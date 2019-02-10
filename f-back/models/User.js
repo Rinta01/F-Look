@@ -10,8 +10,8 @@ const UserSchema = new Schema({
 		type: String,
 	},
 	country: {
-		type: String,
 		default: 'Russia',
+		type: String,
 	},
 	tel: {
 		type: String,

@@ -7,6 +7,7 @@ type User {
     last_name: String
     password: String!
     country: String
+    email: String
     tel: String!
     sex: String!
     age: Int
@@ -41,12 +42,14 @@ input CreateUserInput {
   sex: String!
 }
 input EditUserInput {
-    first_name: String
+    id: String!
+    first_name: String!
     last_name: String
     country: String
-    tel: String
+    tel: String!
+    email: String
     age: Int
-    wealth: String
+    wealth: String!
 }
 type RootQuery {
     findUser(userId: String!): User

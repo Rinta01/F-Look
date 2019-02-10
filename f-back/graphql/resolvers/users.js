@@ -41,14 +41,27 @@ module.exports = {
 		}
 	},
 	editUser: async ({ editUserInput }) => {
-		let user = new User({
-			first_name: editUserInput.first_name,
-			last_name: editUserInput.last_name,
-			country: editUserInput.country,
-			tel: editUserInput.tel,
-			password: editUserInput.password,
-		});
-		const savedUser = await user.save();
-		return savedUser;
+		let savedUser;
+		const user = await User.findById(
+			editUserInput.id,
+			async (err, foundUser) => {
+				if (err) {
+					console.log(err);
+				} else if (!foundUser) {
+					throw new Error('User not found!');
+				} else {
+					foundUser.first_name = editUserInput.first_name;
+					foundUser.last_name = editUserInput.last_name;
+					foundUser.country = editUserInput.country;
+					foundUser.tel = editUserInput.tel;
+					foundUser.email = editUserInput.email;
+					foundUser.age = editUserInput.age;
+					foundUser.wealth = editUserInput.wealth;
+
+					savedUser = await foundUser.save();
+				}
+			}
+		);
+		return user;
 	},
 };

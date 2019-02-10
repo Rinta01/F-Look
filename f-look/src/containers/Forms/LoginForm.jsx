@@ -7,7 +7,7 @@ import { LOGIN } from '../../graphql/queries';
 import { TEL } from '../../utils/validators';
 import { TextInput } from '../../components/InputTypes/Inputs';
 import CustomLoader from '../../components/CustomLoader/CustomLoader';
-import ErrorContainer from '../../components/ErrorContainer/ErrorContainer';
+import StatusContainer from '../../components/StatusContainer/StatusContainer';
 import './Form.scss';
 
 export default class LoginForm extends Component {
@@ -46,28 +46,12 @@ export default class LoginForm extends Component {
 								.required('required'),
 						})}>
 						{props => {
-							const {
-								touched,
-								errors,
-								isSubmitting,
-								handleChange,
-								handleSubmit,
-							} = props;
+							const { isSubmitting, handleSubmit } = props;
 							return (
 								<section className='form-container'>
 									<form onSubmit={handleSubmit}>
-										<TextInput
-											name='tel'
-											onChange={handleChange}
-											errors={errors}
-											touched={touched}
-										/>
-										<TextInput
-											name='password'
-											onChange={handleChange}
-											errors={errors}
-											touched={touched}
-										/>
+										<TextInput name='tel' {...props} />
+										<TextInput name='password' {...props} />
 										{loading ? (
 											<CustomLoader loading={loading} />
 										) : (
@@ -77,7 +61,7 @@ export default class LoginForm extends Component {
 												Submit
 											</button>
 										)}
-										<ErrorContainer error={error} />
+										<StatusContainer error={error} />
 									</form>
 								</section>
 							);
