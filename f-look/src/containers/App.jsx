@@ -1,57 +1,15 @@
 import { library } from '@fortawesome/fontawesome-svg-core';
-import {
-	faFacebookSquare,
-	faGoogle,
-	faVk,
-	faGooglePlusSquare,
-} from '@fortawesome/free-brands-svg-icons';
-import { ApolloClient, InMemoryCache, HttpLink } from 'apollo-boost';
+import { faFacebookSquare, faGoogle, faGooglePlusSquare, faVk } from '@fortawesome/free-brands-svg-icons';
 import React, { Component } from 'react';
-import {
-	BrowserRouter as Router,
-	Route,
-	Switch,
-	Redirect,
-} from 'react-router-dom';
-import Start from '../components/Start';
-import Login from '../components/Login';
-import Profile from '../containers/Profile';
 import { ApolloProvider } from 'react-apollo';
-import { setContext } from 'apollo-link-context';
-import AuthContext from './AuthContext';
+import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
+import Login from '../components/Login/Login';
+import Start from '../components/Start/Start';
+import Profile from '../containers/Pages/Profile';
+import AuthContext from '../context/AuthContext';
+import { client } from '../utils/apolloConfig';
 
 library.add(faFacebookSquare, faGoogle, faVk, faGooglePlusSquare);
-
-const graphqlUri = 'http://localhost:4000/graphql';
-const httpLink = new HttpLink({
-	uri: graphqlUri,
-});
-const authLink = setContext((_, { headers }) => {
-	// get the authentication token from local storage if it exists
-	const token = localStorage.getItem('token');
-	// return the headers to the context so httpLink can read them
-	return {
-		headers: {
-			...headers,
-			Authorization: token ? `Bearer ${token}` : '',
-		},
-	};
-});
-const client = new ApolloClient({
-	link: authLink.concat(httpLink),
-	cache: new InMemoryCache(),
-	watchQuery: {
-		fetchPolicy: 'cache-and-network',
-		errorPolicy: 'ignore',
-	},
-	query: {
-		fetchPolicy: 'network-only',
-		errorPolicy: 'all',
-	},
-	mutate: {
-		errorPolicy: 'all',
-	},
-});
 
 export default class App extends Component {
 	constructor(props) {
@@ -84,7 +42,7 @@ export default class App extends Component {
 							logout: this.logout,
 						}}>
 						<Switch>
-						{this.state.token && (
+							{this.state.token && (
 								<Redirect from='/login' to='/profile' />
 							)}
 							{this.state.token && (

@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
-import LoginForm from '../containers/LoginForm';
-import RegForm from '../containers/RegForm';
-import '../css/Login.scss';
-import CodeConfirm from './CodeConfirm';
-import LoginFooter from './LoginFooter';
+import LoginForm from '../../containers/Forms/LoginForm';
+import RegForm from '../../containers/Forms/RegForm';
+import './Login.scss';
+import CodeConfirm from '../CodeConfirm/CodeConfirm';
+import LoginFooter from '../LoginFooter/LoginFooter';
+
 class Login extends Component {
 	constructor(props) {
 		super(props);
@@ -18,7 +19,7 @@ class Login extends Component {
 	render() {
 		return (
 			<Router>
-				<div className='login-page' onKeyDown={this.handleKeyDown}>
+				<div className='container' onKeyDown={this.handleKeyDown}>
 					<header>
 						<Link
 							to='/signup'
@@ -40,31 +41,34 @@ class Login extends Component {
 							Log in
 						</Link>
 					</header>
-					<Switch>
-						<Route
-							exact
-							path='/login'
-							render={() => (
-								<LoginForm getNumber={this.getNumber} />
-							)}
-						/>
-						<Route
-							exact
-							path='/signup'
-							render={() => (
-								<RegForm getNumber={this.getNumber} />
-							)}
-						/>
-						{this.state.phone && (
+					<section className='form-container'>
+						<Switch>
 							<Route
 								exact
-								path='/confirm'
+								path='/login'
 								render={() => (
-									<CodeConfirm phone={this.state.phone} />
+									<LoginForm getNumber={this.getNumber} />
 								)}
 							/>
-						)}
-					</Switch>
+							<Route
+								exact
+								path='/signup'
+								render={() => (
+									<RegForm getNumber={this.getNumber} />
+								)}
+							/>
+						</Switch>
+					</section>
+					{/* Path to phone number confirmation */}
+					{this.state.phone && (
+						<Route
+							exact
+							path='/confirm'
+							render={() => (
+								<CodeConfirm phone={this.state.phone} />
+							)}
+						/>
+					)}
 					<LoginFooter signup={this.state.signup} />
 				</div>
 			</Router>

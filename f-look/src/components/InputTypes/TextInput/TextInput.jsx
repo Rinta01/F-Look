@@ -1,7 +1,8 @@
 import React, { Component, Fragment } from 'react';
+import './TextInput.scss';
 import PropTypes from 'prop-types';
 
-export default class Input extends Component {
+export default class TextInput extends Component {
 	static propTypes = {
 		name: PropTypes.string,
 		onChange: PropTypes.func,
@@ -66,7 +67,6 @@ export default class Input extends Component {
 
 	render() {
 		const { type, name, placeholder } = this.getInput();
-
 		const { onChange, errors, touched } = this.props;
 
 		return (
@@ -76,15 +76,13 @@ export default class Input extends Component {
 					name={name}
 					placeholder={placeholder}
 					onChange={onChange}
-					className={
-						errors[name] === 'required' && touched[name]
-							? 'input-error'
-							: ''
-					}
+					className={`input-field	${errors[name] === 'required' &&
+						touched[name] &&
+						'input-error'}`}
 				/>
-				{errors[name] !== 'required' ? (
+				{errors[name] !== 'required' && (
 					<div className='input-feedback'>{errors[name]}</div>
-				) : null}
+				)}
 			</Fragment>
 		);
 	}

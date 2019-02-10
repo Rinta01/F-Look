@@ -1,6 +1,6 @@
-import React from 'react';
-import '../css/Login.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React from 'react';
+import './LoginFooter.scss';
 
 const LoginFooter = ({ signup }) => {
 	return (

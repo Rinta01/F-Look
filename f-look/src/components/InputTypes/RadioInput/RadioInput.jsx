@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './RadioInput.scss';
 import PropTypes from 'prop-types';
 
 export default class RadioInput extends Component {
@@ -34,7 +35,7 @@ export default class RadioInput extends Component {
 	}
 
 	render() {
-		const { name, value1, id1, value2, id2} = this.getRadio();
+		const { name, value1, id1, value2, id2 } = this.getRadio();
 		const { onChange, values } = this.props;
 		return (
 			<div className='radio-group'>

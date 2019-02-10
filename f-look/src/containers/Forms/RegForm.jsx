@@ -1,13 +1,12 @@
 import { Formik } from 'formik';
 import React, { Component, Fragment } from 'react';
 import { Mutation } from 'react-apollo';
-import * as Yup from 'yup';
-import Input from '../components/Input';
-import RadioInput from '../components/RadioInput';
-import '../css/Login.scss';
-import { TEL } from '../utils/validators';
-import { NEW_USER } from '../graphql/queries';
 import Loader from 'react-loader-spinner';
+import * as Yup from 'yup';
+import { NEW_USER } from '../../graphql/queries';
+import { TEL } from '../../utils/validators';
+import TextInput from '../../components/InputTypes/TextInput/TextInput';
+import RadioInput from '../../components/InputTypes/RadioInput/RadioInput';
 
 class RegForm extends Component {
 	render() {
@@ -28,14 +27,12 @@ class RegForm extends Component {
 						}}
 						onSubmit={async (values, { setSubmitting }) => {
 							setTimeout(async () => {
-								alert(JSON.stringify(values, null, 2));
 								setSubmitting(false);
-								// console.log(values);
 								const res = await newUser({
 									variables: values,
 								});
 								console.log(res);
-								this.props.getNumber(values.tel);
+								// this.props.getNumber(values.tel);
 							}, 500);
 						}}
 						validationSchema={Yup.object().shape({
@@ -64,44 +61,42 @@ class RegForm extends Component {
 							} = props;
 							return (
 								<Fragment>
-									<section className='form-container'>
-										<form onSubmit={handleSubmit}>
-											<Input
-												name='first_name'
-												onChange={handleChange}
-												errors={errors}
-												touched={touched}
-											/>
-											<Input
-												name='tel'
-												onChange={handleChange}
-												errors={errors}
-												touched={touched}
-											/>
-											<Input
-												name='password'
-												onChange={handleChange}
-												errors={errors}
-												touched={touched}
-											/>
-											<Input
-												name='confirm_password'
-												onChange={handleChange}
-												errors={errors}
-												touched={touched}
-											/>
-											<RadioInput
-												name='sex'
-												onChange={handleChange}
-												values={values}
-											/>
-											<button
-												type='submit'
-												disabled={isSubmitting}>
-												Submit
-											</button>
-										</form>
-									</section>
+									<form onSubmit={handleSubmit}>
+										<TextInput
+											name='first_name'
+											onChange={handleChange}
+											errors={errors}
+											touched={touched}
+										/>
+										<TextInput
+											name='tel'
+											onChange={handleChange}
+											errors={errors}
+											touched={touched}
+										/>
+										<TextInput
+											name='password'
+											onChange={handleChange}
+											errors={errors}
+											touched={touched}
+										/>
+										<TextInput
+											name='confirm_password'
+											onChange={handleChange}
+											errors={errors}
+											touched={touched}
+										/>
+										<RadioInput
+											name='sex'
+											onChange={handleChange}
+											values={values}
+										/>
+										<button
+											type='submit'
+											disabled={isSubmitting}>
+											Submit
+										</button>
+									</form>
 									{loading && (
 										<Loader
 											className='loader'
@@ -111,7 +106,6 @@ class RegForm extends Component {
 											width='50px'
 										/>
 									)}
-
 									{error &&
 										(error.message.includes('duplicate') ? (
 											<p className='input-feedback'>

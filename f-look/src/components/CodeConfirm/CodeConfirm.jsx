@@ -1,8 +1,7 @@
 import { Formik } from 'formik';
 import React from 'react';
 import * as Yup from 'yup';
-import '../css/Login.scss';
-import NumberInput from './NumberInput';
+import NumberInput from '../InputTypes/NumberInput/NumberInput';
 
 const CodeConfirm = ({phone}) => {
 	return (

@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
 import { Formik } from 'formik';
-import * as Yup from 'yup';
-import '../css/Login.scss';
-import Input from '../components/Input';
-import { TEL } from '../utils/validators';
-import AuthContext from './AuthContext';
-import { LOGIN } from '../graphql/queries';
+import React, { Component } from 'react';
 import { ApolloConsumer } from 'react-apollo';
+import * as Yup from 'yup';
+import AuthContext from '../../context/AuthContext';
+import { LOGIN } from '../../graphql/queries';
+import { TEL } from '../../utils/validators';
+import TextInput from '../../components/InputTypes/TextInput/TextInput';
+
 export default class LoginForm extends Component {
 	static contextType = AuthContext;
 	render() {
@@ -24,7 +24,8 @@ export default class LoginForm extends Component {
 								query: LOGIN,
 								variables: values,
 							});
-							this.props.getNumber(values.tel);
+							//This is a redirect to phone number confirmation
+							// this.props.getNumber(values.tel);
 							console.log(res);
 							if (res.data.login) {
 								console.log(this.context);
@@ -51,27 +52,25 @@ export default class LoginForm extends Component {
 								handleSubmit,
 							} = props;
 							return (
-								<section className='form-container'>
-									<form onSubmit={handleSubmit}>
-										<Input
-											name='tel'
-											onChange={handleChange}
-											errors={errors}
-											touched={touched}
-										/>
-										<Input
-											name='password'
-											onChange={handleChange}
-											errors={errors}
-											touched={touched}
-										/>
-										<button
-											type='submit'
-											disabled={isSubmitting}>
-											Submit
-										</button>
-									</form>
-								</section>
+								<form onSubmit={handleSubmit}>
+									<TextInput
+										name='tel'
+										onChange={handleChange}
+										errors={errors}
+										touched={touched}
+									/>
+									<TextInput
+										name='password'
+										onChange={handleChange}
+										errors={errors}
+										touched={touched}
+									/>
+									<button
+										type='submit'
+										disabled={isSubmitting}>
+										Submit
+									</button>
+								</form>
 							);
 						}}
 					</Formik>

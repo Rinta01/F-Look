@@ -1,4 +1,4 @@
-@import '../css/variables.scss';
+@import '../../css/variables.scss';
 @import url('https://fonts.googleapis.com/css?family=Work+Sans:500,600,700');
 
 .start-page {
@@ -24,10 +24,6 @@
 		}
 		transition: 0.25s all linear;
 
-		.logo {
-			// z-index: 1;
-			// position: relative;
-		}
 		&:hover {
 			transform: scale(1.2);
 		}

@@ -27,11 +27,13 @@ export const EDIT_USER = gql`
 		$password: String!
 	) {
 		editUser(
-			first_name: $first_name
-			last_name: $last_name
-			country: $country
-			tel: $tel
-			password: $password
+			editUserInput: {
+				first_name: $first_name,
+				last_name: $last_name,
+				country: $country,
+				tel: $tel,
+				password: $password,
+			}
 		) {
 			first_name
 			last_name
@@ -49,10 +51,12 @@ export const NEW_USER = gql`
 		$sex: String!
 	) {
 		createUser(
-			first_name: $first_name
-			tel: $tel
-			password: $password
-			sex: $sex
+			userInput: {
+				first_name: $first_name
+				tel: $tel
+				password: $password
+				sex: $sex
+			}
 		) {
 			first_name
 			tel

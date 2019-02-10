@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import '../css/Start.scss';
+import './Start.scss';
 import { BrowserRouter as Router, Redirect } from 'react-router-dom';
-import AuthContext from '../containers/AuthContext';
+import AuthContext from '../../context/AuthContext';
 
 class Start extends Component {
 	constructor(props) {

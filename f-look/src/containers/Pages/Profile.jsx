@@ -1,13 +1,13 @@
+import { Formik } from 'formik';
 import React, { Component, Fragment } from 'react';
 import { Mutation } from 'react-apollo';
-import { EDIT_USER } from '../graphql/queries';
-import * as Yup from 'yup';
-import Input from '../components/Input';
-import RadioInput from '../components/RadioInput';
-import '../css/Login.scss';
-import { Formik } from 'formik';
-import { TEL } from '../utils/validators';
 import Loader from 'react-loader-spinner';
+import * as Yup from 'yup';
+import { EDIT_USER } from '../../graphql/queries';
+import { TEL } from '../../utils/validators';
+import TextInput from '../../components/InputTypes/TextInput/TextInput';
+import RadioInput from '../../components/InputTypes/RadioInput/RadioInput';
+//CSS STYLESHEET
 
 export default class Profile extends Component {
 	render() {
@@ -80,25 +80,25 @@ export default class Profile extends Component {
 								<Fragment>
 									<section className='form-container'>
 										<form onSubmit={handleSubmit}>
-											<Input
+											<TextInput
 												name='first_name'
 												onChange={handleChange}
 												errors={errors}
 												touched={touched}
 											/>
-											<Input
+											<TextInput
 												name='tel'
 												onChange={handleChange}
 												errors={errors}
 												touched={touched}
 											/>
-											<Input
+											<TextInput
 												name='password'
 												onChange={handleChange}
 												errors={errors}
 												touched={touched}
 											/>
-											<Input
+											<TextInput
 												name='confirm_password'
 												onChange={handleChange}
 												errors={errors}
@@ -116,7 +116,7 @@ export default class Profile extends Component {
 											</button>
 										</form>
 									</section>
-									{loading ? (
+									{loading && (
 										<Loader
 											className='loader'
 											type='Bars'
@@ -124,17 +124,16 @@ export default class Profile extends Component {
 											height='50px'
 											width='50px'
 										/>
-									) : null}
-									{error ? (
-										error.message.includes('duplicate') ? (
+									)}
+									{error &&
+										(error.message.includes('duplicate') ? (
 											<p className='input-feedback'>
 												This phone number is already
 												registered!
 											</p>
 										) : (
 											<p>{error.message}</p>
-										)
-									) : null}
+										))}
 								</Fragment>
 							);
 						}}
