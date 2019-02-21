@@ -1,4 +1,6 @@
 const Apparel = require('../../models/Apparel');
+const Brand = require('../../models/Brand');
+const brandResolvers = require('../resolvers/brands');
 
 module.exports = {
 	findApparel: async ({ itemArticle }) => {
@@ -18,17 +20,31 @@ module.exports = {
 		const apparel = await Apparel.find({});
 		return apparel;
 	},
-	createApparel: async ({ apparelInput }) => {
+	addApparel: async ({ apparelInput }) => {
+		console.log('here')
+		const findBrand = async () =>
+			await Brand.findOne({ name: apparelInput.brand });
+
 		try {
-			const existingApparel = await User.findOne({
+			const existingApparel = await Apparel.findOne({
 				article: apparelInput.article,
 			});
-			if (existingUser) {
+			if (existingApparel) {
 				throw new Error('Item exists already.');
 			}
+			let foundBrand;
+			foundBrand = findBrand();
+			if (!foundBrand) {
+				await brandResolvers.addBrand({
+					brandInput: { name: apparelInput.brand },
+				});
+				foundBrand = findBrand();
+				
+			}
+			console.log(foundBrand);
 			const item = new Apparel({
 				article: apparelInput.article,
-				brand: apparelInput.brand,
+				brand: foundBrand,
 				sex: apparelInput.sex,
 				category: apparelInput.category,
 				material: apparelInput.material,

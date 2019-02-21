@@ -23,12 +23,13 @@ app.use(express.static('public'));
 // });
 
 mongoose.set('debug', true);
+mongoose.set('useCreateIndex', true);
 mongoose.Promise = Promise;
 mongoose.connection.once('open', () => {
 	console.log('Successfully connected to MongoDB!');
 });
 mongoose
-	.connect('mongodb://localhost/f-look')
+	.connect('mongodb://localhost/f-look', { useNewUrlParser: true })
 	.then(() => {
 		app.listen(PORT, () => {
 			console.log(`Now listening on port ${PORT}`);

@@ -4,11 +4,7 @@ import { Mutation, Query } from 'react-apollo';
 import * as Yup from 'yup';
 import { EDIT_USER, GET_USER } from '../../../graphql/queries';
 import { TEL } from '../../../utils/validators';
-import {
-	TextInput,
-	RadioInput,
-	NumberInput,
-} from '../../../components/InputTypes/Inputs';
+import { TextInput, NumberInput } from '../../../components/InputTypes/Inputs';
 import AuthContext from '../../../context/AuthContext';
 import StatusContainer from '../../../components/StatusContainer/StatusContainer';
 import CustomLoader from '../../../components/CustomLoader/CustomLoader';
@@ -92,7 +88,7 @@ export default class Profile extends Component {
 													variables: {
 														...values,
 														id: this.context.userId,
-														age: Number(values.age),
+														age: +values.age,
 													},
 												});
 											}}

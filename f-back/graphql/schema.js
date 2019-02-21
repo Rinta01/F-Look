@@ -12,6 +12,9 @@ type User {
     sex: String!
     age: Int
     wealth: String
+    size: String
+    favBrands: [Brand!]
+    wishlist: [Apparel!]
 }
 type AuthData {
     userId: ID!
@@ -21,11 +24,19 @@ type AuthData {
 type Apparel {
     id: ID!
     article: String!
-    brand: String!
+    brand: Brand!
     sex: String!
     category: String!
     material: String
     image: String
+}
+type Brand{
+    id: ID!
+    name: String!
+    clothes: [Apparel!]
+}
+input BrandInput{
+    name: String!
 }
 input ApparelInput {
     article: String!
@@ -36,13 +47,13 @@ input ApparelInput {
     image: String
 }
 input CreateUserInput {
-  first_name: String!  
-  tel: String!
-  password: String!
-  sex: String!
+    first_name: String!  
+    tel: String!
+    password: String!
+    sex: String!
 }
 input EditUserInput {
-    id: String!
+    id: String
     first_name: String!
     last_name: String
     country: String
@@ -50,6 +61,9 @@ input EditUserInput {
     email: String
     age: Int
     wealth: String!
+    size: String
+    favBrands: [String]
+    wishlist: [String]
 }
 type RootQuery {
     findUser(userId: String!): User
@@ -61,7 +75,8 @@ type RootMutation {
     login(tel: String!, password: String!): AuthData!
     createUser(userInput: CreateUserInput): User
     editUser(editUserInput: EditUserInput): User!
-    createApparel(apparelInput: ApparelInput): Apparel
+    addApparel(apparelInput: ApparelInput): Apparel
+    addBrand(brandInput: BrandInput): Brand
 }
 schema {
     query: RootQuery

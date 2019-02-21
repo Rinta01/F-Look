@@ -8,8 +8,9 @@ const ApparelSchema = new Schema({
 		unique: true,
 	},
 	brand: {
-		type: String,
+		type: Schema.Types.ObjectId,
 		required: [true, 'An item must belong to a brand'],
+		ref: 'Brand'
 	},
 	//Unisex!!!
 	sex: {

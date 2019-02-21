@@ -46,13 +46,28 @@ const UserSchema = new Schema({
 			message: props => `${props.value} is not a valid gender!`,
 		},
 	},
+	age: {
+		type: Number,
+	},
 	wealth: {
 		type: String,
 		default: 'Average',
 	},
-	age: {
-		type: Number,
+	size: {
+		type: String,
 	},
+	favBrands: [
+		{
+			type: Schema.Types.ObjectId,
+			ref: 'Brand',
+		},
+	],
+	wishList: [
+		{
+			type: Schema.Types.ObjectId,
+			ref: 'Apparel',
+		},
+	],
 });
 
 const User = mongoose.model('User', UserSchema);

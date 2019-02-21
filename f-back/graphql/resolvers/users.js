@@ -4,10 +4,10 @@ const User = require('../../models/User');
 
 module.exports = {
 	findUser: async ({ userId }) => {
-		const user = await User.findById(userId, (err, res) => {
+		const user = await User.findById(userId, (err, user) => {
 			if (err) {
 				console.log(err);
-			} else if (!res) {
+			} else if (!user) {
 				throw new Error('User not found!');
 			}
 		});
@@ -50,6 +50,12 @@ module.exports = {
 				} else if (!foundUser) {
 					throw new Error('User not found!');
 				} else {
+					let foundBrands = [];
+					//find a more optimal way
+					editUserInput.brands.forEach(async b => {
+						const brand = await Brand.findOne({ name: b });
+						foundBrands.push(brand._id);
+					});
 					foundUser.first_name = editUserInput.first_name;
 					foundUser.last_name = editUserInput.last_name;
 					foundUser.country = editUserInput.country;
@@ -57,6 +63,9 @@ module.exports = {
 					foundUser.email = editUserInput.email;
 					foundUser.age = editUserInput.age;
 					foundUser.wealth = editUserInput.wealth;
+					foundUser.size = editUserInput.size;
+					foundUser.favBrands = foundBrands;
+					foundUser.wishlist = foundWishlist;
 
 					savedUser = await foundUser.save();
 				}

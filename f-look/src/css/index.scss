@@ -1,3 +1,7 @@
+@import '../css/variables.scss';
+// @import url('https://fonts.googleapis.com/css?family=Work+Sans:500,600,700');
+@import './fontface.scss';
+
 body,
 html {
 	margin: 0;
@@ -9,9 +13,6 @@ html {
 code {
 	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
-
-@import '../css/variables.scss';
-@import url('https://fonts.googleapis.com/css?family=Work+Sans:500,600,700');
 
 #root {
 	position: absolute;
