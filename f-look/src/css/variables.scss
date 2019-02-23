@@ -125,14 +125,11 @@ $font: 'Work Sans', sans-serif;
 
 		& > .input-feedback {
 			display: block;
-			background: color(dark-grey);
 			color: red;
-			padding: 4px 9px;
-			margin: 0 -9px -9px -9px;
-			// margin-top: 0.5px;
+			padding: 3px 10px;
+			margin: 0 -9px -5px -9px;
 			font-size: 10px;
 			text-align: left;
-			width: 100%;
 			transition: 0.2s all linear;
 		}
 	}

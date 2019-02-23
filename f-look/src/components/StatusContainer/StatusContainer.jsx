@@ -1,15 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Icon from '../Icon/Icon';
 import './StatusContainer.scss';
 
-const StatusContainer = ({ error = null, success = null }) => {
+const StatusContainer = ({ error, success, handleUnmount }) => {
 	const [renderChild, setState] = useState(1);
-	let interval = null;
+	console.log(error, success, handleUnmount);
 
 	useEffect(() => {
-		interval = setTimeout(() => setState(!renderChild), 5000);
+		let interval = setTimeout(() => setState(!renderChild), 2000);
 		return () => {
 			clearInterval(interval);
+			// if (handleUnmount !== undefined) {
+			// 	console.log('eee');
+			// 	handleUnmount();
+			// }
 		};
 	}, []);
 
@@ -25,7 +29,7 @@ const StatusContainer = ({ error = null, success = null }) => {
 	} else if (success && renderChild) {
 		return (
 			<p className='input-feedback success'>
-				<FontAwesomeIcon icon='check' />
+				<Icon icon='check' />
 			</p>
 		);
 	} else return null;

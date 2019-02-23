@@ -76,7 +76,7 @@ export default class TextInput extends Component {
 					type={type}
 					id={`${name}-input`}
 					name={name}
-					placeholder={placeholder}
+					// placeholder={placeholder}
 					onChange={handleChange}
 					value={values[name] ? values[name] : ''}
 					className={`input-field	${errors[name] === 'required' &&

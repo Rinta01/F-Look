@@ -79,7 +79,9 @@ class RegForm extends Component {
 												disabled={isSubmitting}
 											/>
 										)}
-										<StatusContainer error={error} />
+										{error && (
+											<StatusContainer error={error} />
+										)}
 									</form>
 								</section>
 							);

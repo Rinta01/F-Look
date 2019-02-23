@@ -14,7 +14,7 @@ const NumberInput = ({ name, handleChange, errors, touched, values }) => {
 					id={`${name}-input`}
 					name={name}
 					value={values[name] ? values[name] : ''}
-					placeholder={name}
+					// placeholder={name}
 					onChange={handleChange}
 					className={`input-field ${errors[name] &&
 						touched[name] &&

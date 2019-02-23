@@ -60,7 +60,9 @@ export default class LoginForm extends Component {
 												disabled={isSubmitting}
 											/>
 										)}
-										<StatusContainer error={error} />
+										{error && (
+											<StatusContainer error={error} />
+										)}
 									</form>
 								</section>
 							);
