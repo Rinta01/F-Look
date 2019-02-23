@@ -1,5 +1,5 @@
 const bcrypt = require('bcryptjs');
-
+const auth = require('./auth');
 const User = require('../../models/User');
 
 module.exports = {
@@ -34,14 +34,17 @@ module.exports = {
 				sex: userInput.sex,
 			});
 			const savedUser = await user.save();
-			return savedUser;
-			// return { ...savedUser._doc, password: null, id: savedUser.id };
+			const loggedUser = await auth.login({
+				tel: savedUser.tel,
+				password: userInput.password,
+			});
+			console.log({ ...savedUser._doc, ...loggedUser });
+			return { ...savedUser._doc, ...loggedUser };
 		} catch (err) {
 			throw err;
 		}
 	},
 	editUser: async ({ editUserInput }) => {
-		let savedUser;
 		const user = await User.findById(
 			editUserInput.id,
 			async (err, foundUser) => {
@@ -50,12 +53,6 @@ module.exports = {
 				} else if (!foundUser) {
 					throw new Error('User not found!');
 				} else {
-					let foundBrands = [];
-					//find a more optimal way
-					editUserInput.brands.forEach(async b => {
-						const brand = await Brand.findOne({ name: b });
-						foundBrands.push(brand._id);
-					});
 					foundUser.first_name = editUserInput.first_name;
 					foundUser.last_name = editUserInput.last_name;
 					foundUser.country = editUserInput.country;
@@ -64,10 +61,23 @@ module.exports = {
 					foundUser.age = editUserInput.age;
 					foundUser.wealth = editUserInput.wealth;
 					foundUser.size = editUserInput.size;
-					foundUser.favBrands = foundBrands;
-					foundUser.wishlist = foundWishlist;
 
-					savedUser = await foundUser.save();
+					//find a more optimal way
+					if (editUserInput.brands) {
+						let foundBrands = [];
+						editUserInput.brands.forEach(async b => {
+							const brand = await Brand.findOne({ name: b });
+							foundBrands.push(brand._id);
+						});
+						foundUser.favBrands = foundBrands;
+					}
+
+					if (editUserInput.wishlist) {
+						let foundWishlist = [];
+						foundUser.wishlist = foundWishlist;
+					}
+
+					await foundUser.save();
 				}
 			}
 		);

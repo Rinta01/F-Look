@@ -82,6 +82,9 @@ export const NEW_USER = gql`
 			first_name
 			tel
 			sex
+			userId
+			token
+			tokenExpiration
 		}
 	}
 `;

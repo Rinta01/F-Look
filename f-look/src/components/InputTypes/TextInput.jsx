@@ -71,7 +71,9 @@ export default class TextInput extends Component {
 
 		return (
 			<div className='styled-input'>
-				<label htmlFor={`${name}-input`}>{placeholder.toUpperCase()}</label>
+				<label htmlFor={`${name}-input`}>
+					{placeholder.toUpperCase()}
+				</label>
 				<input
 					type={type}
 					id={`${name}-input`}

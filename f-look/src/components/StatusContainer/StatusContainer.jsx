@@ -4,10 +4,10 @@ import './StatusContainer.scss';
 
 const StatusContainer = ({ error, success, handleUnmount }) => {
 	const [renderChild, setState] = useState(1);
-	console.log(error, success, handleUnmount);
+	// console.log(error, success, handleUnmount);
 
 	useEffect(() => {
-		let interval = setTimeout(() => setState(!renderChild), 2000);
+		let interval = setTimeout(() => setState(!renderChild), 3500);
 		return () => {
 			clearInterval(interval);
 			// if (handleUnmount !== undefined) {
@@ -18,7 +18,7 @@ const StatusContainer = ({ error, success, handleUnmount }) => {
 	}, []);
 
 	if (error && renderChild) {
-		console.log(error.graphQLErrors, error.networkError, error.message);
+		// console.log(error.graphQLErrors, error.networkError, error.message);
 		return (
 			<p className='input-feedback'>
 				{error.message.includes('duplicate')

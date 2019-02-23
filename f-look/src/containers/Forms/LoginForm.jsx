@@ -2,14 +2,14 @@ import { Formik } from 'formik';
 import React, { Component } from 'react';
 import { Mutation } from 'react-apollo';
 import * as Yup from 'yup';
+import CustomLoader from '../../components/CustomLoader/CustomLoader';
+import { TextInput } from '../../components/InputTypes/Inputs';
+import StatusContainer from '../../components/StatusContainer/StatusContainer';
+import SubmitButton from '../../components/SubmitButton/SubmitButton';
 import AuthContext from '../../context/AuthContext';
 import { LOGIN } from '../../graphql/queries';
 import { TEL } from '../../utils/validators';
-import { TextInput } from '../../components/InputTypes/Inputs';
-import CustomLoader from '../../components/CustomLoader/CustomLoader';
-import StatusContainer from '../../components/StatusContainer/StatusContainer';
 import './Form.scss';
-import SubmitButton from '../../components/SubmitButton/SubmitButton';
 
 export default class LoginForm extends Component {
 	static contextType = AuthContext;
@@ -18,7 +18,7 @@ export default class LoginForm extends Component {
 			<Mutation
 				mutation={LOGIN}
 				onCompleted={({ login }) => {
-					console.log('YAY');
+					console.log('Successfully authorized');
 					this.context.login(login.userId, login.token);
 				}}
 				onError={err => {
@@ -33,7 +33,10 @@ export default class LoginForm extends Component {
 						onSubmit={async (values, { setSubmitting }) => {
 							setSubmitting(false);
 							await login({
-								variables: values,
+								variables: {
+									tel: values.tel,
+									password: values.password,
+								},
 							});
 							//This is a redirect to phone number confirmation
 							// this.props.getNumber(values.tel);

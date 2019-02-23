@@ -8,8 +8,11 @@ import { EDIT_USER } from '../../graphql/queries';
 import StatusContainer from '../../components/StatusContainer/StatusContainer';
 import CustomLoader from '../../components/CustomLoader/CustomLoader';
 import PropTypes from 'prop-types';
+import SizeChoice from '../../components/SizeChoice/SizeChoice';
+import AuthContext from '../../context/AuthContext';
 
 class ProfileForm extends Component {
+	static contextType = AuthContext;
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -54,7 +57,12 @@ class ProfileForm extends Component {
 						}}
 						onSubmit={async (values, { setSubmitting }) => {
 							setSubmitting(false);
-							// console.log(values);
+							console.log(values);
+							console.log({
+								...values,
+								id: this.context.userId,
+								age: +values.age,
+							})
 							await editUser({
 								variables: {
 									...values,
@@ -127,6 +135,7 @@ class ProfileForm extends Component {
 												name='age'
 												{...props}
 											/>
+											<SizeChoice />
 											{/* <TextInput
                                         name='password'
                                         {...props}

@@ -1,0 +1,32 @@
+@import '../../css/variables.scss';
+
+.size-table-wrapper {
+	max-width: 80%;
+
+	h3 {
+		font-size: 16px;
+		color: color(font-color);
+        font-weight: 600;
+	}
+
+	ul.size-table {
+		list-style: none;
+		padding-left: 0;
+		li {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			width: 100%;
+			font-size: 14px;
+			// font-style: italic;
+
+			div {
+				span:first-child {
+					min-width: 30px;
+					display: inline-block;
+					margin-right: 10px;
+				}
+			}
+		}
+	}
+}

@@ -72,7 +72,7 @@ $font: 'Work Sans', sans-serif;
 		display: block;
 		padding: 6px 9px;
 		border: 1.2px solid color(grey);
-		margin-bottom: 20px;
+		margin: 10px 0;
 		border-radius: 3px;
 		max-width: 75%;
 		transition: all 0.15s linear;
@@ -90,7 +90,7 @@ $font: 'Work Sans', sans-serif;
 		& > label {
 			display: block;
 			float: left;
-			margin-top: -19px;
+			margin-top: -17px;
 			background: #ffffff;
 			height: 14px;
 			padding: 2px 4px;
@@ -100,7 +100,7 @@ $font: 'Work Sans', sans-serif;
 		}
 
 		.input-field {
-			margin: 6px 0;
+			margin: 2px 0 4px 0;
 			padding: 4px 6px;
 			line-height: 20px;
 			border: none;

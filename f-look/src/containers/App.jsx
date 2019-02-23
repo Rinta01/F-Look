@@ -43,12 +43,12 @@ export default class App extends Component {
 		this.logout = this.logout.bind(this);
 	}
 
-	login = (userId, token) => {
-		this.setState({ userId, token });
+	login = async (userId, token) => {
+		await this.setState({ userId, token });
 	};
 
-	logout = () => {
-		this.setState({ userId: null, token: null });
+	logout = async () => {
+		await this.setState({ userId: null, token: null });
 	};
 
 	render() {

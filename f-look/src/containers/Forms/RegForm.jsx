@@ -2,21 +2,24 @@ import { Formik } from 'formik';
 import React, { Component } from 'react';
 import { Mutation } from 'react-apollo';
 import * as Yup from 'yup';
+import CustomLoader from '../../components/CustomLoader/CustomLoader';
+import { RadioInput, TextInput } from '../../components/InputTypes/Inputs';
+import StatusContainer from '../../components/StatusContainer/StatusContainer';
+import SubmitButton from '../../components/SubmitButton/SubmitButton';
+import AuthContext from '../../context/AuthContext';
 import { NEW_USER } from '../../graphql/queries';
 import { TEL } from '../../utils/validators';
-import { TextInput, RadioInput } from '../../components/InputTypes/Inputs';
-import CustomLoader from '../../components/CustomLoader/CustomLoader';
-import StatusContainer from '../../components/StatusContainer/StatusContainer';
 import './Form.scss';
-import SubmitButton from '../../components/SubmitButton/SubmitButton';
 
 class RegForm extends Component {
+	static contextType = AuthContext;
 	render() {
 		return (
 			<Mutation
 				mutation={NEW_USER}
-				onCompleted={() => {
-					console.log('YAY');
+				onCompleted={({createUser}) => {
+					console.log('Successfully signed up');
+					this.context.login(createUser.userId, createUser.token);
 				}}>
 				{(newUser, { loading, error, data }) => (
 					<Formik
