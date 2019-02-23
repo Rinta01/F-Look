@@ -1,5 +1,5 @@
-import React, { Component, Fragment } from 'react';
-import './TextInput.scss';
+import React, { Component } from 'react';
+import './Input.scss';
 import PropTypes from 'prop-types';
 
 export default class TextInput extends Component {
@@ -70,9 +70,11 @@ export default class TextInput extends Component {
 		const { values, handleChange, errors, touched } = this.props;
 
 		return (
-			<Fragment>
+			<div className='styled-input'>
+				<label htmlFor={`${name}-input`}>{placeholder.toUpperCase()}</label>
 				<input
 					type={type}
+					id={`${name}-input`}
 					name={name}
 					placeholder={placeholder}
 					onChange={handleChange}
@@ -81,10 +83,10 @@ export default class TextInput extends Component {
 						touched[name] &&
 						'input-error'}`}
 				/>
-				{errors[name] !== 'required' && (
+				{errors[name] && errors[name] !== 'required' && (
 					<div className='input-feedback'>{errors[name]}</div>
 				)}
-			</Fragment>
+			</div>
 		);
 	}
 }

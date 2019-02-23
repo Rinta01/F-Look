@@ -1,7 +1,7 @@
 @import '../../css/variables.scss';
 
 .form-container {
-	padding: 10px 25px;
+	padding: 10px 13px;
 	width: 100%;
 	max-width: 16rem;
 	transition: all 0.25s ease-in;
@@ -25,24 +25,5 @@
 		flex: 1;
 		position: relative;
 		z-index: 1;
-
-		button {
-			cursor: pointer;
-			margin-top: 10px;
-			padding: 4px 0;
-			background-color: color(grey);
-			width: 100%;
-			letter-spacing: 1px;
-			color: #fff;
-			border: none;
-			font-size: 16px;
-			text-transform: uppercase;
-			outline: none;
-			transition: all 0.2s linear;
-
-			&:hover {
-				background-color: darken(color(grey), 20%);
-			}
-		}
 	}
 }

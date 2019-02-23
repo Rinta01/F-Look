@@ -9,6 +9,7 @@ import { TextInput } from '../../components/InputTypes/Inputs';
 import CustomLoader from '../../components/CustomLoader/CustomLoader';
 import StatusContainer from '../../components/StatusContainer/StatusContainer';
 import './Form.scss';
+import SubmitButton from '../../components/SubmitButton/SubmitButton';
 
 export default class LoginForm extends Component {
 	static contextType = AuthContext;
@@ -55,11 +56,9 @@ export default class LoginForm extends Component {
 										{loading ? (
 											<CustomLoader loading={loading} />
 										) : (
-											<button
-												type='submit'
-												disabled={isSubmitting}>
-												Submit
-											</button>
+											<SubmitButton
+												disabled={isSubmitting}
+											/>
 										)}
 										<StatusContainer error={error} />
 									</form>

@@ -4,7 +4,7 @@ import {
 	faGooglePlusSquare,
 	faVk,
 } from '@fortawesome/free-brands-svg-icons';
-import { faSignOutAlt, faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faSignOutAlt, faSearch, faCheck } from '@fortawesome/free-solid-svg-icons';
 import React, { Component } from 'react';
 import { ApolloProvider } from 'react-apollo';
 import {
@@ -19,7 +19,7 @@ import Profile from '../containers/Pages/Profile/Profile';
 import AuthContext from '../context/AuthContext';
 import { client } from '../utils/apolloConfig';
 
-library.add(faFacebookSquare, faVk, faGooglePlusSquare, faSignOutAlt, faSearch);
+library.add(faFacebookSquare, faVk, faGooglePlusSquare, faSignOutAlt, faSearch, faCheck);
 
 export default class App extends Component {
 	constructor(props) {

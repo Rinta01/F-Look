@@ -1,5 +1,5 @@
 import { Formik } from 'formik';
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { Mutation, Query } from 'react-apollo';
 import * as Yup from 'yup';
 import { EDIT_USER, GET_USER } from '../../../graphql/queries';
@@ -152,7 +152,7 @@ export default class Profile extends Component {
 													handleSubmit,
 												} = props;
 												return (
-													<Fragment>
+													<>
 														<section className='form-container profile-page'>
 															<form
 																onSubmit={
@@ -216,7 +216,7 @@ export default class Profile extends Component {
 																	.mutationSuccess
 															}
 														/>
-													</Fragment>
+													</>
 												);
 											}}
 										</Formik>

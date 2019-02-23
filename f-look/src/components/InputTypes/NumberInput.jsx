@@ -1,28 +1,29 @@
-import React, { Fragment } from 'react';
-import '../TextInput/TextInput.scss';
-import './NumberInput.scss';
+import React from 'react';
+import './Input.scss';
 import PropTypes from 'prop-types';
 
-const NumberInput = ({ name, handleChange, errors, touched, values}) => {
+const NumberInput = ({ name, handleChange, errors, touched, values }) => {
 	if (name === 'age') {
 		return (
-			<Fragment>
+			<div className='styled-input'>
+				<label htmlFor={`${name}-input`}>{name.toUpperCase()}</label>
 				<input
 					type='text'
 					pattern='\d*'
 					maxLength='3'
+					id={`${name}-input`}
 					name={name}
-					value={values[name]?values[name]: ''}
+					value={values[name] ? values[name] : ''}
 					placeholder={name}
 					onChange={handleChange}
 					className={`input-field ${errors[name] &&
 						touched[name] &&
 						'input-error'}`}
 				/>
-				{errors[name] !== 'required' && (
+				{errors[name] && errors[name] !== 'required' && (
 					<div className='input-feedback'>{errors[name]}</div>
 				)}
-			</Fragment>
+			</div>
 		);
 	} else
 		return (

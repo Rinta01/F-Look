@@ -1,9 +1,9 @@
 import { Formik } from 'formik';
 import React from 'react';
 import * as Yup from 'yup';
-import NumberInput from '../InputTypes/NumberInput/NumberInput';
+import { NumberInput } from '../InputTypes/Inputs';
 
-const CodeConfirm = ({phone}) => {
+const CodeConfirm = ({ phone }) => {
 	return (
 		<div className='code-confirm'>
 			<h5>Enter the confirmation code sent to your phone</h5>
@@ -46,14 +46,34 @@ const CodeConfirm = ({phone}) => {
 						errors,
 						handleChange,
 						handleSubmit,
-                    } = props;
+					} = props;
 					return (
 						<form className='code-boxes' onSubmit={handleSubmit}>
-							<NumberInput name='1' onChange={handleChange} errors={errors} touched={touched}/>
-							<NumberInput name='2' onChange={handleChange} errors={errors} touched={touched}/>
-							<NumberInput name='3' onChange={handleChange} errors={errors} touched={touched}/>
-							<NumberInput name='4' onChange={handleChange} errors={errors} touched={touched}/>
-							<button type="submit"></button>
+							<NumberInput
+								name='1'
+								onChange={handleChange}
+								errors={errors}
+								touched={touched}
+							/>
+							<NumberInput
+								name='2'
+								onChange={handleChange}
+								errors={errors}
+								touched={touched}
+							/>
+							<NumberInput
+								name='3'
+								onChange={handleChange}
+								errors={errors}
+								touched={touched}
+							/>
+							<NumberInput
+								name='4'
+								onChange={handleChange}
+								errors={errors}
+								touched={touched}
+							/>
+							<button type='submit' />
 						</form>
 					);
 				}}

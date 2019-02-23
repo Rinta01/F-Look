@@ -1,5 +1,5 @@
-import TextInput from './TextInput/TextInput';
-import RadioInput from './RadioInput/RadioInput';
-import NumberInput from './NumberInput/NumberInput';
+import TextInput from './TextInput';
+import RadioInput from './RadioInput';
+import NumberInput from './NumberInput';
 
 export { TextInput, RadioInput, NumberInput };

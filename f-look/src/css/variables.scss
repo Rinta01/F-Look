@@ -3,6 +3,7 @@ $colors: (
 	black: #282828,
 	font-color: #393939,
 	grey: #dbdbdb,
+	dark-grey: #f3f3f3,
 	red: lighten(red, 33%),
 	input-border: #d6d6d6
 );
@@ -64,4 +65,137 @@ $font: 'Work Sans', sans-serif;
 	text-transform: uppercase;
 	letter-spacing: 1px;
 	text-align: center;
+}
+
+@mixin styled-input {
+	.styled-input {
+		display: block;
+		padding: 6px 9px;
+		border: 1.2px solid color(grey);
+		margin-bottom: 20px;
+		border-radius: 3px;
+		max-width: 75%;
+		transition: all 0.15s linear;
+
+		&:last-child {
+			border: none;
+			margin-bottom: 0px;
+			text-align: center;
+		}
+
+		&:focus-within {
+			border-color: color(purple);
+		}
+
+		& > label {
+			display: block;
+			float: left;
+			margin-top: -19px;
+			background: #ffffff;
+			height: 14px;
+			padding: 2px 4px;
+			color: #b9b9b9;
+			font-size: 12px;
+			overflow: hidden;
+		}
+
+		.input-field {
+			margin: 6px 0;
+			padding: 4px 6px;
+			line-height: 20px;
+			border: none;
+			border-bottom: 1px solid color(input-border);
+			width: 93%;
+			outline: none;
+			transition: all 0.2s linear;
+
+			// &:focus {
+			// 	box-shadow: 0 0.5px 0.5px rgba(229, 103, 23, 0.075) inset;
+			// }
+
+			&::placeholder {
+				color: color(grey);
+				text-transform: uppercase;
+				font-size: 13px;
+			}
+			&.input-error {
+				border-color: color(red);
+			}
+		}
+
+		& > .input-feedback {
+			display: block;
+			background: color(dark-grey);
+			color: red;
+			padding: 4px 9px;
+			margin: 0 -9px -9px -9px;
+			// margin-top: 0.5px;
+			font-size: 10px;
+			text-align: left;
+			width: 100%;
+			transition: 0.2s all linear;
+		}
+	}
+}
+
+@mixin radio-input {
+	.radio-group {
+		display: flex;
+		justify-content: space-evenly;
+		font-size: 14px;
+		margin: 5px 0 5px -2px;
+		width: 100%;
+		align-items: center;
+		flex-wrap: wrap;
+		padding: 5px 0;
+
+		input[type='radio'] {
+			position: absolute;
+			opacity: 0;
+			z-index: -1;
+		}
+		label {
+			position: relative;
+			display: inline-block;
+			margin-right: 10px;
+			margin-bottom: 10px;
+			padding-left: 28px;
+			padding-right: 10px;
+			line-height: 30px;
+			cursor: pointer;
+		}
+		label::before {
+			content: ' ';
+			position: absolute;
+			top: 6px;
+			left: 0;
+			display: block;
+			width: 20px;
+			height: 20px;
+			border: 2px solid darken(color(purple), 3%);
+			border-radius: 4px;
+			z-index: -1;
+		}
+		input[type='radio'] + label::before {
+			border-radius: 18px;
+		}
+		/* Checked */
+		input[type='radio']:checked + label {
+			padding-left: 0.8rem;
+			color: #fff;
+		}
+		input[type='radio']:checked + label::before {
+			top: 0;
+			width: 100%;
+			height: 100%;
+			background: darken(color(purple), 3%);
+		}
+		/* Transition */
+		label,
+		label::before {
+			-webkit-transition: 0.25s all ease;
+			-o-transition: 0.25s all ease;
+			transition: 0.25s all ease;
+		}
+	}
 }
