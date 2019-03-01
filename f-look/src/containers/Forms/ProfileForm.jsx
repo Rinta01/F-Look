@@ -57,12 +57,6 @@ class ProfileForm extends Component {
 						}}
 						onSubmit={async (values, { setSubmitting }) => {
 							setSubmitting(false);
-							console.log(values);
-							console.log({
-								...values,
-								id: this.context.userId,
-								age: +values.age,
-							})
 							await editUser({
 								variables: {
 									...values,
