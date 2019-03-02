@@ -4,7 +4,7 @@ $colors: (
 	font-color: #393939,
 	grey: #dbdbdb,
 	dark-grey: #f3f3f3,
-	red: lighten(red, 33%),
+	red: #ffa8a8,
 	input-border: #d6d6d6
 );
 
@@ -121,16 +121,6 @@ $font: 'Work Sans', sans-serif;
 			&.input-error {
 				border-color: color(red);
 			}
-		}
-
-		& > .input-feedback {
-			display: block;
-			color: red;
-			padding: 3px 10px;
-			margin: 0 -9px -5px -9px;
-			font-size: 10px;
-			text-align: left;
-			transition: 0.2s all linear;
 		}
 	}
 }

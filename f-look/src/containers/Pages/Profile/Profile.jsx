@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { Query } from 'react-apollo';
 import { GET_USER } from '../../../graphql/queries';
 import AuthContext from '../../../context/AuthContext';
-import StatusContainer from '../../../components/StatusContainer/StatusContainer';
-import CustomLoader from '../../../components/CustomLoader/CustomLoader';
+import { StatusContainer } from '../../../components/StatusContainer';
+import { CustomLoader } from '../../../components/CustomLoader';
 import './Profile.scss';
-import Icon from '../../../components/Icon/Icon';
-import ProfileForm from '../../Forms/ProfileForm';
+import { Icon } from '../../../components/Icon';
+import { ProfileForm } from '../../Forms';
 
 export default class Profile extends Component {
 	static contextType = AuthContext;

@@ -17,9 +17,9 @@ import {
 	Route,
 	Switch,
 } from 'react-router-dom';
-import Login from '../components/Login/Login';
-import Start from '../components/Start/Start';
-import Profile from '../containers/Pages/Profile/Profile';
+import { Login } from '../components/Login/';
+import { Start } from '../components/Start/';
+import { Profile } from '../containers/Pages/Profile';
 import AuthContext from '../context/AuthContext';
 import { client } from '../utils/apolloConfig';
 

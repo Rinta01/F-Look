@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './Input.scss';
 import PropTypes from 'prop-types';
+import ErrorMessage from '../ErrorMessage/ErrorMessage';
 
 export default class TextInput extends Component {
 	static propTypes = {
@@ -85,9 +86,7 @@ export default class TextInput extends Component {
 						touched[name] &&
 						'input-error'}`}
 				/>
-				{errors[name] && errors[name] !== 'required' && (
-					<div className='input-feedback'>{errors[name]}</div>
-				)}
+				<ErrorMessage {...{ errors, name }} />
 			</div>
 		);
 	}

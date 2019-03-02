@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { TEL } from '../../utils/validators';
-import { TextInput, NumberInput } from '../../components/InputTypes/Inputs';
+import { TextInput, NumberInput } from '../../components/InputTypes';
 import { Formik } from 'formik';
 import { Mutation } from 'react-apollo';
 import * as Yup from 'yup';
 import { EDIT_USER } from '../../graphql/queries';
-import StatusContainer from '../../components/StatusContainer/StatusContainer';
-import CustomLoader from '../../components/CustomLoader/CustomLoader';
+import { StatusContainer } from '../../components/StatusContainer';
+import { CustomLoader } from '../../components/CustomLoader';
 import PropTypes from 'prop-types';
-import SizeChoice from '../../components/SizeChoice/SizeChoice';
+import { SizeChoice } from '../../components/SizeChoice';
 import AuthContext from '../../context/AuthContext';
 
 class ProfileForm extends Component {
@@ -27,6 +27,7 @@ class ProfileForm extends Component {
 			age,
 			tel,
 			email,
+			size,
 			// wealth,
 		} = this.props;
 		return (
@@ -52,11 +53,13 @@ class ProfileForm extends Component {
 							country,
 							tel,
 							wealth: 'Average',
+							size,
 							// password: '',
 							// confirm_password: '',
 						}}
 						onSubmit={async (values, { setSubmitting }) => {
 							setSubmitting(false);
+							alert(JSON.stringify(values));
 							await editUser({
 								variables: {
 									...values,
@@ -93,6 +96,9 @@ class ProfileForm extends Component {
 									'The country must be one of: Russia, US, UK, Germany, China, France'
 								)
 								.nullable(),
+							size: Yup.string()
+								.nullable()
+								.required('Enter your size'),
 							// password: Yup.string().min(
 							// 	6,
 							// 	'Password is too short'
@@ -129,7 +135,7 @@ class ProfileForm extends Component {
 												name='age'
 												{...props}
 											/>
-											<SizeChoice />
+											<SizeChoice {...props} />
 											{/* <TextInput
                                         name='password'
                                         {...props}

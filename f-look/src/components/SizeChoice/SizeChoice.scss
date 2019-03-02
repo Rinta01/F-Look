@@ -1,12 +1,13 @@
 @import '../../css/variables.scss';
 
 .size-table-wrapper {
-	max-width: 80%;
+	width: 80%;
 
 	h3 {
-		font-size: 16px;
-		color: color(font-color);
-        font-weight: 600;
+		font-size: 14px;
+		color: darken(color(grey),10%);
+		font-weight: 600;
+		text-transform: uppercase;
 	}
 
 	ul.size-table {
