@@ -68,7 +68,7 @@ export default class TextInput extends Component {
 
 	render() {
 		const { type, name, placeholder } = this.getInput();
-		const { values, handleChange, errors, touched } = this.props;
+		const { values, handleChange, errors, touched, disabled } = this.props;
 
 		return (
 			<div className='styled-input'>
@@ -76,14 +76,13 @@ export default class TextInput extends Component {
 					{placeholder.toUpperCase()}
 				</label>
 				<input
-					type={type}
-					id={`${name}-input`}
-					name={name}
+					{...{ type, name, disabled }}
 					// placeholder={placeholder}
+					id={`${name}-input`}
 					onChange={handleChange}
 					value={values[name] ? values[name] : ''}
 					className={`input-field	${
-						(errors[name] === 'required' & touched[name])
+						(errors[name] === 'required') & touched[name]
 							? 'input-error'
 							: ''
 					}`}

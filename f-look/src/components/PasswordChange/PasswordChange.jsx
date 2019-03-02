@@ -11,8 +11,9 @@ const PasswordChange = props => {
 				{...{ collapsed, setCollapsed, label: 'Change Password' }}
 			/>
 			<div className={`collapsible ${collapsed ? 'collapsed' : ''}`}>
-				<TextInput name='password' {...props} />
-				<TextInput name='confirm_password' {...props} />
+				{/* feature not implemented on backend */}
+				<TextInput name='password' {...props} disabled/>
+				<TextInput name='confirm_password' {...props} disabled/>
 			</div>
 		</div>
 	);

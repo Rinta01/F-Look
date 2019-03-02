@@ -34,7 +34,7 @@ export default class Profile extends Component {
 								return <CustomLoader loading={loading} />;
 							if (error) return <StatusContainer error={error} />;
 							else {
-								console.log(data);
+								console.log(data.findUser);
 								return <ProfileForm {...data.findUser} />;
 							}
 						}}

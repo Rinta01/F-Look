@@ -110,15 +110,16 @@ class ProfileForm extends Component {
 											)}
 										</form>
 									</section>
-									{error && <StatusContainer error={error} />}
+									{error && (
+										<StatusContainer {...{ error }} />
+									)}
 									{this.state.mutationSuccess && (
 										<StatusContainer
 											success={this.state.mutationSuccess}
-											handleUnmount={async () => {
-												await this.setState({
+											handleUnmount={() => {
+												this.setState({
 													mutationSuccess: false,
 												});
-												console.log('changed');
 											}}
 										/>
 									)}
