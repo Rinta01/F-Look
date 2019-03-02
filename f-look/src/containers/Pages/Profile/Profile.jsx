@@ -15,7 +15,7 @@ export default class Profile extends Component {
 		return (
 			<div className='profile-wrapper'>
 				<div className='profile-container'>
-					<header>
+					<header className='profile-header'>
 						<div>
 							<h2>Profile</h2>
 							<Icon

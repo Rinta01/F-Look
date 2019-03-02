@@ -77,7 +77,7 @@ input EditUserInput {
     email: String
     age: Int
     wealth: String!
-    size: String
+    size: String!
     favBrands: [String]
     wishlist: [String]
 }

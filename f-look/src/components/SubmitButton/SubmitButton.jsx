@@ -1,9 +1,9 @@
 import React from 'react';
 import './SubmitButton.scss';
 
-const SubmitButton = (props) => {
+const SubmitButton = ({ isSubmitting }) => {
 	return (
-		<button type='submit' {...props}>
+		<button type='submit' disabled={isSubmitting}>
 			Submit
 		</button>
 	);

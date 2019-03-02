@@ -14,7 +14,7 @@
 		font-family: $font;
 	}
 
-	header {
+	header.profile-header {
 		@include title;
 		margin-bottom: 20px;
 		width: 105%;

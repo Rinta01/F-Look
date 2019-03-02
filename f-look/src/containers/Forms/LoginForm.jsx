@@ -1,14 +1,13 @@
 import { Formik } from 'formik';
 import React, { Component } from 'react';
 import { Mutation } from 'react-apollo';
-import * as Yup from 'yup';
 import { CustomLoader } from '../../components/CustomLoader';
 import { TextInput } from '../../components/InputTypes';
 import { StatusContainer } from '../../components/StatusContainer';
 import { SubmitButton } from '../../components/SubmitButton';
 import AuthContext from '../../context/AuthContext';
 import { LOGIN } from '../../graphql/queries';
-import { TEL } from '../../utils/validators';
+import { login_schema } from '../../utils/validators';
 import './Form.scss';
 
 export default class LoginForm extends Component {
@@ -41,14 +40,7 @@ export default class LoginForm extends Component {
 							//This is a redirect to phone number confirmation
 							// this.props.getNumber(values.tel);
 						}}
-						validationSchema={Yup.object().shape({
-							tel: Yup.string()
-								.matches(TEL, 'Phone number is not valid')
-								.required('required'),
-							password: Yup.string()
-								.min(6, 'Password is too short')
-								.required('required'),
-						})}>
+						validationSchema={login_schema}>
 						{props => {
 							const { isSubmitting, handleSubmit } = props;
 							return (

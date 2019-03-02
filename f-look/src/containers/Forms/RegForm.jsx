@@ -1,15 +1,14 @@
 import { Formik } from 'formik';
 import React, { Component } from 'react';
 import { Mutation } from 'react-apollo';
-import * as Yup from 'yup';
 import { CustomLoader } from '../../components/CustomLoader';
 import { RadioInput, TextInput } from '../../components/InputTypes';
 import { StatusContainer } from '../../components/StatusContainer';
 import { SubmitButton } from '../../components/SubmitButton';
 import AuthContext from '../../context/AuthContext';
 import { NEW_USER } from '../../graphql/queries';
-import { TEL } from '../../utils/validators';
 import './Form.scss';
+import { reg_schema } from '../../utils/validators';
 
 class RegForm extends Component {
 	static contextType = AuthContext;
@@ -37,27 +36,9 @@ class RegForm extends Component {
 							});
 							// this.props.getNumber(values.tel);
 						}}
-						validationSchema={Yup.object().shape({
-							first_name: Yup.string().required('required'),
-							tel: Yup.string()
-								.matches(TEL, 'Phone number is not valid')
-								.required('required'),
-							password: Yup.string()
-								.min(6, 'Password is too short')
-								.required('required'),
-							confirm_password: Yup.string()
-								.oneOf(
-									[Yup.ref('password')],
-									'Passwords do not match'
-								)
-								.required('required'),
-						})}>
+						validationSchema={reg_schema}>
 						{props => {
 							const {
-								// values,
-								// touched,
-								// errors,
-								// handleChange,
 								isSubmitting,
 								handleSubmit,
 							} = props;

@@ -8,6 +8,8 @@ import {
 	faSignOutAlt,
 	faSearch,
 	faCheck,
+	faPlus,
+	faMinus
 } from '@fortawesome/free-solid-svg-icons';
 import React, { Component } from 'react';
 import { ApolloProvider } from 'react-apollo';
@@ -29,7 +31,9 @@ library.add(
 	faGooglePlusSquare,
 	faSignOutAlt,
 	faSearch,
-	faCheck
+	faCheck,
+	faPlus,
+	faMinus
 );
 
 export default class App extends Component {

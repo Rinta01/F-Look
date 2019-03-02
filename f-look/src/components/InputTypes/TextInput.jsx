@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './Input.scss';
 import PropTypes from 'prop-types';
-import ErrorMessage from '../ErrorMessage/ErrorMessage';
+import { ErrorMessage } from '../ErrorMessage';
 
 export default class TextInput extends Component {
 	static propTypes = {
@@ -82,9 +82,11 @@ export default class TextInput extends Component {
 					// placeholder={placeholder}
 					onChange={handleChange}
 					value={values[name] ? values[name] : ''}
-					className={`input-field	${errors[name] === 'required' &&
-						touched[name] &&
-						'input-error'}`}
+					className={`input-field	${
+						(errors[name] === 'required' & touched[name])
+							? 'input-error'
+							: ''
+					}`}
 				/>
 				<ErrorMessage {...{ errors, name }} />
 			</div>

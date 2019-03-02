@@ -2,24 +2,21 @@
 
 .size-table-wrapper {
 	width: 80%;
-
-	h3 {
-		font-size: 14px;
-		color: darken(color(grey),10%);
-		font-weight: 600;
-		text-transform: uppercase;
-	}
+	margin: 6px 0;
 
 	ul.size-table {
+		display: block;
 		list-style: none;
 		padding-left: 0;
+		margin-bottom: 12px;
+		margin-top: 0;
+
 		li {
 			display: flex;
 			align-items: center;
 			justify-content: space-between;
 			width: 100%;
 			font-size: 14px;
-			// font-style: italic;
 
 			div {
 				span:first-child {

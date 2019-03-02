@@ -30,6 +30,13 @@ export const GET_USER = gql`
 			sex
 			age
 			wealth
+			size
+			favBrands {
+				name
+			}
+			wishlist {
+				article
+			}
 		}
 	}
 `;
@@ -44,6 +51,7 @@ export const EDIT_USER = gql`
 		$email: String
 		$age: Int
 		$wealth: String!
+		$size: String!
 	) {
 		editUser(
 			editUserInput: {
@@ -55,6 +63,7 @@ export const EDIT_USER = gql`
 				email: $email
 				age: $age
 				wealth: $wealth
+				size: $size
 			}
 		) {
 			id

@@ -1,6 +1,7 @@
 import React from 'react';
 import './Input.scss';
 import PropTypes from 'prop-types';
+import { ErrorMessage } from '../ErrorMessage';
 
 const NumberInput = ({ name, handleChange, errors, touched, values }) => {
 	if (name === 'age') {
@@ -20,9 +21,7 @@ const NumberInput = ({ name, handleChange, errors, touched, values }) => {
 						touched[name] &&
 						'input-error'}`}
 				/>
-				{errors[name] && errors[name] !== 'required' && (
-					<div className='input-feedback'>{errors[name]}</div>
-				)}
+				<ErrorMessage {...{ errors, name }} />
 			</div>
 		);
 	} else

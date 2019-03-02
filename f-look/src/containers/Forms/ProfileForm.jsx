@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
-import { TEL } from '../../utils/validators';
 import { TextInput, NumberInput } from '../../components/InputTypes';
 import { Formik } from 'formik';
 import { Mutation } from 'react-apollo';
-import * as Yup from 'yup';
 import { EDIT_USER } from '../../graphql/queries';
 import { StatusContainer } from '../../components/StatusContainer';
 import { CustomLoader } from '../../components/CustomLoader';
 import PropTypes from 'prop-types';
 import { SizeChoice } from '../../components/SizeChoice';
 import AuthContext from '../../context/AuthContext';
+import { profile_schema } from '../../utils/validators';
+import { PasswordChange } from '../../components/PasswordChange';
+import { SubmitButton } from '../../components/SubmitButton';
 
 class ProfileForm extends Component {
 	static contextType = AuthContext;
@@ -68,46 +69,7 @@ class ProfileForm extends Component {
 								},
 							});
 						}}
-						validationSchema={Yup.object().shape({
-							first_name: Yup.string().required('required'),
-							last_name: Yup.string().nullable(),
-							email: Yup.string()
-								.email('This must be a valid email')
-								.nullable(),
-							tel: Yup.string()
-								.matches(TEL, 'Phone number is not valid')
-								.required('required'),
-							age: Yup.number()
-								.typeError('Age must be a number')
-								.min(1, 'You are too young')
-								.max(100, 'You are too old')
-								.nullable(),
-							// Match with existing countries!!!!!!!
-							country: Yup.string()
-								.oneOf(
-									[
-										'Russia',
-										'US',
-										'UK',
-										'Germany',
-										'China',
-										'France',
-									],
-									'The country must be one of: Russia, US, UK, Germany, China, France'
-								)
-								.nullable(),
-							size: Yup.string()
-								.nullable()
-								.required('Enter your size'),
-							// password: Yup.string().min(
-							// 	6,
-							// 	'Password is too short'
-							// ),
-							// confirm_password: Yup.string().oneOf(
-							// 	[Yup.ref('password')],
-							// 	'Passwords do not match'
-							// ),
-						})}>
+						validationSchema={profile_schema}>
 						{props => {
 							const { isSubmitting, handleSubmit } = props;
 							return (
@@ -136,24 +98,15 @@ class ProfileForm extends Component {
 												{...props}
 											/>
 											<SizeChoice {...props} />
-											{/* <TextInput
-                                        name='password'
-                                        {...props}
-                                    />
-                                    <TextInput
-                                        name='confirm_password'
-                                        {...props}
-                                    /> */}
+											<PasswordChange {...props} />
 											{loading ? (
 												<CustomLoader
 													loading={loading}
 												/>
 											) : (
-												<button
-													type='submit'
-													disabled={isSubmitting}>
-													Save
-												</button>
+												<SubmitButton
+													{...{ isSubmitting }}
+												/>
 											)}
 										</form>
 									</section>
