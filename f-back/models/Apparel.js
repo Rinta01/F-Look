@@ -29,9 +29,18 @@ const ApparelSchema = new Schema({
 		required: [true, 'An item must have a category'],
 	},
 	//the most prevailed material
-	material: {
-		type: String,
-	},
+	materials: [
+		{
+			name: {
+				type: String,
+				required: [true, 'Material name is required']
+			},
+			share: {
+				type: String,
+				required: [true, 'Material share is required']
+			}
+		},
+	],
 	image: {
 		type: String,
 		default: 'https://via.placeholder.com/150?text=Missing+item',

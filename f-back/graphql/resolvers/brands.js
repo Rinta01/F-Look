@@ -5,7 +5,7 @@ module.exports = {
 	addBrand: async ({ brandInput }) => {
 		try {
 			const existingBbrand = await Brand.findOne({
-				brand: brandInput.name,
+				name: brandInput.name,
 			});
 			if (existingBbrand) {
 				throw new Error('Brand exists already.');

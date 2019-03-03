@@ -7,9 +7,12 @@ const BrandSchema = new Schema({
 		required: [true, 'A brand must have a name'],
 		unique: true,
 	},
-	clothes: {
-		type: Schema.Types.ObjectId,
-	}
+	clothes: [
+		{
+			type: Schema.Types.ObjectId,
+			ref: 'Apparel',
+		},
+	],
 });
 
 const Brand = mongoose.model('Brand', BrandSchema);

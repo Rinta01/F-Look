@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const path = require('path');
 const bodyParser = require('body-parser');
 const isAuth = require('./middleware/is-auth');
-const rootValue = require('./graphql/resolvers/index');
+const rootValue = require('./graphql/resolvers');
 const { CORS, optionsHandler } = require('./middleware/cors');
 
 const PORT = process.env.PORT || 4000;

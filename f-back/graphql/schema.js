@@ -37,14 +37,19 @@ type AuthData {
     token: String!
     tokenExpiration: Int!
 }
+type Material{
+    name: String!
+    share: String!
+}
 type Apparel {
     id: ID!
     article: String!
     brand: Brand!
     sex: String!
     category: String!
-    material: String
+    materials: [Material!]
     image: String
+    price: Int!
 }
 type Brand{
     id: ID!
@@ -53,14 +58,20 @@ type Brand{
 }
 input BrandInput{
     name: String!
+    clothes: [String!]
+}
+input MaterialInput{
+    name: String!
+    share: Int!
 }
 input ApparelInput {
     article: String!
     brand: String!
     sex: String!
     category: String!
-    material: String
+    materials: [MaterialInput!]!
     image: String
+    price: Int!
 }
 input CreateUserInput {
     first_name: String!  

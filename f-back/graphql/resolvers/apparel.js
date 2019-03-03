@@ -21,10 +21,6 @@ module.exports = {
 		return apparel;
 	},
 	addApparel: async ({ apparelInput }) => {
-		console.log('here')
-		const findBrand = async () =>
-			await Brand.findOne({ name: apparelInput.brand });
-
 		try {
 			const existingApparel = await Apparel.findOne({
 				article: apparelInput.article,
@@ -33,22 +29,25 @@ module.exports = {
 				throw new Error('Item exists already.');
 			}
 			let foundBrand;
-			foundBrand = findBrand();
+			foundBrand = await Brand.findOne({ name: apparelInput.brand });
+
 			if (!foundBrand) {
-				await brandResolvers.addBrand({
+				console.log('here');
+				foundBrand = await brandResolvers.addBrand({
 					brandInput: { name: apparelInput.brand },
 				});
-				foundBrand = findBrand();
-				
 			}
-			console.log(foundBrand);
+			let processedMaterials = [];
+			if (apparelInput.materials.length) {
+				processedMaterials = apparelInput.materials.map(m => ({
+					name: m.name,
+					share: `${m.share}%`,
+				}));
+			}
 			const item = new Apparel({
-				article: apparelInput.article,
+				...apparelInput,
 				brand: foundBrand,
-				sex: apparelInput.sex,
-				category: apparelInput.category,
-				material: apparelInput.material,
-				image: apparelInput.image,
+				materials: processedMaterials,
 			});
 			const savedItem = await item.save();
 			return savedItem;

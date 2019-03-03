@@ -62,7 +62,11 @@ export default class TextInput extends Component {
 					placeholder: 'Confirm Password',
 				};
 			default:
-				return {};
+				return {
+					type: 'text',
+					name,
+					placeholder: '',
+				};
 		}
 	}
 
