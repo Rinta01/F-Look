@@ -54,14 +54,12 @@ module.exports = {
 				} else if (!foundUser) {
 					throw new Error('User not found!');
 				} else {
-					foundUser.first_name = editUserInput.first_name;
-					foundUser.last_name = editUserInput.last_name;
-					foundUser.country = editUserInput.country;
-					foundUser.tel = editUserInput.tel;
-					foundUser.email = editUserInput.email;
-					foundUser.age = editUserInput.age;
-					foundUser.wealth = editUserInput.wealth;
-					foundUser.size = editUserInput.size;
+					// console.log(foundUser);
+					for (var k in foundUser) {
+						if (editUserInput[k]) {
+							foundUser[k] = editUserInput[k];
+						}
+					}
 
 					//find a more optimal way
 					if (editUserInput.brands) {

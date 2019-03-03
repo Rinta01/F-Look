@@ -50,6 +50,7 @@ export const EDIT_USER = gql`
 		$tel: String!
 		$email: String
 		$age: Int
+		$sex: String!
 		$wealth: String!
 		$size: String!
 	) {
@@ -62,6 +63,7 @@ export const EDIT_USER = gql`
 				tel: $tel
 				email: $email
 				age: $age
+				sex: $sex
 				wealth: $wealth
 				size: $size
 			}

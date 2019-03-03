@@ -1,5 +1,5 @@
-@import '../../css/variables.scss';
-@import url('https://fonts.googleapis.com/css?family=Work+Sans:500,600,700');
+@import '../../../css/variables.scss';
+// @import url('https://fonts.googleapis.com/css?family=Work+Sans:500,600,700');
 
 .start-page {
 	height: 100vh;
@@ -8,6 +8,7 @@
 	align-items: center;
 	justify-content: center;
 	background-color: color(black);
+	padding-top: 0!important;
 
 	.logo-container {
 		cursor: default;

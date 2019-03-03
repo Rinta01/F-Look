@@ -21,4 +21,13 @@ code {
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
+
+	& * {
+		font-family: $font;
+	}
+
+	//consider nav panel height
+	& > div:first-child{
+		padding-top: 25px;
+	}
 }

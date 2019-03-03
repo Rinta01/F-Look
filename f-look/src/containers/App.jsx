@@ -9,7 +9,9 @@ import {
 	faSearch,
 	faCheck,
 	faPlus,
-	faMinus
+	faMinus,
+	faBarcode,
+	faEye,
 } from '@fortawesome/free-solid-svg-icons';
 import React, { Component } from 'react';
 import { ApolloProvider } from 'react-apollo';
@@ -19,11 +21,13 @@ import {
 	Route,
 	Switch,
 } from 'react-router-dom';
-import { Login } from '../components/Login/';
-import { Start } from '../components/Start/';
+import { Login } from './Pages/Login/';
+import { Start } from './Pages/Start/';
 import { Profile } from '../containers/Pages/Profile';
 import AuthContext from '../context/AuthContext';
 import { client } from '../utils/apolloConfig';
+import { Main } from './Pages/Main';
+import NotFound from './Pages/NotFound/NotFound';
 
 library.add(
 	faFacebookSquare,
@@ -33,7 +37,9 @@ library.add(
 	faSearch,
 	faCheck,
 	faPlus,
-	faMinus
+	faMinus,
+	faBarcode,
+	faEye
 );
 
 export default class App extends Component {
@@ -79,6 +85,9 @@ export default class App extends Component {
 							{!this.state.token && (
 								<Redirect from='/profile' to='/login' />
 							)}
+							{!this.state.token && (
+								<Redirect from='/main' to='/login' />
+							)}
 							<Route exact path='/' component={Start} />
 							<Route
 								exact
@@ -91,6 +100,8 @@ export default class App extends Component {
 								render={() => <Login signup={true} />}
 							/>
 							<Route exact path='/profile' component={Profile} />
+							<Route exact path='/main' component={Main} />
+							<Route path='*' exact component={NotFound} />
 						</Switch>
 					</AuthContext.Provider>
 				</Router>

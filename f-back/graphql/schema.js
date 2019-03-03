@@ -76,6 +76,7 @@ input EditUserInput {
     tel: String!
     email: String
     age: Int
+    sex: String!
     wealth: String!
     size: String!
     favBrands: [String]

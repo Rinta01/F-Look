@@ -7,6 +7,7 @@ import { CustomLoader } from '../../../components/CustomLoader';
 import './Profile.scss';
 import { Icon } from '../../../components/Icon';
 import { ProfileForm } from '../../Forms';
+import { NavPanel } from '../../../components/NavPanel';
 
 export default class Profile extends Component {
 	static contextType = AuthContext;
@@ -39,6 +40,7 @@ export default class Profile extends Component {
 							}
 						}}
 					</Query>
+					<NavPanel />
 				</div>
 			</div>
 		);

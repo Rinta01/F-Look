@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
-import { TextInput, NumberInput } from '../../components/InputTypes';
+import {
+	TextInput,
+	NumberInput,
+	RadioInput,
+} from '../../components/InputTypes';
 import { Formik } from 'formik';
 import { Mutation } from 'react-apollo';
 import { EDIT_USER } from '../../graphql/queries';
@@ -28,6 +32,7 @@ class ProfileForm extends Component {
 			age,
 			tel,
 			email,
+			sex,
 			size,
 			// wealth,
 		} = this.props;
@@ -53,15 +58,16 @@ class ProfileForm extends Component {
 							email,
 							country,
 							tel,
+							sex,
 							wealth: 'Average',
 							size,
 							// password: '',
 							// confirm_password: '',
 						}}
-						onSubmit={async (values, { setSubmitting }) => {
+						onSubmit={(values, { setSubmitting }) => {
 							setSubmitting(false);
-							alert(JSON.stringify(values));
-							await editUser({
+							// alert(JSON.stringify(values));
+							editUser({
 								variables: {
 									...values,
 									id: this.context.userId,
@@ -97,6 +103,7 @@ class ProfileForm extends Component {
 												name='age'
 												{...props}
 											/>
+											<RadioInput name='sex' {...props} />
 											<SizeChoice {...props} />
 											<PasswordChange {...props} />
 											{loading ? (

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
-import { LoginForm, RegForm } from '../../containers/Forms';
+import { LoginForm, RegForm } from '../../Forms';
 import './Login.scss';
-import { CodeConfirm } from '../CodeConfirm';
-import { LoginFooter } from '../LoginFooter';
+import { CodeConfirm } from '../../../components/CodeConfirm';
+import { LoginFooter } from '../../../components/LoginFooter';
 
 class Login extends Component {
 	constructor(props) {
