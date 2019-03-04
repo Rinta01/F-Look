@@ -43,6 +43,8 @@ class ProfileForm extends Component {
 					this.setState({
 						mutationSuccess: true,
 					});
+
+					this.props.refetch({ id: this.context.userId });
 				}}
 				onError={async () => {
 					this.setState({
@@ -64,10 +66,10 @@ class ProfileForm extends Component {
 							// password: '',
 							// confirm_password: '',
 						}}
-						onSubmit={(values, { setSubmitting }) => {
+						onSubmit={async (values, { setSubmitting }) => {
 							setSubmitting(false);
 							// alert(JSON.stringify(values));
-							editUser({
+							await editUser({
 								variables: {
 									...values,
 									id: this.context.userId,

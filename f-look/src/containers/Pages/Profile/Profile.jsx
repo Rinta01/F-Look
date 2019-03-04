@@ -30,13 +30,18 @@ export default class Profile extends Component {
 					<Query
 						query={GET_USER}
 						variables={{ userId: this.context.userId }}>
-						{({ loading, error, data }) => {
+						{({ loading, error, data, refetch }) => {
 							if (loading)
 								return <CustomLoader loading={loading} />;
 							if (error) return <StatusContainer error={error} />;
 							else {
 								console.log(data.findUser);
-								return <ProfileForm {...data.findUser} />;
+								return (
+									<ProfileForm
+										{...data.findUser}
+										refetch={refetch}
+									/>
+								);
 							}
 						}}
 					</Query>
