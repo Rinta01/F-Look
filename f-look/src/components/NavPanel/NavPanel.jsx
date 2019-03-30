@@ -7,12 +7,12 @@ const NavPanel = () => {
 		<nav className='nav-panel'>
 			<ul>
 				<li>
+					<NavLink to='/wishlist'>Wishlist</NavLink>
+				</li>
+				<li>
 					<NavLink exact to='/main'>
 						Main
 					</NavLink>
-				</li>
-				<li>
-					<NavLink to='/wishlist'>Wishlist</NavLink>
 				</li>
 				<li>
 					<NavLink exact to='/profile'>

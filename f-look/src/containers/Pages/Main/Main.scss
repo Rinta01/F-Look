@@ -21,6 +21,7 @@
 		}
 
 		& a {
+			text-align: center;
 			text-decoration: none;
 		}
 		& .links-wrapper {
@@ -74,9 +75,9 @@
 				line-height: 22px;
 				border-bottom: 3px solid color(purple);
 
-				&:focus {
-					border-bottom: 5px solid color(purple);
-				}
+				// &:focus {
+					// box-shadow: 5px solid color(purple);
+				// }
 			}
 			svg {
 				font-size: 20px;
