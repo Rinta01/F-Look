@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 const isAuth = require('./middleware/is-auth');
 const rootValue = require('./graphql/resolvers');
 const { CORS, optionsHandler } = require('./middleware/cors');
+const { atlasUri } = require('./config/mongo_config');
 
 const PORT = process.env.PORT || 4000;
 const app = express();
@@ -29,7 +30,7 @@ mongoose.connection.once('open', () => {
 	console.log('Successfully connected to MongoDB!');
 });
 mongoose
-	.connect('mongodb://localhost/f-look', { useNewUrlParser: true })
+	.connect(atlasUri, { useNewUrlParser: true })
 	.then(() => {
 		app.listen(PORT, () => {
 			console.log(`Now listening on port ${PORT}`);
