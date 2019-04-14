@@ -45,10 +45,13 @@ type Apparel {
     id: ID!
     article: String!
     brand: Brand!
+    name: String,
     sex: String!
     category: String!
     materials: [Material!]
+    color: String!
     image: String
+    source: String!
     price: Int!
 }
 type Brand{
@@ -67,11 +70,14 @@ input MaterialInput{
 input ApparelInput {
     article: String!
     brand: String!
+    name: String,
     sex: String!
     category: String!
     materials: [MaterialInput!]!
-    image: String
+    color: String!
     price: Int!
+    image: String
+    source: String!
 }
 input CreateUserInput {
     first_name: String!  
@@ -98,6 +104,7 @@ type RootQuery {
     allUsers: [User!]!
     findApparel(itemArticle: String!): Apparel
     allApparel: [Apparel!]!
+    recommended(itemId: String!): [Apparel!]!
 }
 type RootMutation {
     login(tel: String!, password: String!): AuthData!

@@ -76,26 +76,60 @@ export const EDIT_USER = gql`
 `;
 
 export const NEW_USER = gql`
-	mutation(
-		$first_name: String!
-		$tel: String!
-		$password: String!
-		$sex: String!
-	) {
-		createUser(
-			userInput: {
-				first_name: $first_name
-				tel: $tel
-				password: $password
-				sex: $sex
-			}
-		) {
+	mutation($first_name: String!, $tel: String!, $password: String!, $sex: String!) {
+		createUser(userInput: { first_name: $first_name, tel: $tel, password: $password, sex: $sex }) {
 			first_name
 			tel
 			sex
 			userId
 			token
 			tokenExpiration
+		}
+	}
+`;
+
+export const GET_ALL_APPAREL = gql`
+	query {
+		allApparel {
+			id
+			article
+			brand {
+				name
+			}
+			name
+			sex
+			category
+			materials {
+				name
+				share
+			}
+			color
+			image
+			source
+			price
+		}
+	}
+`;
+
+export const GET_RECOMMENDED = gql`
+	query($itemId: String!) {
+		recommended(itemId: $itemId) {
+			id
+			article
+			brand {
+				name
+			}
+			name
+			sex
+			category
+			materials {
+				name
+				share
+			}
+			color
+			image
+			source
+			price
 		}
 	}
 `;

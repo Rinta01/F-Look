@@ -28,18 +28,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(session({ secret: 'f-auth', cookie: { maxAge: 60000 }, resave: false, saveUninitialized: false }));
 
-app.use((err, req, res) => {
-	console.log(err);
-	res.status(err.status || 500);
-
-	res.json({
-		errors: {
-			message: err.message,
-			error: err,
-		},
-	});
-});
-
 if (!isProduction) {
 	app.use(errorHandler());
 }

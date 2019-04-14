@@ -8,6 +8,7 @@ html {
 	padding: 0;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+	scroll-behavior: smooth;
 }
 
 code {
@@ -27,7 +28,7 @@ code {
 	}
 
 	//consider nav panel height
-	& > div:first-child{
-		padding-top: 25px;
+	& > div:not(.react-notification-root) {
+		padding-top: 20px;
 	}
 }

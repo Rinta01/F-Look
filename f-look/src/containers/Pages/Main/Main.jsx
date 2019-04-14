@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import './Main.scss';
-import { NavPanel } from '../../../components/NavPanel';
-import { Icon } from '../../../components/Icon';
+import { Icon } from '../../../components';
 
 export default class Main extends Component {
-	render() {
+	render () {
 		return (
 			<div className='main-wrapper'>
 				<div className='main-container'>
@@ -16,6 +15,12 @@ export default class Main extends Component {
 								<Icon icon='barcode' />
 							</section>
 						</NavLink>
+						<NavLink to='/apparel'>
+							<section>
+								<span>All clothes</span>
+								<Icon icon='tshirt' />
+							</section>
+						</NavLink>
 						<NavLink to='/article'>
 							<section>
 								<span>Search apparel</span>
@@ -23,13 +28,12 @@ export default class Main extends Component {
 							</section>
 						</NavLink>
 					</div>
-                    {/* into separate component */}
+					{/* into separate component */}
 					<section className='search-section'>
 						<input type='text' />
 						<Icon icon='search' />
 					</section>
 				</div>
-				<NavPanel />
 			</div>
 		);
 	}

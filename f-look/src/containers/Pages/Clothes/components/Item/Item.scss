@@ -1,0 +1,47 @@
+@import '../../../../../css/variables.scss';
+
+.cloth-item {
+	display: flex;
+	flex-direction: column;
+	width: 33%;
+
+	@media screen and (max-width: breakpoint(l)) {
+		width: 33%;
+	}
+	@media screen and (max-width: breakpoint(xm)) {
+		width: 50%;
+	}
+	@media screen and (max-width: breakpoint(m)) {
+		width: 100%;
+	}
+
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	flex: 0 0 auto;
+
+	& img.item-image {
+		width: 300px;
+	}
+
+	& .item-name {
+		text-align: center;
+	}
+
+	& .price-tag {
+		padding-top: 5px;
+		font-size: smaller;
+		color: grey;
+	}
+
+	& .upper-panel {
+		display: inline-flex;
+		justify-content: space-between;
+		align-items: center;
+		width: 90%;
+		padding: 0.25em 0;
+		& svg {
+			font-size: 25px;
+		}
+	}
+}

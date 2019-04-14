@@ -1,6 +1,18 @@
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faFacebookSquare, faGooglePlusSquare, faVk } from '@fortawesome/free-brands-svg-icons';
-import { faBarcode, faCheck, faEye, faMinus, faPlus, faSearch, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
+import {
+	faBarcode,
+	faCheck,
+	faEye,
+	faMinus,
+	faPlus,
+	faSearch,
+	faSignOutAlt,
+	faTshirt,
+	faLink,
+	faStar,
+	faHandHoldingHeart,
+} from '@fortawesome/free-solid-svg-icons';
 import React, { Component } from 'react';
 import { ApolloProvider } from 'react-apollo';
 import ReactNotification from 'react-notifications-component';
@@ -9,7 +21,8 @@ import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-d
 import AuthContext from '../context/AuthContext';
 import NotificationsContext from '../context/NotificationsContext';
 import { client } from '../utils/apolloConfig';
-import { Login, Main, NotFound, Profile, Start } from './Pages';
+import { Login, Main, NotFound, Profile, Start, Clothes } from './Pages';
+import { NavPanel } from '../components';
 
 library.add(
 	faFacebookSquare,
@@ -22,6 +35,10 @@ library.add(
 	faMinus,
 	faBarcode,
 	faEye,
+	faTshirt,
+	faLink,
+	faStar,
+	faHandHoldingHeart,
 );
 
 export default class App extends Component {
@@ -83,8 +100,9 @@ export default class App extends Component {
 								addNotification,
 							}}>
 							<ReactNotification ref={notificationDOMRef} />
+							<NavPanel />
 							<Switch>
-								{this.state.token && <Redirect from='/login' to='/profile' />}
+								{this.state.token && <Redirect from='/login' to='/main' />}
 								{this.state.token && <Redirect from='/signup' to='/profile' />}
 								{!this.state.token && <Redirect from='/confirm' to='/login' />}
 								{!this.state.token && <Redirect from='/profile' to='/login' />}
@@ -94,6 +112,7 @@ export default class App extends Component {
 								<Route exact path='/signup' render={() => <Login signup={true} />} />
 								<Route exact path='/profile' component={Profile} />
 								<Route exact path='/main' component={Main} />
+								<Route path='/apparel' component={Clothes} />
 								<Route path='*' exact component={NotFound} />
 							</Switch>
 						</NotificationsContext.Provider>
