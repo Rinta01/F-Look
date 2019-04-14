@@ -1,38 +1,51 @@
 import React, { useState, useEffect } from 'react';
-import Icon from '../Icon/Icon';
+import { Icon } from '..';
 import './StatusContainer.scss';
 
-const StatusContainer = ({ error, success, handleUnmount }) => {
-	const [renderChild, setState] = useState(1);
+const StatusContainer = ({ error, success, handleUnmount, graphql }) => {
+	// console.log({ ...error });
+	// const [ renderChild, setState ] = useState(1);
 	// console.log(error, success, handleUnmount);
 
-	useEffect(() => {
-		let interval = setTimeout(() => setState(!renderChild), 3500);
-		return () => {
-			clearInterval(interval);
-			// if (handleUnmount !== undefined) {
-			// 	console.log('eee');
-			// 	handleUnmount();
-			// }
-		};
-	}, []);
+	// useEffect(() => {
+	// 	let interval = setTimeout(() => setState(!renderChild), 3500);
+	// 	return () => {
+	// 		clearInterval(interval);
+	// 		// if (handleUnmount !== undefined) {
+	// 		// 	console.log('eee');
+	// 		// 	handleUnmount();
+	// 		// }
+	// 	};
+	// }, []);
 
-	if (error && renderChild) {
+	if (error) {
 		// console.log(error.graphQLErrors, error.networkError, error.message);
+		if (graphql) {
+			return (
+				<p className='input-feedback'>
+					{error.networkError.result.errors.length &&
+						error.networkError.result.errors.map(m => m.message.split(': '))}
+				</p>
+			);
+		}
 		return (
 			<p className='input-feedback'>
-				{error.message.includes('duplicate')
-					? 'This phone number is already registered!'
-					: `${error.message.split(': ')[1]}`}
+				{error.message.includes('duplicate') ? (
+					'This phone number is already registered!'
+				) : (
+					`${error.message.split(': ')[1]}`
+				)}
 			</p>
 		);
-	} else if (success && renderChild) {
+	}
+	else if (success) {
 		return (
 			<p className='input-feedback success'>
 				<Icon icon='check' />
 			</p>
 		);
-	} else return null;
+	}
+	else return null;
 };
 
 export default StatusContainer;

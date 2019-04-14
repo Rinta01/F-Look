@@ -22,7 +22,7 @@ module.exports = {
 			'welcomefellowmemer',
 			{
 				expiresIn: '1h',
-			}
+			},
 		);
 		return {
 			userId: user.id,

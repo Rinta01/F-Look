@@ -1,20 +1,12 @@
-import React, { Component } from 'react';
-import {
-	TextInput,
-	NumberInput,
-	RadioInput,
-} from '../../components/InputTypes';
 import { Formik } from 'formik';
-import { Mutation } from 'react-apollo';
-import { EDIT_USER } from '../../graphql/queries';
-import { StatusContainer } from '../../components/StatusContainer';
-import { CustomLoader } from '../../components/CustomLoader';
 import PropTypes from 'prop-types';
-import { SizeChoice } from '../../components/SizeChoice';
+import React, { Component } from 'react';
+import { Mutation } from 'react-apollo';
+import { CustomLoader, PasswordChange, SizeChoice, StatusContainer, SubmitButton } from '../../components';
+import { NumberInput, RadioInput, TextInput } from '../../components/InputTypes';
 import AuthContext from '../../context/AuthContext';
+import { EDIT_USER } from '../../graphql/queries';
 import { profile_schema } from '../../utils/validators';
-import { PasswordChange } from '../../components/PasswordChange';
-import { SubmitButton } from '../../components/SubmitButton';
 
 class ProfileForm extends Component {
 	static contextType = AuthContext;

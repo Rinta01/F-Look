@@ -9,7 +9,6 @@
 		"sync.gist": "27e704a1ee0b4d4a2f74a9359e313546",
 		"prettier.autoScroll": false,
 		"prettier.breakBeforeElse": true,
-		"prettier.breakProperty": true,
 		"prettier.cssEnable": [
 			"css",
 			"less",
@@ -32,6 +31,8 @@
 		"scssFormatter.singleQuote": true,
 		"scssFormatter.useTabs": true,
 		"scss.showErrors": true,
-		"editor.formatOnSave": true
+		"editor.formatOnSave": true,
+		"prettier.breakProperty": true,
+		"prettier.openOutput": false
 	}
 }

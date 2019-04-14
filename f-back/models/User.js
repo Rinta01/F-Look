@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const UserSchema = new Schema({
 	first_name: {
 		type: String,
-		required: [true, 'User must have a first name.'],
+		required: [ true, 'User must have a first name.' ],
 	},
 	last_name: {
 		type: String,
@@ -15,7 +15,7 @@ const UserSchema = new Schema({
 	},
 	tel: {
 		type: String,
-		required: [true, 'User must have a phone number.'],
+		required: [ true, 'User must have a phone number.' ],
 		unique: true,
 		trim: true,
 		index: true,
@@ -30,7 +30,7 @@ const UserSchema = new Schema({
 	},
 	password: {
 		type: String,
-		required: [true, 'User must have a password.'],
+		required: [ true, 'User must have a password.' ],
 	},
 	created_date: {
 		type: Date,
@@ -38,9 +38,9 @@ const UserSchema = new Schema({
 	},
 	sex: {
 		type: String,
-		required: [true, 'User must have a gender'],
+		required: [ true, 'User must have a gender' ],
 		validate: {
-			validator: function(val) {
+			validator: function (val) {
 				return /Male|Female/i.test(val);
 			},
 			message: props => `${props.value} is not a valid gender!`,

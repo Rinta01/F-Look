@@ -11,12 +11,11 @@ const httpLink = new HttpLink({
 });
 const errorLink = onError(({ response, graphQLErrors, networkError }) => {
 	if (graphQLErrors)
-		graphQLErrors.map(({ message, path }) =>
-			console.log(`[GraphQL error]: Message: ${message}, Path: ${path}`)
-		);
+		graphQLErrors.map(({ message, path }) => console.log(`[GraphQL error]: Message: ${message}, Path: ${path}`));
 	if (networkError) {
 		console.log(`[Network error]: ${networkError}`);
 	}
+	// return graphQLErrors;
 });
 const authLink = setContext((_, { headers }) => {
 	// get the authentication token from local storage if it exists
@@ -30,7 +29,7 @@ const authLink = setContext((_, { headers }) => {
 	};
 });
 export const client = new ApolloClient({
-	link: ApolloLink.from([authLink, errorLink, httpLink]),
+	link: ApolloLink.from([ authLink, errorLink, httpLink ]),
 	cache: new InMemoryCache(),
 	watchQuery: {
 		fetchPolicy: 'cache-and-network',

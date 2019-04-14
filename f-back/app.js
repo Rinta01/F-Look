@@ -6,22 +6,43 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const isAuth = require('./middleware/is-auth');
 const rootValue = require('./graphql/resolvers');
+const session = require('express-session');
 const { CORS, optionsHandler } = require('./middleware/cors');
 const { atlasUri } = require('./config/mongo_config');
+const errorHandler = require('errorhandler');
 
 const PORT = process.env.PORT || 4000;
 const app = express();
 
+const isProduction = process.env.NODE_ENV === 'production';
+
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.use(CORS, optionsHandler);
 app.use(isAuth);
 app.use('/graphql', graphqlHTTP({ schema, rootValue, graphiql: true }));
-app.use(express.static('public'));
 
-// app.get('*', (req, res) => {
-// 	res.sendFile(path.resolve(__dirname, 'public', 'index.html'));
-// });
+app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(session({ secret: 'f-auth', cookie: { maxAge: 60000 }, resave: false, saveUninitialized: false }));
+
+app.use((err, req, res) => {
+	console.log(err);
+	res.status(err.status || 500);
+
+	res.json({
+		errors: {
+			message: err.message,
+			error: err,
+		},
+	});
+});
+
+if (!isProduction) {
+	app.use(errorHandler());
+}
 
 mongoose.set('debug', true);
 mongoose.set('useCreateIndex', true);

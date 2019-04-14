@@ -1,18 +1,15 @@
 import { Formik } from 'formik';
 import React, { Component } from 'react';
 import { Mutation } from 'react-apollo';
-import { CustomLoader } from '../../components/CustomLoader';
-import { RadioInput, TextInput } from '../../components/InputTypes';
-import { StatusContainer } from '../../components/StatusContainer';
-import { SubmitButton } from '../../components/SubmitButton';
+import { CustomLoader, RadioInput, StatusContainer, SubmitButton, TextInput } from '../../components';
 import AuthContext from '../../context/AuthContext';
 import { NEW_USER } from '../../graphql/queries';
-import './Form.scss';
 import { reg_schema } from '../../utils/validators';
+import './Form.scss';
 
 class RegForm extends Component {
 	static contextType = AuthContext;
-	render() {
+	render () {
 		return (
 			<Mutation
 				mutation={NEW_USER}
@@ -38,34 +35,21 @@ class RegForm extends Component {
 						}}
 						validationSchema={reg_schema}>
 						{props => {
-							const {
-								isSubmitting,
-								handleSubmit,
-							} = props;
+							const { isSubmitting, handleSubmit } = props;
 							return (
 								<section className='form-container'>
 									<form onSubmit={handleSubmit}>
-										<TextInput
-											name='first_name'
-											{...props}
-										/>
+										<TextInput name='first_name' {...props} />
 										<TextInput name='tel' {...props} />
 										<TextInput name='password' {...props} />
-										<TextInput
-											name='confirm_password'
-											{...props}
-										/>
+										<TextInput name='confirm_password' {...props} />
 										<RadioInput name='sex' {...props} />
 										{loading ? (
 											<CustomLoader loading={loading} />
 										) : (
-											<SubmitButton
-												disabled={isSubmitting}
-											/>
+											<SubmitButton disabled={isSubmitting} />
 										)}
-										{error && (
-											<StatusContainer error={error} />
-										)}
+										{error && <StatusContainer error={error} />}
 									</form>
 								</section>
 							);
