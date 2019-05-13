@@ -31,9 +31,7 @@ export const GET_USER = gql`
 			age
 			wealth
 			size
-			favBrands {
-				name
-			}
+			favBrands
 			wishlist {
 				article
 			}
@@ -93,9 +91,7 @@ export const GET_ALL_APPAREL = gql`
 		allApparel {
 			id
 			article
-			brand {
-				name
-			}
+			brand
 			name
 			sex
 			category
@@ -116,9 +112,7 @@ export const GET_RECOMMENDED = gql`
 		recommended(itemId: $itemId) {
 			id
 			article
-			brand {
-				name
-			}
+			brand
 			name
 			sex
 			category

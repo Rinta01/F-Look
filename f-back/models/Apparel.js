@@ -8,9 +8,8 @@ const ApparelSchema = new Schema({
 		unique: true,
 	},
 	brand: {
-		type: Schema.Types.ObjectId,
+		type: String,
 		required: [ true, 'An item must belong to a brand' ],
-		ref: 'Brand',
 	},
 	name: {
 		type: String,

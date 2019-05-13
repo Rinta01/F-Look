@@ -7,7 +7,8 @@ module.exports = {
 		const user = await User.findById(userId, (err, user) => {
 			if (err) {
 				console.log(err);
-			} else if (!user) {
+			}
+			else if (!user) {
 				throw new Error('User not found!');
 			}
 		});
@@ -46,40 +47,33 @@ module.exports = {
 		}
 	},
 	editUser: async ({ editUserInput }) => {
-		const user = await User.findById(
-			editUserInput.id,
-			async (err, foundUser) => {
-				if (err) {
-					console.log(err);
-				} else if (!foundUser) {
-					throw new Error('User not found!');
-				} else {
-					// console.log(foundUser);
-					for (var k in foundUser) {
-						if (editUserInput[k]) {
-							foundUser[k] = editUserInput[k];
-						}
-					}
-
-					//find a more optimal way
-					if (editUserInput.brands) {
-						let foundBrands = [];
-						editUserInput.brands.forEach(async b => {
-							const brand = await Brand.findOne({ name: b });
-							foundBrands.push(brand._id);
-						});
-						foundUser.favBrands = foundBrands;
-					}
-
-					if (editUserInput.wishlist) {
-						let foundWishlist = [];
-						foundUser.wishlist = foundWishlist;
-					}
-
-					await foundUser.save();
-				}
+		const user = await User.findById(editUserInput.id, async (err, foundUser) => {
+			if (err) {
+				console.log(err);
 			}
-		);
+			else if (!foundUser) {
+				throw new Error('User not found!');
+			}
+			else {
+				// console.log(foundUser);
+				for (var k in foundUser) {
+					if (editUserInput[k]) {
+						foundUser[k] = editUserInput[k];
+					}
+				}
+				//find a more optimal way
+				if (editUserInput.favBrands) {
+					foundUser.favBrands = foundUser.favBrands.concat(editUserInput.favBrands);
+				}
+
+				if (editUserInput.wishlist) {
+					let foundWishlist = [];
+					foundUser.wishlist = foundWishlist;
+				}
+
+				await foundUser.save();
+			}
+		});
 		return user;
 	},
 };

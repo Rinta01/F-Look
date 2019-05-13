@@ -1,6 +1,4 @@
 const Apparel = require('../../models/Apparel');
-const Brand = require('../../models/Brand');
-const brandResolvers = require('../resolvers/brands');
 
 module.exports = {
 	findApparel: async ({ itemArticle }) => {
@@ -16,25 +14,19 @@ module.exports = {
 	},
 	allApparel: async () => {
 		const apparel = await Apparel.find({});
-		const fullApparel = apparel.map(a => {
-			foundBrand = Brand.findById(a.brand);
-			// console.log(foundBrand);
-			return { ...a._doc, id: a._id, brand: foundBrand };
-		});
-		console.log(fullApparel);
-		return fullApparel;
+		return apparel;
 	},
 	recommended: async ({ itemId }) => {
 		const apparel = await Apparel.findById(itemId);
 		const { category, color } = apparel;
 		const recommendedItems = await Apparel.find({ category, color });
-		const recommendedApparel = recommendedItems.map(a => {
-			foundBrand = Brand.findById(a.brand);
-			// console.log(foundBrand);
-			return { ...a._doc, id: a._id, brand: foundBrand };
-		});
-		console.log(recommendedApparel);
-		return recommendedApparel;
+		// const recommendedApparel = recommendedItems.map(a => {
+		// 	foundBrand = Brand.findById(a.brand);
+		// 	// console.log(foundBrand);
+		// 	return { ...a._doc, id: a._id, brand: foundBrand };
+		// });
+		console.log(recommendedItems);
+		return recommendedItems;
 	},
 	addApparel: async ({ apparelInput }) => {
 		try {
@@ -43,14 +35,6 @@ module.exports = {
 			});
 			if (existingApparel) {
 				throw new Error('Item exists already.');
-			}
-			let foundBrand;
-			foundBrand = await Brand.findOne({ name: apparelInput.brand });
-
-			if (!foundBrand) {
-				foundBrand = await brandResolvers.addBrand({
-					brandInput: { name: apparelInput.brand },
-				});
 			}
 			let processedMaterials = [];
 			if (apparelInput.materials.length) {
@@ -61,7 +45,7 @@ module.exports = {
 			}
 			const item = new Apparel({
 				...apparelInput,
-				brand: foundBrand,
+				brand: { brandName: apparelInput.brand },
 				materials: processedMaterials,
 			});
 			const savedItem = await item.save();

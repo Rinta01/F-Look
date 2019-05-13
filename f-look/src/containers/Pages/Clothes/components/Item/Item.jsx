@@ -8,12 +8,12 @@ const propTypes = {
 };
 
 const Item = ({ item, handleRecommend }) => {
-	const { id, name, image, price, source } = item;
+	const { id, name, image, price, source, brand } = item;
 	return (
 		<div className='cloth-item' data-itemid={id}>
 			<img className='item-image' src={image} alt='' />
 			<div className='upper-panel'>
-				<a href={source} target='_blank'>
+				<a href={source} target='_blank' rel='noopener noreferrer'>
 					<Icon icon='link' title='See source' />
 				</a>
 				<Icon icon='hand-holding-heart' title='See recommended' onClick={() => handleRecommend(id)} />

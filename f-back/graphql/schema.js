@@ -13,7 +13,7 @@ type User {
     age: Int
     wealth: String
     size: String
-    favBrands: [Brand!]
+    favBrands: [String!]
     wishlist: [Apparel!]
 }
 type LoggedUser {
@@ -26,7 +26,7 @@ type LoggedUser {
     age: Int
     wealth: String!
     size: String!
-    favBrands: [Brand!]
+    favBrands: [String!]
     wishlist: [Apparel!]
     userId: String!
     token: String!
@@ -44,7 +44,7 @@ type Material{
 type Apparel {
     id: ID!
     article: String!
-    brand: Brand!
+    brand: String!
     name: String,
     sex: String!
     category: String!
@@ -53,15 +53,6 @@ type Apparel {
     image: String
     source: String!
     price: Int!
-}
-type Brand{
-    id: ID!
-    name: String!
-    clothes: [Apparel!]
-}
-input BrandInput{
-    name: String!
-    clothes: [String!]
 }
 input MaterialInput{
     name: String!
@@ -111,7 +102,6 @@ type RootMutation {
     createUser(userInput: CreateUserInput): LoggedUser!
     editUser(editUserInput: EditUserInput): User!
     addApparel(apparelInput: ApparelInput): Apparel
-    addBrand(brandInput: BrandInput): Brand
 }
 schema {
     query: RootQuery
