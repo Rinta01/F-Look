@@ -16,8 +16,8 @@ Todos:
 7. Main Page +
 8. Barcode Scan (google it)	
 9. Find by article (mutation is created) +-
-10. Clothing page	
-11. Clothes selection page (algorithm??)
+10. Clothing page	+
+11. Clothes selection page (algorithm??) +-
 12. Filter component
 13. Wishlist
 14. CSS Transitions
