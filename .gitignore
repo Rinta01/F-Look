@@ -1,15 +1,3 @@
-# vs code files
-/.vscode
-# f-workspace.code-workspace
-
-# legacy files
-/f-back/legacy
-
-# from back-end
-/f-back/node_modules
-
-# from front-end
-f-look/node_modules
 .pnp
 .pnp.js
 
