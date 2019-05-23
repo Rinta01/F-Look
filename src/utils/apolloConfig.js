@@ -10,7 +10,7 @@ const prodBaseUri = 'https://f-back.herokuapp.com';
 const localBaseUri = 'http://localhost:4000';
 const prodFrontUri = 'https://f-look.herokuapp.com';
 const localFrontUri = 'http://localhost:3000';
-const graphqlUri = `${localBaseUri}/graphql`;
+const graphqlUri = `${prodBaseUri}/graphql`;
 
 const httpLink = new HttpLink({
 	uri: graphqlUri,
