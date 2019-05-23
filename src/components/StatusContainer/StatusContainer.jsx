@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Icon } from '..';
 import './StatusContainer.scss';
 
@@ -19,11 +19,11 @@ const StatusContainer = ({ error, success, handleUnmount, graphql }) => {
 	// }, []);
 
 	if (error) {
-		// console.log(error.graphQLErrors, error.networkError, error.message);
+		console.log(error.graphQLErrors, error.networkError, error.message);
 		if (graphql) {
 			return (
 				<p className='input-feedback'>
-					{error.networkError ? (
+					{error.networkError && error.networkError.result ? (
 						error.networkError.result.errors.length && error.networkError.result.errors.map(m => m.message.split(': '))
 					) : null}
 					{error.graphQLErrors ? (

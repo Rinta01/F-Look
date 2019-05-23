@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { ApolloClient } from 'apollo-client';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { HttpLink } from 'apollo-link-http';
@@ -7,9 +8,13 @@ import { ApolloLink } from 'apollo-link';
 
 const prodBaseUri = 'https://f-back.herokuapp.com';
 const localBaseUri = 'http://localhost:4000';
-const graphqlUri = `${prodBaseUri}/graphql`;
+const prodFrontUri = 'https://f-look.herokuapp.com';
+const localFrontUri = 'http://localhost:3000';
+const graphqlUri = `${localBaseUri}/graphql`;
+
 const httpLink = new HttpLink({
 	uri: graphqlUri,
+	credentials: 'include',
 });
 const errorLink = onError(({ response, graphQLErrors, networkError }) => {
 	if (graphQLErrors) graphQLErrors.map(({ message, path }) => console.log(`[GraphQL error]: Message: ${message}, Path: ${path}`));
@@ -18,15 +23,15 @@ const errorLink = onError(({ response, graphQLErrors, networkError }) => {
 	}
 	// return graphQLErrors;
 });
-const authLink = setContext((_, { headers }) => {
+const authLink = setContext((_, { headers = {} }) => {
 	// get the authentication token from local storage if it exists
 	const token = localStorage.getItem('token');
-	const requestHeaders = { ...{ headers, 'Access-Control-Allow-Origin': 'http://siteA.com' } };
-	console.log(headers);
+	// console.log(token);
+	// const requestHeaders = { ...{ ...headers, 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Credentials': true } };
 	// return the headers to the context so httpLink can read them
 	return {
 		headers: {
-			...requestHeaders,
+			// ...requestHeaders,
 			Authorization: token ? `Bearer ${token}` : '',
 		},
 	};

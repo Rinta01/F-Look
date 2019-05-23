@@ -1,5 +1,5 @@
 import { Formik } from 'formik';
-import React, { Component, useContext } from 'react';
+import React, { useContext } from 'react';
 import { Mutation } from 'react-apollo';
 import { CustomLoader, StatusContainer, SubmitButton, TextInput } from '../../components';
 import AuthContext from '../../context/AuthContext';
@@ -45,11 +45,7 @@ const LoginForm = () => {
 								<form onSubmit={handleSubmit}>
 									<TextInput name='tel' {...props} />
 									<TextInput name='password' {...props} />
-									{loading ? (
-										<CustomLoader loading={loading} />
-									) : (
-										<SubmitButton disabled={isSubmitting} />
-									)}
+									{loading ? <CustomLoader loading={loading} /> : <SubmitButton disabled={isSubmitting} />}
 									{error && <StatusContainer error={error} graphql />}
 								</form>
 							</section>
