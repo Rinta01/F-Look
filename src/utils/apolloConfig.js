@@ -21,10 +21,12 @@ const errorLink = onError(({ response, graphQLErrors, networkError }) => {
 const authLink = setContext((_, { headers }) => {
 	// get the authentication token from local storage if it exists
 	const token = localStorage.getItem('token');
+	const requestHeaders = { ...{ headers, 'Access-Control-Allow-Origin': 'http://siteA.com' } };
+	console.log(headers);
 	// return the headers to the context so httpLink can read them
 	return {
 		headers: {
-			...headers,
+			...requestHeaders,
 			Authorization: token ? `Bearer ${token}` : '',
 		},
 	};

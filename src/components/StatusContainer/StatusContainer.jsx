@@ -23,18 +23,18 @@ const StatusContainer = ({ error, success, handleUnmount, graphql }) => {
 		if (graphql) {
 			return (
 				<p className='input-feedback'>
-					{error.networkError.result.errors.length &&
-						error.networkError.result.errors.map(m => m.message.split(': '))}
+					{error.networkError ? (
+						error.networkError.result.errors.length && error.networkError.result.errors.map(m => m.message.split(': '))
+					) : null}
+					{error.graphQLErrors ? (
+						error.graphQLErrors.map(({ message, path }) => `[GraphQL error]: Message: ${message}, Path: ${path}`)
+					) : null}
 				</p>
 			);
 		}
 		return (
 			<p className='input-feedback'>
-				{error.message.includes('duplicate') ? (
-					'This phone number is already registered!'
-				) : (
-					`${error.message.split(': ')[1]}`
-				)}
+				{error.message.includes('duplicate') ? 'This phone number is already registered!' : `${error.message.split(': ')[1]}`}
 			</p>
 		);
 	}

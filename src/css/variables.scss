@@ -1,21 +1,6 @@
-$colors: (
-	purple: #b97fff,
-	black: #282828,
-	font-color: #393939,
-	grey: #dbdbdb,
-	dark-grey: #f3f3f3,
-	red: #ffa8a8,
-	input-border: #d6d6d6
-);
+$colors: (purple: #b97fff, black: #282828, font-color: #393939, grey: #dbdbdb, dark-grey: #f3f3f3, red: #ffa8a8, input-border: #d6d6d6, white: #fff);
 
-$breakpoints: (
-	s: 320px,
-	xs: 480px,
-	m: 640px,
-	xm: 768px,
-	l: 900px,
-	x: 1200px
-);
+$breakpoints: (s: 320px, xs: 480px, m: 640px, xm: 768px, l: 900px, x: 1200px);
 
 $font: 'Work Sans', sans-serif;
 
