@@ -25,9 +25,7 @@ const StatusContainer = ({ error, success, handleUnmount, graphql }) => {
 				<p className='input-feedback'>
 					{error.networkError && error.networkError.result ? (
 						error.networkError.result.errors.length && error.networkError.result.errors.map(m => m.message.split(': '))
-					) : (
-						error.networkError
-					)}
+					) : null}
 					{error.graphQLErrors ? (
 						error.graphQLErrors.map(({ message, path }) => `[GraphQL error]: Message: ${message}, Path: ${path}`)
 					) : null}
