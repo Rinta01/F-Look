@@ -33,7 +33,7 @@
 			section {
 				display: flex;
 				align-items: center;
-				margin: 0 2rem;
+				justify-content: space-evenly;
 				transition: transform 0.2s linear;
 
 				&:hover {
@@ -76,7 +76,7 @@
 				border-bottom: 3px solid color(purple);
 
 				// &:focus {
-					// box-shadow: 5px solid color(purple);
+				// box-shadow: 5px solid color(purple);
 				// }
 			}
 			svg {
