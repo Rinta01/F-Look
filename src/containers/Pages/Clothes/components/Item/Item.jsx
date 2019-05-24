@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
 import t from 'prop-types';
 import './Item.scss';
