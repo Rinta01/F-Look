@@ -1,6 +1,16 @@
 $colors: (purple: #b97fff, black: #282828, font-color: #393939, grey: #dbdbdb, dark-grey: #f3f3f3, red: #ffa8a8, input-border: #d6d6d6, white: #fff);
 
-$breakpoints: (s: 320px, xs: 480px, m: 640px, xm: 768px, l: 900px, x: 1200px);
+$breakpoints: (
+	mobileS: 320px,
+	mobileM: 375px,
+	mobileL: 425px,
+	tablet: 768px,
+	laptopS: 1024px,
+	laptopM: 1280px,
+	laptopL: 366px,
+	desktopM: 1920px,
+	desktopL: 2560px
+);
 
 $font: 'Work Sans', sans-serif;
 
