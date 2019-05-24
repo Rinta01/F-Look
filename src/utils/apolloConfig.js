@@ -10,18 +10,18 @@ const prodBaseUri = 'https://f-back.herokuapp.com';
 const localBaseUri = 'http://localhost:4000';
 const prodFrontUri = 'https://f-look.herokuapp.com';
 const localFrontUri = 'http://localhost:3000';
-const graphqlUri = `${localBaseUri}/graphql`;
+const graphqlUri = `${prodFrontUri}/graphql`;
 
 const httpLink = new HttpLink({
 	uri: graphqlUri,
-	credentials: 'include',
+	// credentials: 'include',
 });
 const errorLink = onError(({ response, graphQLErrors, networkError }) => {
 	if (graphQLErrors) graphQLErrors.map(({ message, path }) => console.log(`[GraphQL error]: Message: ${message}, Path: ${path}`));
 	if (networkError) {
 		console.log(`[Network error]: ${networkError}`);
 	}
-	// return graphQLErrors;
+	return graphQLErrors;
 });
 const authLink = setContext((_, { headers = {} }) => {
 	// get the authentication token from local storage if it exists
