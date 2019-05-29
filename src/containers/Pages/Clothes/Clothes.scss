@@ -5,11 +5,36 @@
 	flex-direction: column;
 	align-items: center;
 	justify-content: space-around;
-	height: 100vh;
+	// height: 100vh;
 	width: 100%;
 	padding-top: 0 !important;
-	flex-basis: 75%;
+	flex-basis: 70%;
 	margin: auto;
+
+	& .arrows-scroll {
+		position: absolute;
+		cursor: pointer;
+		font-size: x-large;
+		background-color: color(opaqueWhite);
+		border-radius: 50%;
+		text-align: center;
+		transition: background-color .15s ease-out;
+		width: 2rem;
+		height: 2rem;
+		outline: none;
+		&:hover {
+			background-color: color(white);
+		}
+		&:first-child {
+			left: 0.25rem;
+		}
+		&:last-child {
+			right: 0.25rem;
+		}
+		@media screen and (max-width: breakpoint(tablet)) {
+			display: none;
+		}
+	}
 
 	@media screen and (max-width: breakpoint(mobileL)) {
 		flex-basis: 95%;
@@ -29,12 +54,12 @@
 		overflow-x: auto;
 		width: 100%;
 		-webkit-overflow-scrolling: touch;
-		// &::-webkit-scrollbar {
-		// display: none;
-		// }
+		&::-webkit-scrollbar {
+			display: none;
+		}
 
 		* {
-			position: relative;
+			// position: relative;
 			text-transform: uppercase;
 		}
 	}

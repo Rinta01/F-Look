@@ -8,7 +8,7 @@ const propTypes = {
 	absolute: t.bool,
 };
 
-const CustomLoader = ({ loading, absolute }) => {
+const CustomLoader = ({ loading, absolute = true }) => {
 	if (loading) {
 		return (
 			<div className={`loader ${absolute ? 'absolute' : ''}`}>

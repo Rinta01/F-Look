@@ -3,22 +3,22 @@
 	"version": "0.1.0",
 	"private": true,
 	"dependencies": {
-		"@fortawesome/fontawesome-svg-core": "^1.2.17",
-		"@fortawesome/free-brands-svg-icons": "^5.8.1",
-		"@fortawesome/free-solid-svg-icons": "^5.8.1",
+		"@fortawesome/fontawesome-svg-core": "^1.2.18",
+		"@fortawesome/free-brands-svg-icons": "^5.8.2",
+		"@fortawesome/free-solid-svg-icons": "^5.8.2",
 		"@fortawesome/react-fontawesome": "^0.1.4",
-		"apollo-cache-inmemory": "^1.5.1",
-		"apollo-client": "^2.5.1",
+		"apollo-cache-inmemory": "^1.6.0",
+		"apollo-client": "^2.6.0",
 		"apollo-link": "^1.2.11",
 		"apollo-link-context": "^1.0.17",
 		"apollo-link-error": "^1.1.10",
 		"apollo-link-http": "^1.5.14",
-		"formik": "^1.5.1",
-		"graphql": "^14.2.0",
+		"formik": "^1.5.7",
+		"graphql": "^14.3.1",
 		"graphql-tag": "^2.10.1",
-		"node-sass": "^4.11.0",
+		"node-sass": "^4.12.0",
 		"react": "^16.8.6",
-		"react-apollo": "^2.5.3",
+		"react-apollo": "^2.5.6",
 		"react-dom": "^16.8.6",
 		"react-loader-spinner": "^2.3.0",
 		"react-notifications-component": "^1.1.1",
@@ -38,6 +38,11 @@
 	"eslintConfig": {
 		"extends": "react-app"
 	},
-	"browserslist": [ ">0.2%", "not dead", "not ie <= 11", "not op_mini all" ],
+	"browserslist": [
+		">0.2%",
+		"not dead",
+		"not ie <= 11",
+		"not op_mini all"
+	],
 	"homepage": "https://Rinta01.github.io/f-look"
 }

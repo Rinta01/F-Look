@@ -1,11 +1,10 @@
 @import '../../../../../css/variables.scss';
 
 .cloth-item {
-	display: flex;
+	display: inline-flex;
 	flex-direction: column;
-	width: 33%;
 
-	@media screen and (max-width: breakpoint(desktopM)) {
+	@media screen and (max-width: breakpoint(desktopL)) {
 		width: 33%;
 	}
 	@media screen and (max-width: breakpoint(laptopS)) {
@@ -20,8 +19,11 @@
 	align-items: center;
 	flex: 0 0 auto;
 
-	& img.item-image {
-		max-width: 90%;
+	& > a {
+		max-width: 85%;
+		& img.item-image {
+			max-width: 100%;
+		}
 	}
 
 	& .item-name {
