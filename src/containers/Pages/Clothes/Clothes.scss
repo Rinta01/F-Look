@@ -4,12 +4,23 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	justify-content: center;
+	justify-content: space-around;
 	height: 100vh;
 	width: 100%;
 	padding-top: 0 !important;
+	flex-basis: 75%;
+	margin: auto;
 
-	.apparel-container {
+	@media screen and (max-width: breakpoint(mobileL)) {
+		flex-basis: 95%;
+		margin: 0;
+	}
+
+	& > h3 {
+		margin: 0;
+	}
+
+	& > .apparel-container {
 		background-color: white;
 		align-items: center;
 		overflow-wrap: break-word;

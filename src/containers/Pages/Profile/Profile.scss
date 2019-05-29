@@ -1,63 +1,91 @@
 @import '../../../css/variables.scss';
 
-.profile-wrapper {
-	// height: 100vh;
-	// width: 100vw;
-	.profile-container {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-		padding: 2.5rem 0;
-		overflow: visible;
-		overflow-wrap: break-word;
-
-		header.profile-header {
-			@include title;
-			margin-bottom: 20px;
-			width: 75%;
-
-			div {
-				display: flex;
-				justify-content: space-between;
-				align-items: center;
-				width: 105%;
-
-				h2 {
-					font-size: 17px;
-					margin: 10px 0;
-				}
-				.social-icon {
-					font-size: 20px;
-					float: right;
-				}
-			}
-			h4 {
-				color: color(grey);
-				font-size: 10px;
-				margin: 0;
-				float: left;
-			}
+main {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 100%;
+	@media screen and (max-width: breakpoint(desktopL)) and (min-width: breakpoint(tablet)) {
+		justify-content: space-between;
+		& > svg {
+			display: block !important;
 		}
-		.form-container {
-			&.profile-page {
-				&::before {
-					top: -0.6rem; // let it overlap a bit to prevent thin line which could appear during scaling in some browsers etc.
-					bottom: 1.1rem;
-					left: 1.1rem;
-					right: -0.6rem;
-				}
+		& > .profile-wrapper {
+			width: 45% !important;
+			height: 95% !important;
+			margin-left: 2rem;
+		}
+	}
+	& > svg {
+		display: none;
+		position: absolute;
+		right: 0;
+		width: 50%;
+		height: calc(100vh - #{$navHeight});
+		/* set height to pixels if you want angle to change with screen width */
+	}
 
-				&::after {
-					left: -0.6rem;
-					right: 1.1rem;
-					top: 1.1rem;
-					bottom: -0.6rem;
+	.profile-wrapper {
+		height: 100%;
+		width: 93%;
+
+		.profile-container {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: space-evenly;
+			height: 100%;
+			overflow: visible;
+			overflow-wrap: break-word;
+
+			header.profile-header {
+				@include title;
+				// margin-bottom: 20px;
+				width: 75%;
+
+				div {
+					display: flex;
+					justify-content: space-between;
+					align-items: center;
+					width: 105%;
+
+					h2 {
+						font-size: 17px;
+						margin: 10px 0;
+					}
+					.social-icon {
+						font-size: 20px;
+						float: right;
+					}
+				}
+				h4 {
+					color: color(grey);
+					font-size: 10px;
+					margin: 0;
+					float: left;
 				}
 			}
-		}
-		.social-icon {
-			align-self: flex-end;
+			.form-container {
+				&.profile-page {
+					&::before {
+						top: -0.6rem; // let it overlap a bit to prevent thin line which could appear during scaling in some browsers etc.
+						bottom: 1.1rem;
+						left: 1.1rem;
+						right: -0.6rem;
+					}
+
+					&::after {
+						left: -0.6rem;
+						right: 1.1rem;
+						top: 1.1rem;
+						bottom: -0.6rem;
+					}
+				}
+			}
+			.social-icon {
+				align-self: flex-end;
+			}
 		}
 	}
 }

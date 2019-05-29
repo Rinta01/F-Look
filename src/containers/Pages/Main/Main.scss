@@ -31,11 +31,14 @@
 			align-items: center;
 			justify-content: space-evenly;
 
-			@media screen and (max-width: breakpoints(mobileL)) {
+			@media screen and (max-width: breakpoint(tablet)) {
 				flex-direction: column;
+				height: 55vh;
 			}
 
 			section {
+				width: 9rem;
+				height: 4rem;
 				display: flex;
 				align-items: center;
 				justify-content: space-evenly;

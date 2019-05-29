@@ -104,9 +104,9 @@ export default class App extends Component {
 							<Switch>
 								{this.state.token && <Redirect from='/login' to='/main' />}
 								{this.state.token && <Redirect from='/signup' to='/profile' />}
-								{!this.state.token && <Redirect from='/confirm' to='/login' />}
-								{!this.state.token && <Redirect from='/profile' to='/login' />}
-								{!this.state.token && <Redirect from='/main' to='/login' />}
+								{/* {!this.state.token && <Redirect from='/confirm' to='/login' />} */}
+								{/* {!this.state.token && <Redirect from='/profile' to='/login' />} */}
+								{/* {!this.state.token && <Redirect from='/main' to='/login' />} */}
 								<Route exact path='/' component={Start} />
 								<Route exact path='/login' render={() => <Login signup={false} />} />
 								<Route exact path='/signup' render={() => <Login signup={true} />} />

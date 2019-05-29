@@ -16,19 +16,19 @@ code {
 }
 
 #root {
-	// height: 100vh;
+	height: 100vh;
 	width: 100%;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	justify-content: center;
+	justify-content: flex-end;
 
 	& * {
 		font-family: $font;
 	}
 
 	//consider nav panel height
-	& > div:not(.react-notification-root) {
-		padding-top: 20px;
+	& > * {
+		max-height: calc(100vh - #{$navHeight});
 	}
 }

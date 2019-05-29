@@ -1,5 +1,5 @@
 $colors: (purple: #b97fff, black: #282828, font-color: #393939, grey: #dbdbdb, dark-grey: #f3f3f3, red: #ffa8a8, input-border: #d6d6d6, white: #fff);
-
+$navHeight: 3rem;
 $breakpoints: (
 	mobileS: 320px,
 	mobileM: 375px,
@@ -67,9 +67,9 @@ $font: 'Work Sans', sans-serif;
 		display: block;
 		padding: 6px 9px;
 		border: 1.2px solid color(grey);
-		margin: 10px 0;
+		margin: .5rem 0;
 		border-radius: 3px;
-		max-width: 75%;
+		width: 75%;
 		transition: all 0.15s linear;
 
 		& .input-feedback {
@@ -99,7 +99,7 @@ $font: 'Work Sans', sans-serif;
 			line-height: 20px;
 			border: none;
 			border-bottom: 1px solid color(input-border);
-			width: 93%;
+			width: 95%;
 			outline: none;
 			transition: all 0.2s linear;
 
@@ -125,7 +125,7 @@ $font: 'Work Sans', sans-serif;
 		justify-content: space-evenly;
 		font-size: 14px;
 		margin: 5px 0 5px -2px;
-		width: 100%;
+		width: 75%;
 		align-items: center;
 		flex-wrap: wrap;
 		padding: 5px 0;

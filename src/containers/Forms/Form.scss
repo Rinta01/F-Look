@@ -1,9 +1,9 @@
 @import '../../css/variables.scss';
 
 .form-container {
-	padding: 10px 6px;
+	padding: .5rem .3rem;
 	width: 100%;
-	max-width: 16rem;
+	// max-width: 16rem;
 	transition: all 0.25s ease-in;
 
 	@include borders;

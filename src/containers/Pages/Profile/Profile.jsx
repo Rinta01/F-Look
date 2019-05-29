@@ -11,27 +11,32 @@ export default class Profile extends Component {
 
 	render () {
 		return (
-			<div className='profile-wrapper'>
-				<div className='profile-container'>
-					<header className='profile-header'>
-						<div>
-							<h2>Profile</h2>
-							<Icon className='social-icon' icon={'sign-out-alt'} onClick={this.context.logout} />
-						</div>
-						<h4 className='active'>Please fill out your info</h4>
-					</header>
-					<Query query={GET_USER} variables={{ userId: this.context.userId }}>
-						{({ loading, error, data, refetch }) => {
-							if (loading) return <CustomLoader loading={loading} />;
-							if (error) return <StatusContainer error={error} />;
-							else {
-								console.log(data);
-								return <ProfileForm {...data.findUser} refetch={refetch} />;
-							}
-						}}
-					</Query>
+			<main>
+				<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'>
+					<polygon fill='#b97fff' points='0,120 100,0 100,100' />
+				</svg>
+				<div className='profile-wrapper'>
+					<div className='profile-container'>
+						<header className='profile-header'>
+							<div>
+								<h2>Profile</h2>
+								<Icon className='social-icon' icon={'sign-out-alt'} onClick={this.context.logout} />
+							</div>
+							<h4 className='active'>Please fill out your info</h4>
+						</header>
+						<Query query={GET_USER} variables={{ userId: this.context.userId }}>
+							{({ loading, error, data, refetch }) => {
+								if (loading) return <CustomLoader loading={loading} />;
+								if (error) return <StatusContainer error={error} />;
+								else {
+									console.log(data);
+									return <ProfileForm {...data.findUser} refetch={refetch} />;
+								}
+							}}
+						</Query>
+					</div>
 				</div>
-			</div>
+			</main>
 		);
 	}
 }

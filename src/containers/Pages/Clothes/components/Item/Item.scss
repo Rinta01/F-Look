@@ -5,13 +5,13 @@
 	flex-direction: column;
 	width: 33%;
 
-	@media screen and (max-width: breakpoint(l)) {
+	@media screen and (max-width: breakpoint(desktopM)) {
 		width: 33%;
 	}
-	@media screen and (max-width: breakpoint(xm)) {
+	@media screen and (max-width: breakpoint(laptopS)) {
 		width: 50%;
 	}
-	@media screen and (max-width: breakpoint(m)) {
+	@media screen and (max-width: breakpoint(mobileL)) {
 		width: 100%;
 	}
 
@@ -21,7 +21,7 @@
 	flex: 0 0 auto;
 
 	& img.item-image {
-		width: 300px;
+		max-width: 90%;
 	}
 
 	& .item-name {
