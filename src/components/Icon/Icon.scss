@@ -10,4 +10,8 @@
 	&:hover {
 		color: darken(color(grey), 20%);
 	}
+
+	&.favored {
+		color: yellow;
+	}
 }

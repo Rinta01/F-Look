@@ -104,12 +104,13 @@ export default class App extends Component {
 							<Switch>
 								{this.state.token && <Redirect from='/login' to='/main' />}
 								{this.state.token && <Redirect from='/signup' to='/profile' />}
-								{/* {!this.state.token && <Redirect from='/confirm' to='/login' />} */}
-								{/* {!this.state.token && <Redirect from='/profile' to='/login' />} */}
-								{/* {!this.state.token && <Redirect from='/main' to='/login' />} */}
+								{!this.state.token && <Redirect from='/confirm' to='/login' />}
+								{!this.state.token && <Redirect from='/profile' to='/login' />}
+								{!this.state.token && <Redirect from='/main' to='/login' />}
 								<Route exact path='/' component={Start} />
 								<Route exact path='/login' render={() => <Login signup={false} />} />
-								<Route exact path='/signup' render={() => <Login signup={true} />} />
+								<Route exact path='/signup' render={() => <Login signup />} />
+								{this.state.userId && <Route exact path='/wishlist' render={() => <Clothes wishlist />} />}
 								<Route exact path='/profile' component={Profile} />
 								<Route exact path='/main' component={Main} />
 								<Route path='/apparel' component={Clothes} />

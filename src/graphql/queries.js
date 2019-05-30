@@ -6,17 +6,44 @@ export const LOGIN = gql`
 			userId
 			token
 			tokenExpiration
+			# id
+			# first_name
+			# last_name
+			# country
+			# tel
+			# email
+			# sex
+			# age
+			# wealth
+			# size
+			# favBrands
+			# wishlist {
+			# 	id
+			# 	article
+			# 	brand
+			# 	name
+			# 	sex
+			# 	category
+			# 	materials {
+			# 		name
+			# 		share
+			# 	}
+			# 	color
+			# 	image
+			# 	source
+			# 	price
+			# }
 		}
 	}
 `;
-export const GET_USERS = gql`
-	query {
-		allUsers {
-			first_name
-			last_name
-		}
-	}
-`;
+// export const GET_USERS = gql`
+// 	query {
+// 		allUsers {
+// 			first_name
+// 			last_name
+// 		}
+// 	}
+// `;
 
 export const GET_USER = gql`
 	query($userId: String!) {
@@ -33,7 +60,20 @@ export const GET_USER = gql`
 			size
 			favBrands
 			wishlist {
+				id
 				article
+				brand
+				name
+				sex
+				category
+				materials {
+					name
+					share
+				}
+				color
+				image
+				source
+				price
 			}
 		}
 	}
@@ -124,6 +164,26 @@ export const GET_RECOMMENDED = gql`
 			image
 			source
 			price
+		}
+	}
+`;
+export const ADD_TO_WISHLIST = gql`
+	mutation($userId: String!, $itemId: String!) {
+		addToWishlist(userId: $userId, itemId: $itemId) {
+			id
+			article
+			# brand
+			# name
+			# sex
+			# category
+			# materials {
+			# 	name
+			# 	share
+			# }
+			# color
+			# image
+			# source
+			# price
 		}
 	}
 `;

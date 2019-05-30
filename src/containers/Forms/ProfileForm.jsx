@@ -1,5 +1,5 @@
 import { Formik } from 'formik';
-import PropTypes from 'prop-types';
+import t from 'prop-types';
 import React, { Component } from 'react';
 import { Mutation } from 'react-apollo';
 import { CustomLoader, PasswordChange, SizeChoice, StatusContainer, SubmitButton } from '../../components';
@@ -132,13 +132,13 @@ class ProfileForm extends Component {
 			</Mutation>
 		);
 	}
-	static propTypes = {
-		first_name: PropTypes.string,
-		last_name: PropTypes.string,
-		country: PropTypes.string,
-		age: PropTypes.number,
-		tel: PropTypes.string,
-		email: PropTypes.string,
+	static t = {
+		first_name: t.string,
+		last_name: t.string,
+		country: t.string,
+		age: t.number,
+		tel: t.string,
+		email: t.string,
 	};
 }
 
