@@ -170,20 +170,23 @@ export const GET_RECOMMENDED = gql`
 export const ADD_TO_WISHLIST = gql`
 	mutation($userId: String!, $itemId: String!) {
 		addToWishlist(userId: $userId, itemId: $itemId) {
-			id
-			article
-			# brand
-			# name
-			# sex
-			# category
-			# materials {
-			# 	name
-			# 	share
-			# }
-			# color
-			# image
-			# source
-			# price
+			item {
+				id
+				article
+				brand
+				name
+				sex
+				category
+				materials {
+					name
+					share
+				}
+				color
+				image
+				source
+				price
+			}
+			status
 		}
 	}
 `;

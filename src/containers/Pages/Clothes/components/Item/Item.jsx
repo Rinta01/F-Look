@@ -8,31 +8,39 @@ import { ADD_TO_WISHLIST, GET_USER } from '../../../../../graphql/queries';
 
 const propTypes = {
 	item: t.object,
+	favored: t.string,
 };
 
 const Item = ({ item, handleRecommend, userId, favored }) => {
 	const { id, name, image, price, source, brand } = item;
-	console.log(userId, favored);
 	return (
 		<Mutation
 			mutation={ADD_TO_WISHLIST}
 			variables={{ userId, itemId: id }}
-			// update={(cache, { data: { addToWishlist } }) => {
-			// 	console.log(addToWishlist);
-			// 	console.log(cache);
-			// 	const { user } = cache.readQuery({ query: GET_USER });
-			// 	console.log(user);
-			// 	cache.writeQuery({
-			// 		query: GET_USER,
-			// 		data: { user: { ...user, wishlist: user.wishlist.concat(addToWishlist) } },
-			// 	});
-			// }}
+			update={async (cache, { data: { addToWishlist } }) => {
+				if (addToWishlist) {
+					const { item, status } = addToWishlist;
+					const { findUser: user } = cache.readQuery({ query: GET_USER, variables: { userId } });
+					let updatedWishlist = user.wishlist;
+					if (status === 'ok') {
+						updatedWishlist = [ ...user.wishlist, item ];
+					}
+					else if (status === 'del') {
+						updatedWishlist = user.wishlist.filter(i => i.id !== item.id);
+					}
+					await cache.writeQuery({
+						query: GET_USER,
+						data: { findUser: { ...user, wishlist: updatedWishlist } },
+					});
+				}
+			}}
 			onCompleted={({ addToWishlist }) => {
 				console.log(addToWishlist);
-				console.log('Added to wishlist!');
+				console.log('Wishlist updated!');
 			}}
 			onError={err => {
 				console.log({ ...err });
+				console.log('Wishlist not updated!');
 				// notification.addNotification({ message: err.networkErrors[0].message });
 			}}>
 			{(addToWishlist, { loading, error }) => (
@@ -45,7 +53,7 @@ const Item = ({ item, handleRecommend, userId, favored }) => {
 							<Icon icon='link' title='See source' />
 						</a>
 						<Icon icon='hand-holding-heart' title='See recommended' onClick={() => handleRecommend(id)} />
-						<Icon icon='star' title='Add to wishlist' onClick={addToWishlist} favored={favored} />
+						<Icon icon='star' title='Add to wishlist' onClick={addToWishlist} {...{ favored }} />
 					</div>
 					<span className='item-name'>{name}</span>
 					<span className='price-tag'>{price} rub</span>

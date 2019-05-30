@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Query, ApolloConsumer } from 'react-apollo';
+import { Query } from 'react-apollo';
 import { GET_ALL_APPAREL, GET_RECOMMENDED, GET_USER } from '../../../graphql/queries';
 import { CustomLoader, StatusContainer } from '../../../components';
 import './Clothes.scss';
@@ -7,23 +7,28 @@ import Item from './components/Item/Item';
 import t from 'prop-types';
 import AuthContext from '../../../context/AuthContext';
 
+const ApparelItems = ({ userId, dataSet, userWishlist, handleRecommend }) => {
+	return dataSet.map(a => {
+		const favored = userWishlist.some(s => s.id === a.id);
+		return <Item item={a} key={a.id} {...{ userId, handleRecommend }} favored={favored ? 'favored' : ''} />;
+	});
+};
+
 class Clothes extends Component {
 	constructor (props) {
 		super(props);
 		this.state = {
 			itemId: '',
-			wishlist: false,
 		};
 		this.container = React.createRef();
 	}
 	static contextType = AuthContext;
+	static propTypes = {
+		wishlist: t.bool,
+	};
 	static defaultProps = {
 		wishlist: false,
 	};
-
-	static getDerivedStateFromProps (props, state) {
-		return { ...state, wishlist: props.wishlist };
-	}
 
 	setItemId = itemId => {
 		this.setState({ itemId });
@@ -44,70 +49,49 @@ class Clothes extends Component {
 	};
 	render () {
 		const { container, handleArrowClick, handleRecommend } = this;
-		const { itemId, wishlist } = this.state;
+		const { itemId } = this.state;
+		const { wishlist } = this.props;
 		const { userId } = this.context;
-		if (wishlist) {
+		if (userId) {
 			return (
 				<Query query={GET_USER} variables={{ userId: this.context.userId }}>
-					{({ loading, error, data, refetch }) => {
+					{({ loading, error, data: { findUser }, refetch }) => {
 						if (loading) return <CustomLoader {...{ loading }} />;
 						if (error) return <StatusContainer {...error} />;
-						else {
-							console.log(data);
-							const dataSet = data.findUser.wishlist;
-							const favored = dataSet.find(a => a.id !== itemId);
-							console.log(dataSet, favored);
+						if (findUser) {
 							return (
-								<div className='apparel-wrapper'>
-									<h3>Your Wishlist</h3>
-									<div className='apparel-container' ref={container}>
-										<div className='arrows-scroll' onClick={() => handleArrowClick('left')}>
-											&#10094;
-										</div>
-										{dataSet && dataSet.map(a => <Item item={a} key={a.id} {...{ userId, handleRecommend, favored }} />)}
-										<div className='arrows-scroll' onClick={() => handleArrowClick('right')}>
-											&#10095;
-										</div>
-									</div>
-								</div>
+								<Query query={itemId ? GET_RECOMMENDED : GET_ALL_APPAREL} variables={itemId ? { itemId } : null}>
+									{({ loading, error, data, refetch }) => {
+										if (loading) return <CustomLoader {...{ loading }} />;
+										if (error) return <StatusContainer {...error} />;
+										else {
+											const userWishlist = findUser.wishlist;
+											const dataSet = wishlist ? userWishlist : itemId ? data.recommended : data.allApparel;
+											return (
+												<div className='apparel-wrapper'>
+													<h3>{itemId ? 'Recommended' : 'Popular'} Items</h3>
+													<div className='apparel-container' ref={container}>
+														<div className='arrows-scroll' onClick={() => handleArrowClick('left')}>
+															&#10094;
+														</div>
+														<ApparelItems {...{ userId, handleRecommend, dataSet, userWishlist }} />
+														<div className='arrows-scroll' onClick={() => handleArrowClick('right')}>
+															&#10095;
+														</div>
+													</div>
+												</div>
+											);
+										}
+									}}
+								</Query>
 							);
 						}
+						else return null;
 					}}
 				</Query>
 			);
 		}
-		return (
-			<ApolloConsumer>
-				{client => (
-					<Query query={itemId ? GET_RECOMMENDED : GET_ALL_APPAREL} variables={itemId ? { itemId } : null}>
-						{({ loading, error, data, refetch }) => {
-							const dataSet = itemId ? data.recommended : data.allApparel;
-							if (loading) return <CustomLoader {...{ loading }} />;
-							if (error) return <StatusContainer {...error} />;
-							else {
-								// const { user } = client.readQuery({ query: GET_USER, variables: { userId } });
-								// console.log(user);
-								// const favored = user.wishlist.find(a => a.id !== itemId);
-								return (
-									<div className='apparel-wrapper'>
-										<h3>{itemId ? 'Recommended' : 'Popular'} Items</h3>
-										<div className='apparel-container' ref={container}>
-											<div className='arrows-scroll' onClick={() => handleArrowClick('left')}>
-												&#10094;
-											</div>
-											{dataSet.map(a => <Item item={a} key={a.id} {...{ userId, handleRecommend }} />)}
-											<div className='arrows-scroll' onClick={() => handleArrowClick('right')}>
-												&#10095;
-											</div>
-										</div>
-									</div>
-								);
-							}
-						}}
-					</Query>
-				)}
-			</ApolloConsumer>
-		);
+		else return null;
 	}
 }
 

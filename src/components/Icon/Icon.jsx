@@ -1,10 +1,14 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './Icon.scss';
+import t from 'prop-types';
 
 const Icon = props => {
-	console.log(props.favored);
-	return <FontAwesomeIcon {...props} className={`social-icon ${props.favored ? 'favored' : ''}`} />;
+	return <FontAwesomeIcon {...props} className={`social-icon ${props.favored}`} />;
+};
+
+Icon.propTypes = {
+	favored: t.string,
 };
 
 export default Icon;
