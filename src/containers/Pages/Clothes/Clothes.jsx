@@ -30,11 +30,13 @@ class Clothes extends Component {
 		wishlist: false,
 	};
 
-	setItemId = itemId => {
-		this.setState({ itemId });
-	};
 	handleRecommend = id => {
-		this.setItemId(id);
+		if (!this.state.itemId) {
+			this.setState({ itemId: id });
+		}
+		else {
+			this.setState({ itemId: '' });
+		}
 	};
 	handleArrowClick = w => {
 		const node = this.container.current;
@@ -67,9 +69,10 @@ class Clothes extends Component {
 										else {
 											const userWishlist = findUser.wishlist;
 											const dataSet = wishlist ? userWishlist : itemId ? data.recommended : data.allApparel;
+											const header = wishlist ? 'My Wishlist' : itemId ? 'Recommended Items' : 'Popular Items';
 											return (
 												<div className='apparel-wrapper'>
-													<h3>{itemId ? 'Recommended' : 'Popular'} Items</h3>
+													<h3>{header}</h3>
 													<div className='apparel-container' ref={container}>
 														<div className='arrows-scroll' onClick={() => handleArrowClick('left')}>
 															&#10094;

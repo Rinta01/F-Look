@@ -14,7 +14,6 @@ const graphqlUri = `${prodBaseUri}/graphql`;
 
 const httpLink = new HttpLink({
 	uri: graphqlUri,
-	// credentials: 'include',
 });
 const errorLink = onError(({ response, graphQLErrors, networkError }) => {
 	if (graphQLErrors) graphQLErrors.map(({ message, path }) => console.log(`[GraphQL error]: Message: ${message}, Path: ${path}`));
@@ -30,7 +29,6 @@ const authLink = setContext((_, { headers = {} }) => {
 	// return the headers to the context so httpLink can read them
 	return {
 		headers: {
-			// ...headers,
 			Authorization: token ? `Bearer ${token}` : '',
 		},
 	};
