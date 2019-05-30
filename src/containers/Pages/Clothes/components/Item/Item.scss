@@ -5,10 +5,10 @@
 	flex-direction: column;
 
 	@media screen and (max-width: breakpoint(desktopL)) {
-		width: 33%;
+		width: 25%;
 	}
 	@media screen and (max-width: breakpoint(laptopS)) {
-		width: 50%;
+		width: 33%;
 	}
 	@media screen and (max-width: breakpoint(mobileL)) {
 		width: 100%;

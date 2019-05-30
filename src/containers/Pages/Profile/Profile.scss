@@ -18,6 +18,7 @@ main {
 		}
 	}
 	& > svg {
+		position: fixed;
 		display: none;
 		position: absolute;
 		right: 0;
