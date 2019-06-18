@@ -26,7 +26,7 @@ export default class Profile extends Component {
 						</header>
 						<Query query={GET_USER} variables={{ userId: this.context.userId }}>
 							{({ loading, error, data, refetch }) => {
-								if (loading) return <CustomLoader loading={loading} />;
+								if (loading) return <CustomLoader loading={loading} absolute={false} />;
 								if (error) return <StatusContainer error={error} />;
 								else {
 									console.log(data);

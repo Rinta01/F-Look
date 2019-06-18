@@ -45,7 +45,7 @@ const LoginForm = () => {
 								<form onSubmit={handleSubmit}>
 									<TextInput name='tel' {...props} />
 									<TextInput name='password' {...props} />
-									{loading ? <CustomLoader loading={loading} /> : <SubmitButton disabled={isSubmitting} />}
+									{loading ? <CustomLoader loading={loading} absolute={false} /> : <SubmitButton disabled={isSubmitting} />}
 									{error && <StatusContainer error={error} graphql />}
 								</form>
 							</section>

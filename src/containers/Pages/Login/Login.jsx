@@ -11,7 +11,6 @@ class Login extends Component {
 			signup: this.props.signup,
 			phone: null,
 		};
-		this.getNumber = this.getNumber.bind(this);
 	}
 
 	render () {
@@ -44,24 +43,22 @@ class Login extends Component {
 						<Route exact path='/signup' render={() => <RegForm getNumber={this.getNumber} />} />
 					</Switch>
 					{/* Path to phone number confirmation */}
-					{this.state.phone && (
-						<Route exact path='/confirm' render={() => <CodeConfirm phone={this.state.phone} />} />
-					)}
+					{this.state.phone && <Route exact path='/confirm' render={() => <CodeConfirm phone={this.state.phone} />} />}
 					<LoginFooter signup={this.state.signup} />
 				</div>
 			</Router>
 		);
 	}
-	handleKeyDown (e) {
+	handleKeyDown = e => {
 		if (e.which === 27) {
 			e.target.blur();
 		}
-	}
-	getNumber (num) {
+	};
+	getNumber = num => {
 		this.setState({
 			phone: num,
 		});
-	}
+	};
 }
 
 export default Login;
