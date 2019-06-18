@@ -11,7 +11,7 @@ export default class TextInput extends Component {
 		touched: PropTypes.object,
 	};
 
-	getInput({ name } = this.props) {
+	getInput ({ name } = this.props) {
 		switch (name) {
 			case 'first_name':
 				return {
@@ -70,26 +70,20 @@ export default class TextInput extends Component {
 		}
 	}
 
-	render() {
+	render () {
 		const { type, name, placeholder } = this.getInput();
 		const { values, handleChange, errors, touched, disabled } = this.props;
 
 		return (
 			<div className='styled-input'>
-				<label htmlFor={`${name}-input`}>
-					{placeholder.toUpperCase()}
-				</label>
+				<label htmlFor={`${name}-input`}>{placeholder.toUpperCase()}</label>
 				<input
 					{...{ type, name, disabled }}
 					// placeholder={placeholder}
 					id={`${name}-input`}
 					onChange={handleChange}
 					value={values[name] ? values[name] : ''}
-					className={`input-field	${
-						(errors[name] === 'required') & touched[name]
-							? 'input-error'
-							: ''
-					}`}
+					className={`input-field	${(errors[name] === 'required') & touched[name] ? 'input-error' : ''}`}
 				/>
 				<ErrorMessage {...{ errors, name }} />
 			</div>

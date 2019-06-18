@@ -75,7 +75,7 @@ class ProfileForm extends Component {
 							return (
 								<>
 									<section className='form-container profile-page'>
-										<form onSubmit={handleSubmit}>
+										<form className='profile-form' onSubmit={handleSubmit}>
 											<TextInput
 												name='first_name'
 												{...props}
@@ -88,15 +88,15 @@ class ProfileForm extends Component {
 											<TextInput
 												name='country'
 												{...props}
-											/>
+												/>
 											<TextInput
 												name='email'
 												{...props}
-											/>
+												/>
 											<NumberInput
 												name='age'
 												{...props}
-											/>
+												/>
 											<RadioInput name='sex' {...props} />
 											<SizeChoice {...props} />
 											<PasswordChange {...props} />

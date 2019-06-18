@@ -17,10 +17,14 @@ main {
 			margin-left: 2rem;
 		}
 	}
+	@media screen and (max-width: breakpoint(mobileL)) {
+		& > .profile-wrapper {
+			width: 90% !important;
+		}
+	}
 	& > svg {
 		position: fixed;
 		display: none;
-		position: absolute;
 		right: 0;
 		width: 50%;
 		height: calc(100vh - #{$navHeight});
@@ -32,17 +36,18 @@ main {
 		width: 93%;
 
 		.profile-container {
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			justify-content: space-evenly;
+			display: block;
 			height: 100%;
 			overflow: visible;
 			overflow-wrap: break-word;
 
 			header.profile-header {
 				@include title;
-				// margin-bottom: 20px;
+				display: flex;
+				flex-direction: column;
+				align-items: flex-start;
+				margin: 0 auto;
+				margin-bottom: 1rem;
 				width: 75%;
 
 				div {
@@ -68,6 +73,23 @@ main {
 				}
 			}
 			.form-container {
+				width: 95%;
+				& > form {
+					justify-content: space-between;
+					& > .styled-input {
+						margin: .5rem 0;
+					}
+					.profile-input-wrapper {
+						width: 100%;
+						height: 100%;
+						display: flex;
+						flex-direction: column;
+						align-items: center;
+						justify-content: space-between;
+						flex: 23rem 1 1;
+					}
+				}
+
 				&.profile-page {
 					&::before {
 						top: -0.6rem; // let it overlap a bit to prevent thin line which could appear during scaling in some browsers etc.
